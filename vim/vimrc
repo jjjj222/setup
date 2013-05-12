@@ -154,6 +154,7 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 set number
 set numberwidth=4   
 set cpoptions+=n
+highlight LineNr ctermfg=yellow   ctermbg=black
 
 " fold "
 set foldenable
