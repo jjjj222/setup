@@ -1,0 +1,2 @@
+bindkey "^[[1;5D" prev  # change window with ctrl-left
+bindkey "^[[1;5C" next  # change window with ctrl-right

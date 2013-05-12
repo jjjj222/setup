@@ -1,0 +1,7 @@
+[user]
+	name = jjjj222
+	email = jjjj222.tso@gmail.com
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff

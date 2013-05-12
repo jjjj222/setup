@@ -1,0 +1,33 @@
+altscreen on
+term xterm-256color
+hardstatus alwayslastline "%{=b bw} %m/%d %c %{-}| %-Lw%{=b y}%50L>%n%f [%t]%{-}%+Lw%<"
+bufferfile $HOME/.screen-exchange
+
+bindkey "^[[D" prev  # change window with ctrl-left
+bindkey "^[[C" next  # change window with ctrl-right
+bindkey "^[[A" prev # change window with ctrl-left
+bindkey "^[[B" next # change window with ctrl-right
+
+bind -c demo1 0 number 0
+bind -c demo1 1 number 1
+bind -c demo1 2 number 2
+bind -c demo1 3 number 3
+bind -c demo1 4 number 4
+bind -c demo1 5 number 5
+bind -c demo1 6 number 6
+bind -c demo1 7 number 7
+bind -c demo1 8 number 8
+bind -c demo1 9 number 9
+bindkey "^B" command -c demo1
+
+bind ^G
+
+startup_message off
+defutf8 on
+nonblock on
+vbell off
+msgwait 10
+
+shell -$SHELL
+
+defscrollback 10000

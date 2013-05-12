@@ -1,0 +1,12 @@
+XTerm*background: black
+XTerm*foreground: lightgray
+XTerm*faceName: "Lucida Console"
+XTerm*faceSize: 10
+XTerm*ScrollBar: true
+XTerm*rightScrollBar: true
+XTerm*title: Q_Q
+
+XTerm*ttyModes:         erase ^?
+XTerm*VT100.Translations: \
+    #override   <Key>BackSpace: string(0x7f) \n\
+                <Key>Delete:    string(0x1b) string("[3~")

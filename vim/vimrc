@@ -1,0 +1,224 @@
+syntax on 
+set nocompatible
+set tags+=~/build/lmc/tags,~/build/cpu/tags
+set backspace=indent,eol,start
+set whichwrap+=<,>,[,]
+set history=50
+"set visualbell t_vb=    " turn off error beep/flash
+"set novisualbell    " turn off visual bell
+
+" auto complete for file name "
+set wildmode=longest,list
+set wildmenu
+
+
+" enhance map "
+let mapleader = ","
+
+" maps "
+nmap <C-g> :tab split<CR> :Grep <cword> *.*<CR>
+nmap <C-h> :tab split<CR> :Grep <cword> *.h<CR>
+"nnoremap <C-d> ^<C-v>
+" nmap <leader>g :Grep <cword> %<CR>
+nmap <F10> :cclose<CR>
+nmap <F11> :cprev<CR>
+nmap <F12> :cnext<CR>
+
+"nmap <F9> :TlistToggle<CR>
+nmap <F9> :VCSAnnotate<CR>
+
+nmap <leader>e :tabnew ~/.vimrc<CR>
+nmap <leader>s :source ~/.vimrc<CR>
+nmap <leader>o :tabnew <cWORD><CR>
+nmap <leader>m :marks<CR>
+nmap <leader>t :tabs<CR>
+nmap <leader>l :tab split<CR>
+
+" plain text"
+vmap <C-d> :call MakeAsComment()<CR><ESC>
+function! MakeAsComment() range
+    let line_ul = line("'<")
+    let col_ul  = virtcol("'<")
+    let line_lr = line("'>")
+    let col_lr  = virtcol("'>")
+    call cursor( line_lr, col_lr )
+    execute "normal A */"
+    call cursor( line_ul, col_ul )
+    execute "normal I/* "
+    execute "normal za"
+endfunction
+
+vmap <C-g> :call MakeMultiLineComment()<CR><ESC>
+function! MakeMultiLineComment() range
+    let line_u = line("'<")
+    let line_l = line("'>")
+    let col_n = col(".")
+    call cursor( line_u, col_n )
+    execute "normal ^"
+    let col_n = col(".")
+
+    while line_u <= line_l
+        call cursor( line_u, col_n )
+        execute "normal ^"
+        let col_cur = col(".")
+        if (col_cur >= col_n)
+            call cursor( line_u, col_n )
+            execute "normal i//"
+        endif
+        let line_u = line_u + 1
+    endwhile
+
+    "for line_n in range(linu_u, line_l)
+    "    call cursor( line_n, col_n )
+    "    execute "normal i//"
+    "endfor
+endfunction
+
+"function! MakeLineComment(c)
+"    let line = line(".")
+"    let col = a:c
+"    call cursor( line, col )
+"    execute "normal i//"
+"endfunction
+
+
+nmap <leader>a :call AddHeader()<CR><ESC>
+function! AddHeader()
+    let curLine = line(".")
+    call append(curLine + 0, "//------------------------------------------------------------------------------")
+    call append(curLine + 1, "//   ")
+    call append(curLine + 2, "//------------------------------------------------------------------------------")
+endfunction
+
+nmap <leader>i :call AddIf()<CR><ESC>
+function! AddIf()
+    "let line_ul = line("'<")
+    "let col_ul  = virtcol("'<")
+    "let line_lr = line("'>")
+    "let col_lr  = virtcol("'>")
+    execute "normal i if () {}"
+    "let curLine = line(".")
+    "let curCol = col(".")
+    "call append(curLine + 0, "QQ ". curLine . "-" . curCol)
+    "call cursor( curLine+1, curCol )
+    "execute "normal i }"
+    "execute "normal A */"
+    "call cursor( line_ul, col_ul )
+    "call cursor( curLine, curCol )
+    "execute "normal I/* "
+    "execute "normal za"
+endfunction
+
+nmap <leader>d A // TODO<ESC>
+nmap + o<ESC>k
+nmap - dd
+
+nmap <leader>0 :tabm0<CR>
+nmap <leader>1 :tabm1<CR>
+nmap <leader>2 :tabm2<CR>
+nmap <leader>3 :tabm3<CR>
+nmap <leader>4 :tabm4<CR>
+nmap <leader>5 :tabm5<CR>
+nmap <leader>6 :tabm6<CR>
+nmap <leader>7 :tabm7<CR>
+nmap <leader>8 :tabm8<CR>
+nmap <leader>9 :tabm<CR>
+
+
+" copy/paste cross session"
+vmap <C-c> :w! ~/.vim_clipboard<CR>      
+nmap <C-v> :r ~/.vim_clipboard<CR>
+
+" tab/space "
+set expandtab
+set tabstop=4
+set shiftwidth=4
+" set softtabstop=4
+highlight Tab ctermbg=blue
+match Tab /\t/
+"filetype on
+"filetype indent on
+
+" tabpage "
+set showtabline=2 " always show 
+map Q :tabpre <Enter>
+map W :tabnext <Enter>
+highlight TabLine ctermfg=darkgrey   ctermbg=black
+highlight TabLineFill ctermfg=black   ctermbg=black
+highlight TabLineSel ctermfg=white   ctermbg=black
+
+" ctags "
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
+" line number "
+set number
+set numberwidth=4   
+set cpoptions+=n
+
+" fold "
+set foldenable
+set foldmarker={,}
+" set foldmethod=marker
+set foldmethod=syntax
+set foldlevel=1000
+set foldcolumn=4
+highlight Folded     ctermfg=Cyan   ctermbg=Black
+highlight FoldColumn ctermfg=Cyan ctermbg=Black
+function! SimpleFoldText()
+    let linenum = v:foldend - v:foldstart - 1
+    return getline(v:foldstart).' ... '.linenum.' lines ... } '
+endfunction 
+set foldtext=SimpleFoldText() " Custom fold text function
+" au BufNewFile,BufRead *.v          source ~/.vim/vfold.vim
+nmap <F1> :set foldlevel=0<CR>
+nmap <F2> :set foldlevel=1<CR>
+nmap <F3> :set foldlevel=2<CR>
+nmap <F4> :set foldlevel=3<CR>
+nmap <F5> :set foldlevel=4<CR>
+nmap <F6> :set foldlevel=5<CR>
+nmap <F7> :set foldlevel=6<CR>
+nmap <F8> :set foldlevel=100<CR>
+
+" status "
+set laststatus=2 " alway shot status line
+" set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set ruler           " show the cursor position all the time
+set showcmd         " display incomplete commands
+highlight StatusLine    ctermfg=Blue        ctermbg=white
+highlight StatusLineNC  ctermfg=white       ctermbg=black
+
+" cursor "
+highlight Cursor        ctermfg=Black       ctermbg=Green   cterm=bold
+" set cursorline
+" highlight CursorLine   cterm=bold
+" highlight CursorLine   cterm=underline
+" set cursorcolumn
+" highlight CursorColumn ctermfg=Brown
+
+" search "
+set hlsearch
+set incsearch 
+" set ignorecase
+" set smartcase
+highlight Search        ctermfg=Black      ctermbg=Red      cterm=NONE
+
+" theme "
+highlight Normal        ctermfg=LightGrey
+highlight Visual                                            cterm=reverse
+highlight Special       ctermfg=Brown
+highlight Comment       ctermfg=Blue
+highlight Statement     ctermfg=Yellow                      cterm=NONE
+highlight Type                                              cterm=NONE
+
+"if has("cscope")
+"    set csto=0
+"    if filereadable("cscope.out")
+"        cs add cscope.out  
+"    elseif $CSCOPE_DB != ""
+"        cs add $CSCOPE_DB
+"    endif
+"    set cscopeverbose  
+"    nmap <leader>c :tab split<CR>:cs find c <C-R>=expand("<cword>")<CR><CR>	
+"endif
+
+
