@@ -205,11 +205,11 @@ highlight Search        ctermfg=Black      ctermbg=DarkRed      cterm=NONE
 
 " theme "
 highlight Normal        ctermfg=LightGrey
-highlight Visual                                            cterm=reverse
+highlight Visual                           ctermbg=Black        cterm=reverse
 highlight Special       ctermfg=Brown
 highlight Comment       ctermfg=Blue
-highlight Statement     ctermfg=Yellow                      cterm=NONE
-highlight Type                                              cterm=NONE
+highlight Statement     ctermfg=Yellow                          cterm=NONE
+highlight Type                                                  cterm=NONE
 
 "if has("cscope")
 "    set csto=0
