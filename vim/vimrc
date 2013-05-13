@@ -201,7 +201,7 @@ set hlsearch
 set incsearch 
 " set ignorecase
 " set smartcase
-highlight Search        ctermfg=Black      ctermbg=Red      cterm=NONE
+highlight Search        ctermfg=Black      ctermbg=DarkRed      cterm=NONE
 
 " theme "
 highlight Normal        ctermfg=LightGrey
