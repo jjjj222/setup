@@ -1,0 +1,47 @@
+setenv EDITOR "vim"
+umask 027
+limit coredumpsize 10k
+unset autologout
+unset ignoreeof
+set notify
+set autolist
+set complete
+set echo_style=both
+set ellipsis
+set fignore=(.o \~)
+set histdup=erase
+set history=100
+set listjobs=long
+set listmaxrows=23
+set notify=1
+set rmstar=1
+set savehist=( $history merge )
+set showdots=1
+set symlinks=expand
+stty -ixon
+unalias * 
+
+#set path = ( . )
+#
+#set paths_to_add  = (   $home/bin \
+#                        /usr/lib64/qt-3.3/bin \
+#                        /usr/local/bin \
+#                        /bin \
+#                        /usr/bin \
+#                        /usr/X11R6/bin \
+#                        /home/vpxqa/bin \
+#                        /grid/common/bin \
+#                        /grid/common/pkgs/ccrtools \
+#                        )
+#
+#foreach path_to_add ($paths_to_add)
+#    if (-d $path_to_add ) then
+#        set path = ( $path $path_to_add )
+#    else
+#        echo "Can't find path '$path_to_add'"
+#    endif
+#end
+
+
+######################## env ##################################################
+set prompt = '%{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
