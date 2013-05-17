@@ -50,6 +50,14 @@ endfunction
 
 vmap <C-g> :call MakeMultiLineComment()<CR><ESC>
 function! MakeMultiLineComment() range
+    let cur_file = &filetype
+    let l:comment_str = "//"
+    if (cur_file == "vim")
+        let l:comment_str = "\""
+    elseif (cur_file == "perl")
+        let l:comment_str = "#"
+    endif
+
     let line_u = line("'<")
     let line_l = line("'>")
     let col_n = col(".")
@@ -63,15 +71,10 @@ function! MakeMultiLineComment() range
         let col_cur = col(".")
         if (col_cur >= col_n)
             call cursor( line_u, col_n )
-            execute "normal i//"
+            execute "normal i" . l:comment_str
         endif
         let line_u = line_u + 1
     endwhile
-
-    "for line_n in range(linu_u, line_l)
-    "    call cursor( line_n, col_n )
-    "    execute "normal i//"
-    "endfor
 endfunction
 
 "function! MakeLineComment(c)
@@ -96,7 +99,7 @@ function! AddIf()
     "let col_ul  = virtcol("'<")
     "let line_lr = line("'>")
     "let col_lr  = virtcol("'>")
-    execute "normal i if () {}"
+    "execute "normal i if () {}"
     "let curLine = line(".")
     "let curCol = col(".")
     "call append(curLine + 0, "QQ ". curLine . "-" . curCol)
