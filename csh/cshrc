@@ -4,10 +4,7 @@ limit coredumpsize 10k
 unset autologout
 unset ignoreeof
 set notify
-set autolist
-set complete
 set echo_style=both
-set ellipsis
 set fignore=(.o \~)
 set histdup=erase
 set history=100
@@ -18,30 +15,70 @@ set rmstar=1
 set savehist=( $history merge )
 set showdots=1
 set symlinks=expand
+
+###############################################################################
+#   auto complete
+###############################################################################
+
+set autolist
+set complete
+
+
+###############################################################################
+#   keyboard
+###############################################################################
+
 stty -ixon
+
+
+###############################################################################
+#   path
+###############################################################################
+
+set path = ( . ~/bin $path )
+set cdpath= ( ~/lnk )
+
+
+###############################################################################
+#   alias
+###############################################################################
+
 unalias * 
 
-#set path = ( . )
-#
-#set paths_to_add  = (   $home/bin \
-#                        /usr/lib64/qt-3.3/bin \
-#                        /usr/local/bin \
-#                        /bin \
-#                        /usr/bin \
-#                        /usr/X11R6/bin \
-#                        /home/vpxqa/bin \
-#                        /grid/common/bin \
-#                        /grid/common/pkgs/ccrtools \
-#                        )
-#
-#foreach path_to_add ($paths_to_add)
-#    if (-d $path_to_add ) then
-#        set path = ( $path $path_to_add )
-#    else
-#        echo "Can't find path '$path_to_add'"
-#    endif
-#end
+# grep
+alias grep 'grep --color=auto -n -r'
 
+# ls
+if ($HOST == "Jjjj222s-MacBook-Pro.local") then
+    alias ls 'ls -FG'
+else
+    alias ls 'ls --color=auto -F'
+endif
 
-######################## env ##################################################
+alias ll 'ls -al'
+
+# vi
+alias vi 'vim -p'
+
+# git
+alias gittree 'git log --graph --all --decorate --oneline'
+
+# rm
+alias rmswp 'rm .*.swp'
+
+# pwd
+alias cwd 'echo $cwd'
+
+# cur
+alias setcur 'pwd > ~/.cur_dir/dir_\!*'
+alias cdcur 'cd `cat ~/.cur_dir/dir_\!*`'
+alias lscur 'ls ~/.cur_dir/'
+
+###############################################################################
+#   prompt
+###############################################################################
+
+set ellipsis
 set prompt = '%{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
+
+
