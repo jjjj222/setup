@@ -143,6 +143,8 @@ set shiftwidth=4
 " set softtabstop=4
 highlight Tab ctermbg=blue
 match Tab /\t/
+highlight TrailingSpace ctermbg=red
+match TrailingSpace /\s\+$/
 "filetype on
 "filetype indent on
 
