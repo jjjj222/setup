@@ -60,6 +60,8 @@ function! MakeMultiLineComment() range
         let l:comment_str = "#"
     elseif (cur_file == "gdb")
         let l:comment_str = "#"
+    elseif (cur_file == "cpf")
+        let l:comment_str = "#"
     endif
 
     let line_u = line("'<")
@@ -144,9 +146,12 @@ set shiftwidth=4
 highlight Tab ctermbg=blue
 match Tab /\t/
 highlight TrailingSpace ctermbg=red
-match TrailingSpace /\s\+$/
+2match TrailingSpace /\s\+$/
 "filetype on
 "filetype indent on
+
+" filetype"
+"au BufRead,BufNewFile *.cpf        set filetype=cpf
 
 " tabpage "
 set showtabline=2 " always show 
