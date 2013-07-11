@@ -62,6 +62,8 @@ function! MakeMultiLineComment() range
         let l:comment_str = "#"
     elseif (cur_file == "cpf")
         let l:comment_str = "#"
+    elseif (cur_file == "upf")
+        let l:comment_str = "#"
     endif
 
     let line_u = line("'<")
@@ -94,9 +96,20 @@ endfunction
 nmap <leader>a :call AddHeader()<CR><ESC>
 function! AddHeader()
     let curLine = line(".")
-    call append(curLine + 0, "//------------------------------------------------------------------------------")
-    call append(curLine + 1, "//   ")
-    call append(curLine + 2, "//------------------------------------------------------------------------------")
+    let cur_file = &filetype
+    if (cur_file == "vim")
+        call append(curLine + 0, "\"------------------------------------------------------------------------------")
+        call append(curLine + 1, "\"   ")
+        call append(curLine + 2, "\"------------------------------------------------------------------------------")
+    elseif (cur_file == "cpf" || cur_file == "upf")
+        call append(curLine + 0, "#------------------------------------------------------------------------------")
+        call append(curLine + 1, "#   ")
+        call append(curLine + 2, "#------------------------------------------------------------------------------")
+    else
+        call append(curLine + 0, "//------------------------------------------------------------------------------")
+        call append(curLine + 1, "//   ")
+        call append(curLine + 2, "//------------------------------------------------------------------------------")
+    endif
 endfunction
 
 nmap <leader>i :call AddIf()<CR><ESC>
@@ -151,7 +164,8 @@ highlight TrailingSpace ctermbg=red
 "filetype indent on
 
 " filetype"
-"au BufRead,BufNewFile *.cpf        set filetype=cpf
+au BufRead,BufNewFile *.cpf        set filetype=cpf
+au BufRead,BufNewFile *.upf        set filetype=upf
 
 " tabpage "
 set showtabline=2 " always show 
