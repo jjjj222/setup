@@ -1,0 +1,40 @@
+#=================== my setting ==================================
+set print pretty on
+set print object on
+#set print array on
+set pagination off
+set tui border-kind ascii
+set tui active-border-mode bold
+set listsize 20
+define ls
+    if ( $argc == 0)
+        list *$pc
+    else
+        set listsize $arg0
+        list *$pc
+        set listsize 20
+    end
+end
+
+define ll
+    ls 60
+end
+
+define goto
+    tb $arg0
+    jump $arg0
+end
+
+#================== python ===============================================
+python
+import sys
+sys.path.insert(0, "~/.jjjj222_setup/gdb/stl/printer/python")
+from libstdcxx.v6.printers import register_libstdcxx_printers
+register_libstdcxx_printers (None)
+end
+
+#python execfile("~/.jjjj222_setup/gdb/verplex/cpu_printer.py")
+#python execfile("~/.jjjj222_setup/gdb/verplex/pia_printer.py")
+
+#================== script ==========================================
+#source ~/.jjjj222_setup/gdb/stl/stl
