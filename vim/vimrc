@@ -1,6 +1,10 @@
 syntax on 
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+set completeopt-=preview
+
 set nocompatible
-set tags+=~/build/lmc/tags,~/build/cpu/tags
+set tags+=~/build/lmc/src/tags,~/build/cpu/tags
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,]
 set history=50
@@ -18,6 +22,9 @@ let mapleader = ","
 " maps "
 nmap <C-g> :tab split<CR> :Grep <cword> *.*<CR>
 nmap <C-h> :tab split<CR> :Grep <cword> *.h<CR>
+nmap <C-f> <ESC>
+vmap <C-f> <ESC>
+imap <C-f> <ESC>
 "nnoremap <C-d> ^<C-v>
 " nmap <leader>g :Grep <cword> %<CR>
 nmap <F10> :cclose<CR>
@@ -229,15 +236,19 @@ set hlsearch
 set incsearch 
 " set ignorecase
 " set smartcase
-highlight Search        ctermfg=Black      ctermbg=DarkRed      cterm=NONE
+highlight Search        ctermfg=Black       ctermbg=DarkRed     cterm=NONE
 
 " theme "
 highlight Normal        ctermfg=LightGrey
-highlight Visual                           ctermbg=Black        cterm=reverse
+highlight Visual                            ctermbg=Black       cterm=reverse
 highlight Special       ctermfg=Brown
 highlight Comment       ctermfg=Blue
 highlight Statement     ctermfg=Yellow                          cterm=NONE
 highlight Type                                                  cterm=NONE
+
+" omni "
+highlight Pmenu         ctermfg=Black       ctermbg=Magenta
+
 
 "if has("cscope")
 "    set csto=0
@@ -250,4 +261,12 @@ highlight Type                                                  cterm=NONE
 "    nmap <leader>c :tab split<CR>:cs find c <C-R>=expand("<cword>")<CR><CR>	
 "endif
 
-
+" OmniCppComplete
+"let OmniCpp_NamespaceSearch = 1
+"let OmniCpp_GlobalScopeSearch = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+"let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+"let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+"let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+"let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]

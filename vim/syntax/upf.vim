@@ -54,7 +54,7 @@ syn match   upfOption '-\w\+'
 syn keyword upfVersion          upf_version
 syn keyword upfHierarchy        load_upf
 syn keyword upfPowerDomain      create_power_domain set_related_supply_net
-syn keyword upfSupplySet        create_supply_net create_supply_port connect_supply_net set_domain_supply_net
+syn keyword upfSupplySet        create_supply_net create_supply_port connect_supply_net set_domain_supply_net create_power_switch
 syn keyword upfPowerState       add_port_state create_pst add_pst_state
 syn keyword upfCrossingRule     set_isolation set_isolation_control set_level_shifter
 syn keyword upfRetRule          set_retention set_retention_control

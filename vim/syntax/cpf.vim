@@ -72,7 +72,7 @@ syn keyword cpfLibrary          define_library_set define_isolation_cell
 syn keyword cpfPowerDomain      create_power_domain update_power_domain identify_secondary_domain
 syn keyword cpfSupplySet        create_power_nets create_ground_nets
 syn keyword cpfPowerState       create_nominal_condition create_power_mode update_nominal_condition
-syn keyword cpfCrossingRule     create_isolation_rule
+syn keyword cpfCrossingRule     create_isolation_rule update_isolation_rules create_level_shifter_rule update_level_shifter_rules
 
 
 "------------------------------------------------------------------------------
