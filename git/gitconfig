@@ -3,6 +3,7 @@
 	email = jjjj222.tso@gmail.com
 [core]
 	editor = vim
+	excludesfile = /Users/jjjj222/.jjjj222_setup/git/gitignore
 [merge]
 	tool = vimdiff
 [color]
