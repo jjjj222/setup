@@ -63,6 +63,8 @@ function! MakeMultiLineComment() range
         let l:comment_str = "\""
     elseif (cur_file == "perl")
         let l:comment_str = "#"
+    elseif (cur_file == "python")
+        let l:comment_str = "#"
     elseif (cur_file == "csh")
         let l:comment_str = "#"
     elseif (cur_file == "gdb")

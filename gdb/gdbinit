@@ -3,8 +3,8 @@ set print pretty on
 set print object on
 #set print array on
 set pagination off
-set tui border-kind ascii
-set tui active-border-mode bold
+#set tui border-kind ascii
+#set tui active-border-mode bold
 set listsize 20
 define ls
     if ( $argc == 0)
@@ -25,16 +25,14 @@ define goto
     jump $arg0
 end
 
-#================== python ===============================================
-python
-import sys
-sys.path.insert(0, "~/.jjjj222_setup/gdb/stl/printer/python")
-from libstdcxx.v6.printers import register_libstdcxx_printers
-register_libstdcxx_printers (None)
-end
-
-#python execfile("~/.jjjj222_setup/gdb/verplex/cpu_printer.py")
-#python execfile("~/.jjjj222_setup/gdb/verplex/pia_printer.py")
-
-#================== script ==========================================
+##================== python ===============================================
+#python
+#import sys
+#import os
+#sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/printer/python")
+#from libstdcxx.v6.printers import register_libstdcxx_printers
+#register_libstdcxx_printers (None)
+#end
+#
+##================== script ==========================================
 #source ~/.jjjj222_setup/gdb/stl/stl

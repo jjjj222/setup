@@ -49,7 +49,7 @@ unalias *
 alias grep 'grep --color=auto -n -r'
 
 # ls
-if ($HOST == "Jjjj222s-MacBook-Pro.local") then
+if ($HOST == "Jjjj222s-MacBook-Pro-2.local") then
     alias ls 'ls -FG'
 else
     alias ls 'ls --color=auto -F'
@@ -74,6 +74,7 @@ alias cwd 'echo $cwd'
 alias setcur 'pwd > ~/.cur_dir/dir_\!*'
 alias cdcur 'cd `cat ~/.cur_dir/dir_\!*`'
 alias lscur 'ls ~/.cur_dir/'
+alias showcur 'cat ~/.cur_dir/dir_\!*'
 
 ###############################################################################
 #   prompt
