@@ -1,6 +1,6 @@
 altscreen on
 term xterm-256color
-hardstatus alwayslastline "%{=b bw} %m/%d %c %{-}| %-Lw%{=b y}%50L>%n%f [%t]%{-}%+Lw%<"
+hardstatus alwayslastline "%{=b bw} %m/%d %D %c %{-}| %-Lw%{=b y}%50L>%n%f [%t]%{-}%+Lw%<"
 bufferfile $HOME/.screen-exchange
 
 bindkey "^[[D" prev  # change window with ctrl-left
