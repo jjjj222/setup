@@ -43,7 +43,7 @@ set cdpath= ( ~/build ~/lnk )
 #   alias
 ###############################################################################
 
-unalias * 
+unalias *
 
 # grep
 alias grep 'grep --color=auto -n -r'
