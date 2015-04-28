@@ -1,7 +1,10 @@
-syntax on 
+syntax on
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 set completeopt-=preview
+
+" disable auto comment
+set formatoptions-=cro
 
 set nocompatible
 set tags+=~/build/lmc/src/tags,~/build/cpu/tags
@@ -16,210 +19,132 @@ set wildmode=longest,list
 set wildmenu
 
 
+"------------------------------------------------------------------------------
+"   maps
+"------------------------------------------------------------------------------
 " enhance map "
 let mapleader = ","
 
-" maps "
-nmap <C-g> :tab split<CR> :Grep <cword> *.*<CR>
-nmap <C-h> :tab split<CR> :Grep <cword> *.h<CR>
-nmap <C-f> <ESC>
-vmap <C-f> <ESC>
-imap <C-f> <ESC>
+nmap    <C-g>       :tab split<CR> :Grep <cword> *.*<CR>
+nmap    <C-h>       :tab split<CR> :Grep <cword> *.h<CR>
+nmap    <C-f>       <ESC>
+vmap    <C-f>       <ESC>
+imap    <C-f>       <ESC>
 "nnoremap <C-d> ^<C-v>
 " nmap <leader>g :Grep <cword> %<CR>
-nmap <F10> :cclose<CR>
-nmap <F11> :cprev<CR>
-nmap <F12> :cnext<CR>
+nmap    <F10>       :cclose<CR>
+nmap    <F11>       :cprev<CR>
+nmap    <F12>       :cnext<CR>
 
 "nmap <F9> :TlistToggle<CR>
-nmap <F9> :VCSAnnotate<CR>
+nmap    <F9>        :VCSAnnotate<CR>
 
-nmap <leader>e :tabnew ~/.vimrc<CR>
-nmap <leader>s :source ~/.vimrc<CR>
-nmap <leader>o :tabnew <cWORD><CR>
-nmap <leader>m :marks<CR>
-nmap <leader>t :tabs<CR>
-nmap <leader>l :tab split<CR>
+nmap    <leader>e   :tabnew ~/.vimrc<CR>
+nmap    <leader>s   :source ~/.vimrc<CR>
+nmap    <leader>o   :tabnew <cWORD><CR>
+nmap    <leader>m   :marks<CR>
 
 " plain text"
-vmap <C-d> :call MakeAsComment()<CR><ESC>
-function! MakeAsComment() range
-    let line_ul = line("'<")
-    let col_ul  = virtcol("'<")
-    let line_lr = line("'>")
-    let col_lr  = virtcol("'>")
-    call cursor( line_lr, col_lr )
-    execute "normal A */"
-    call cursor( line_ul, col_ul )
-    execute "normal I/* "
-    execute "normal za"
-endfunction
-
-vmap <C-g> :call MakeMultiLineComment()<CR><ESC>
-function! MakeMultiLineComment() range
-    let cur_file = &filetype
-    let l:comment_str = "//"
-    if (cur_file == "vim")
-        let l:comment_str = "\""
-    elseif (cur_file == "conf")
-        let l:comment_str = "#"
-    elseif (cur_file == "perl")
-        let l:comment_str = "#"
-    elseif (cur_file == "python")
-        let l:comment_str = "#"
-    elseif (cur_file == "csh")
-        let l:comment_str = "#"
-    elseif (cur_file == "gdb")
-        let l:comment_str = "#"
-    elseif (cur_file == "cpf")
-        let l:comment_str = "#"
-    elseif (cur_file == "upf")
-        let l:comment_str = "#"
-    endif
-
-    let line_u = line("'<")
-    let line_l = line("'>")
-    let col_n = col(".")
-    call cursor( line_u, col_n )
-    execute "normal ^"
-    let col_n = col(".")
-
-    while line_u <= line_l
-        call cursor( line_u, col_n )
-        execute "normal ^"
-        let col_cur = col(".")
-        if (col_cur >= col_n)
-            call cursor( line_u, col_n )
-            execute "normal i" . l:comment_str
-        endif
-        let line_u = line_u + 1
-    endwhile
-endfunction
-
-"function! MakeLineComment(c)
-"    let line = line(".")
-"    let col = a:c
-"    call cursor( line, col )
-"    execute "normal i//"
-"endfunction
+vmap    <C-d>       :call MakeAsComment()<CR><ESC>
+vmap    <C-g>       :call MakeMultiLineComment()<CR><ESC>
+nmap    <leader>a   :call AddHeader()<CR><ESC>
+nmap    <leader>d   A // TODO<ESC>
+nmap    +           o<ESC>k
+nmap    -           dd
 
 
-nmap <leader>a :call AddHeader()<CR><ESC>
-function! AddHeader()
-    let curLine = line(".")
-    let cur_file = &filetype
-    if (cur_file == "vim")
-        call append(curLine + 0, "\"------------------------------------------------------------------------------")
-        call append(curLine + 1, "\"   ")
-        call append(curLine + 2, "\"------------------------------------------------------------------------------")
-    elseif (cur_file == "cpf" || cur_file == "upf")
-        call append(curLine + 0, "#------------------------------------------------------------------------------")
-        call append(curLine + 1, "#   ")
-        call append(curLine + 2, "#------------------------------------------------------------------------------")
-    else
-        call append(curLine + 0, "//------------------------------------------------------------------------------")
-        call append(curLine + 1, "//   ")
-        call append(curLine + 2, "//------------------------------------------------------------------------------")
-    endif
-endfunction
+" copy/paste "
+vmap    <C-c>       :w! ~/.vim_clipboard<CR>
+nmap    <C-v>       :r ~/.vim_clipboard<CR>
 
-nmap <leader>i :call AddIf()<CR><ESC>
-function! AddIf()
-    "let line_ul = line("'<")
-    "let col_ul  = virtcol("'<")
-    "let line_lr = line("'>")
-    "let col_lr  = virtcol("'>")
-    "execute "normal i if () {}"
-    "let curLine = line(".")
-    "let curCol = col(".")
-    "call append(curLine + 0, "QQ ". curLine . "-" . curCol)
-    "call cursor( curLine+1, curCol )
-    "execute "normal i }"
-    "execute "normal A */"
-    "call cursor( line_ul, col_ul )
-    "call cursor( curLine, curCol )
-    "execute "normal I/* "
-    "execute "normal za"
-endfunction
+" tabpage "
+nmap    <leader>t   :tabs<CR>
+nmap    <leader>l   :tab split<CR>
+map     Q           :tabpre <Enter>
+map     W           :tabnext <Enter>
+nmap    <leader>0   :tabm0<CR>
+nmap    <leader>1   :tabm1<CR>
+nmap    <leader>2   :tabm2<CR>
+nmap    <leader>3   :tabm3<CR>
+nmap    <leader>4   :tabm4<CR>
+nmap    <leader>5   :tabm5<CR>
+nmap    <leader>6   :tabm6<CR>
+nmap    <leader>7   :tabm7<CR>
+nmap    <leader>8   :tabm8<CR>
+nmap    <leader>9   :tabm<CR>
 
-nmap <leader>d A // TODO<ESC>
-nmap + o<ESC>k
-nmap - dd
+" ctags "
+map     <C-\>       :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
-nmap <leader>0 :tabm0<CR>
-nmap <leader>1 :tabm1<CR>
-nmap <leader>2 :tabm2<CR>
-nmap <leader>3 :tabm3<CR>
-nmap <leader>4 :tabm4<CR>
-nmap <leader>5 :tabm5<CR>
-nmap <leader>6 :tabm6<CR>
-nmap <leader>7 :tabm7<CR>
-nmap <leader>8 :tabm8<CR>
-nmap <leader>9 :tabm<CR>
+" folding "
+nmap    <F1>        :set foldlevel=0<CR>
+nmap    <F2>        :set foldlevel=1<CR>
+nmap    <F3>        :set foldlevel=2<CR>
+nmap    <F4>        :set foldlevel=3<CR>
+nmap    <F5>        :set foldlevel=4<CR>
+nmap    <F6>        :set foldlevel=5<CR>
+nmap    <F7>        :set foldlevel=6<CR>
+nmap    <F8>        :set foldlevel=100<CR>
 
 
-" copy/paste cross session"
-vmap <C-c> :w! ~/.vim_clipboard<CR>      
-nmap <C-v> :r ~/.vim_clipboard<CR>
-
-" tab/space "
+"------------------------------------------------------------------------------
+"   tab/space
+"------------------------------------------------------------------------------
 set expandtab
 set tabstop=4
 set shiftwidth=4
 " set softtabstop=4
-highlight Tab ctermbg=blue
+highlight Tab           ctermbg=blue
 match Tab /\t/
 highlight TrailingSpace ctermbg=red
 2match TrailingSpace /\s\+$/
 "filetype on
 "filetype indent on
 
-" filetype"
+
+"------------------------------------------------------------------------------
+"   filetype setup
+"------------------------------------------------------------------------------
 au BufRead,BufNewFile *.cpf        set filetype=cpf
 au BufRead,BufNewFile *.upf        set filetype=upf
 
-" tabpage "
-set showtabline=2 " always show 
-map Q :tabpre <Enter>
-map W :tabnext <Enter>
-highlight TabLine ctermfg=darkgrey   ctermbg=black
-highlight TabLineFill ctermfg=black   ctermbg=black
-highlight TabLineSel ctermfg=white   ctermbg=black
 
-" ctags "
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"------------------------------------------------------------------------------
+"   tabpage
+"------------------------------------------------------------------------------
+set showtabline=2 " always show
+highlight TabLine       ctermfg=darkgrey    ctermbg=black
+highlight TabLineFill   ctermfg=black       ctermbg=black
+highlight TabLineSel    ctermfg=white       ctermbg=black
 
-" line number "
+
+"------------------------------------------------------------------------------
+"   line number
+"------------------------------------------------------------------------------
 set number
-set numberwidth=4   
+set numberwidth=4
 set cpoptions+=n
-highlight LineNr ctermfg=yellow   ctermbg=black
+highlight LineNr        ctermfg=yellow      ctermbg=black
 
-" fold "
+
+"------------------------------------------------------------------------------
+"   folding
+"------------------------------------------------------------------------------
 set foldenable
 set foldmarker={,}
 " set foldmethod=marker
 set foldmethod=syntax
 set foldlevel=1000
 set foldcolumn=4
-highlight Folded     ctermfg=Cyan   ctermbg=Black
-highlight FoldColumn ctermfg=Cyan ctermbg=Black
-function! SimpleFoldText()
-    let linenum = v:foldend - v:foldstart - 1
-    return getline(v:foldstart).' ... '.linenum.' lines ... } '
-endfunction 
+highlight Folded        ctermfg=Cyan        ctermbg=Black
+highlight FoldColumn    ctermfg=Cyan        ctermbg=Black
 set foldtext=SimpleFoldText() " Custom fold text function
 " au BufNewFile,BufRead *.v          source ~/.vim/vfold.vim
-nmap <F1> :set foldlevel=0<CR>
-nmap <F2> :set foldlevel=1<CR>
-nmap <F3> :set foldlevel=2<CR>
-nmap <F4> :set foldlevel=3<CR>
-nmap <F5> :set foldlevel=4<CR>
-nmap <F6> :set foldlevel=5<CR>
-nmap <F7> :set foldlevel=6<CR>
-nmap <F8> :set foldlevel=100<CR>
 
-" status "
+
+"------------------------------------------------------------------------------
+"   status bar
+"------------------------------------------------------------------------------
 set laststatus=2 " alway shot status line
 " set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set ruler           " show the cursor position all the time
@@ -227,22 +152,31 @@ set showcmd         " display incomplete commands
 highlight StatusLine    ctermfg=Blue        ctermbg=white
 highlight StatusLineNC  ctermfg=white       ctermbg=black
 
-" cursor "
-highlight Cursor        ctermfg=Black       ctermbg=Green   cterm=bold
+
+"------------------------------------------------------------------------------
+"   cursor
+"------------------------------------------------------------------------------
+highlight Cursor        ctermfg=Black       ctermbg=Green       cterm=bold
 " set cursorline
 " highlight CursorLine   cterm=bold
 " highlight CursorLine   cterm=underline
 " set cursorcolumn
 " highlight CursorColumn ctermfg=Brown
 
-" search "
+
+"------------------------------------------------------------------------------
+"   search
+"------------------------------------------------------------------------------
 set hlsearch
-set incsearch 
+set incsearch
 " set ignorecase
 " set smartcase
 highlight Search        ctermfg=Black       ctermbg=DarkRed     cterm=NONE
 
-" theme "
+
+"------------------------------------------------------------------------------
+"   theme
+"------------------------------------------------------------------------------
 highlight Normal        ctermfg=LightGrey
 highlight Visual                            ctermbg=Black       cterm=reverse
 highlight Special       ctermfg=Brown
@@ -254,6 +188,9 @@ highlight Type                                                  cterm=NONE
 highlight Pmenu         ctermfg=Black       ctermbg=Magenta
 
 
+"------------------------------------------------------------------------------
+"   
+"------------------------------------------------------------------------------
 "if has("cscope")
 "    set csto=0
 "    if filereadable("cscope.out")
@@ -274,3 +211,134 @@ highlight Pmenu         ctermfg=Black       ctermbg=Magenta
 "let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 "let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 "let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+"
+
+
+
+"------------------------------------------------------------------------------
+"   function
+"------------------------------------------------------------------------------
+
+" folding"
+function! SimpleFoldText()
+    let linenum = v:foldend - v:foldstart - 1
+    return getline(v:foldstart).' ... '.linenum.' lines ... } '
+endfunction
+
+" comment "
+function! GetCommentStr()
+    let cur_file = &filetype
+
+    if (cur_file == "vim")
+        return "\""
+    elseif (cur_file == "c" || cur_file == "cpp")
+        return "//"
+    endif
+
+    return "#"
+endfunction
+
+function! MakeAsComment() range
+    let line_ul = line("'<")
+    let col_ul  = virtcol("'<")
+    let line_lr = line("'>")
+    let col_lr  = virtcol("'>")
+    call cursor( line_lr, col_lr )
+    execute "normal A */"
+    call cursor( line_ul, col_ul )
+    execute "normal I/* "
+    execute "normal za"
+endfunction
+
+function! MakeMultiLineComment() range
+    let comment_str = GetCommentStr()
+    "let cur_file = &filetype
+    "let l:comment_str = "//"
+    "if (cur_file == "vim")
+    "    let l:comment_str = "\""
+    "elseif (cur_file == "conf")
+    "    let l:comment_str = "#"
+    "elseif (cur_file == "perl")
+    "    let l:comment_str = "#"
+    "elseif (cur_file == "python")
+    "    let l:comment_str = "#"
+    "elseif (cur_file == "csh")
+    "    let l:comment_str = "#"
+    "elseif (cur_file == "gdb")
+    "    let l:comment_str = "#"
+    "elseif (cur_file == "cpf")
+    "    let l:comment_str = "#"
+    "elseif (cur_file == "upf")
+    "    let l:comment_str = "#"
+    "endif
+
+    let line_u = line("'<")
+    let line_l = line("'>")
+    let col_n = col(".")
+    call cursor( line_u, col_n )
+    execute "normal ^"
+    let col_n = col(".")
+
+    while line_u <= line_l
+        call cursor( line_u, col_n )
+        execute "normal ^"
+        let col_cur = col(".")
+        if (col_cur >= col_n)
+            call cursor( line_u, col_n )
+            execute "normal i" . comment_str
+        endif
+        let line_u = line_u + 1
+    endwhile
+endfunction
+
+"function! MakeLineComment(c)
+"    let line = line(".")
+"    let col = a:c
+"    call cursor( line, col )
+"    execute "normal i//"
+"endfunction
+
+
+function! AddHeader()
+    let curLine = line(".")
+    let comment_str = GetCommentStr()
+    call append(curLine + 0, comment_str . "------------------------------------------------------------------------------")
+    call append(curLine + 1, comment_str . "   ")
+    call append(curLine + 2, comment_str . "------------------------------------------------------------------------------")
+
+    call cursor(curLine + 2, 0)
+    "let curLine = line(".")
+    "let cur_file = &filetype
+    "if (cur_file == "vim")
+    "    call append(curLine + 0, "\"------------------------------------------------------------------------------")
+    "    call append(curLine + 1, "\"   ")
+    "    call append(curLine + 2, "\"------------------------------------------------------------------------------")
+    "elseif (cur_file == "cpf" || cur_file == "upf")
+    "    call append(curLine + 0, "#------------------------------------------------------------------------------")
+    "    call append(curLine + 1, "#   ")
+    "    call append(curLine + 2, "#------------------------------------------------------------------------------")
+    "else
+    "    call append(curLine + 0, "//------------------------------------------------------------------------------")
+    "    call append(curLine + 1, "//   ")
+    "    call append(curLine + 2, "//------------------------------------------------------------------------------")
+    "endif
+endfunction
+
+"nmap <leader>i :call AddIf()<CR><ESC>
+"function! AddIf()
+"    "let line_ul = line("'<")
+"    "let col_ul  = virtcol("'<")
+"    "let line_lr = line("'>")
+"    "let col_lr  = virtcol("'>")
+"    "execute "normal i if () {}"
+"    "let curLine = line(".")
+"    "let curCol = col(".")
+"    "call append(curLine + 0, "QQ ". curLine . "-" . curCol)
+"    "call cursor( curLine+1, curCol )
+"    "execute "normal i }"
+"    "execute "normal A */"
+"    "call cursor( line_ul, col_ul )
+"    "call cursor( curLine, curCol )
+"    "execute "normal I/* "
+"    "execute "normal za"
+"endfunction
