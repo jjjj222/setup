@@ -1,3 +1,38 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+"set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Nerd Tree
+Plugin 'scrooloose/nerdtree'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+"filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
+
+
 syntax on
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
@@ -18,6 +53,11 @@ set history=50
 set wildmode=longest,list
 set wildmenu
 
+set undodir=~/.vim_tmp/undo//
+set backupdir=~/.vim_tmp/backup//
+set directory=~/.vim_tmp/swp//
+set viminfo+=n~/.vim_tmp/viminfo
+"set clipboard=unnamed
 
 "------------------------------------------------------------------------------
 "   maps
@@ -27,9 +67,9 @@ let mapleader = ","
 
 nmap    <C-g>       :tab split<CR> :Grep <cword> *.*<CR>
 nmap    <C-h>       :tab split<CR> :Grep <cword> *.h<CR>
-nmap    <C-f>       <ESC>
-vmap    <C-f>       <ESC>
-imap    <C-f>       <ESC>
+"nmap    <C-f>       <ESC>
+"vmap    <C-f>       <ESC>
+"imap    <C-f>       <ESC>
 "nnoremap <C-d> ^<C-v>
 " nmap <leader>g :Grep <cword> %<CR>
 nmap    <F10>       :cclose<CR>
@@ -37,7 +77,8 @@ nmap    <F11>       :cprev<CR>
 nmap    <F12>       :cnext<CR>
 
 "nmap <F9> :TlistToggle<CR>
-nmap    <F9>        :VCSAnnotate<CR>
+"nmap    <F9>        :VCSAnnotate<CR>
+nmap    <F9>        :NERDTreeToggle<CR>
 
 nmap    <leader>e   :tabnew ~/.vimrc<CR>
 nmap    <leader>s   :source ~/.vimrc<CR>
@@ -49,13 +90,16 @@ vmap    <C-d>       :call MakeAsComment()<CR><ESC>
 vmap    <C-g>       :call MakeMultiLineComment()<CR><ESC>
 nmap    <leader>a   :call AddHeader()<CR><ESC>
 nmap    <leader>d   A // TODO<ESC>
-nmap    +           o<ESC>k
-nmap    -           dd
+nmap    +           m`O<ESC>``
+nmap    -           ddk
 
+" save "
+nmap    <C-s>       :w<Enter>
+imap    <C-s>       <ESC>:w<Enter>
 
 " copy/paste "
-vmap    <C-c>       :w! ~/.vim_clipboard<CR>
-nmap    <C-v>       :r ~/.vim_clipboard<CR>
+vmap    <C-c>       :w! ~/.vim_tmp/vim_clipboard<CR>
+nmap    <C-v>       :r ~/.vim_tmp/vim_clipboard<CR>
 
 " tabpage "
 nmap    <leader>t   :tabs<CR>
@@ -86,11 +130,20 @@ nmap    <F6>        :set foldlevel=5<CR>
 nmap    <F7>        :set foldlevel=6<CR>
 nmap    <F8>        :set foldlevel=100<CR>
 
+" nerd tree "
+nmap    <C-n>       :NERDTreeToggle<CR>
+autocmd FileType nerdtree nmap <buffer> <CR> go
+autocmd FileType nerdtree nmap <buffer> <right> o
+autocmd FileType nerdtree nmap <buffer> <left> o
 
 "------------------------------------------------------------------------------
 "   tab/space
 "------------------------------------------------------------------------------
-set expandtab
+if (&filetype == "make")
+    set noexpandtab
+else
+    set expandtab
+endif
 set tabstop=4
 set shiftwidth=4
 " set softtabstop=4
@@ -105,8 +158,10 @@ highlight TrailingSpace ctermbg=red
 "------------------------------------------------------------------------------
 "   filetype setup
 "------------------------------------------------------------------------------
-au BufRead,BufNewFile *.cpf        set filetype=cpf
-au BufRead,BufNewFile *.upf        set filetype=upf
+au BufRead,BufNewFile cshrc         set filetype=csh
+au BufRead,BufNewFile *.cpf         set filetype=cpf
+au BufRead,BufNewFile *.upf         set filetype=upf
+au BufRead,BufNewFile *.md          set filetype=markdown
 
 
 "------------------------------------------------------------------------------
@@ -191,6 +246,8 @@ highlight Pmenu         ctermfg=Black       ctermbg=Magenta
 "------------------------------------------------------------------------------
 "   
 "------------------------------------------------------------------------------
+"let g:closetag_html_style=1
+
 "if has("cscope")
 "    set csto=0
 "    if filereadable("cscope.out")
@@ -231,11 +288,31 @@ function! GetCommentStr()
 
     if (cur_file == "vim")
         return "\""
-    elseif (cur_file == "c" || cur_file == "cpp")
+    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "javascript")
         return "//"
     endif
 
     return "#"
+endfunction
+
+function! GetBlockCommentStartStr()
+    let cur_file = &filetype
+
+    if (cur_file == "html" || cur_file == "javascript")
+        return "<!--"
+    endif
+
+    return "/*"
+endfunction
+
+function! GetBlockCommentEndStr()
+    let cur_file = &filetype
+
+    if (cur_file == "html" || cur_file == "javascript")
+        return "-->"
+    endif
+
+    return "*/"
 endfunction
 
 function! MakeAsComment() range
@@ -243,10 +320,16 @@ function! MakeAsComment() range
     let col_ul  = virtcol("'<")
     let line_lr = line("'>")
     let col_lr  = virtcol("'>")
+
+    let start_str = GetBlockCommentStartStr()
+    let end_str = GetBlockCommentEndStr()
+    "let start_str = "/*"
+    "let end_str = "*/"
+
     call cursor( line_lr, col_lr )
-    execute "normal A */"
+    execute "normal A " . end_str
     call cursor( line_ul, col_ul )
-    execute "normal I/* "
+    execute "normal I" . start_str . " "
     execute "normal za"
 endfunction
 

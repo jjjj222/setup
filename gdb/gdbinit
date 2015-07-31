@@ -27,14 +27,22 @@ define goto
     jump $arg0
 end
 
+#------------------------------------------------------------------------------
+#   command
+#------------------------------------------------------------------------------
+#set breakpoint pending on
+#break main
+
 ##================== python ===============================================
-#python
-#import sys
-#import os
-#sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/printer/python")
-#from libstdcxx.v6.printers import register_libstdcxx_printers
-#register_libstdcxx_printers (None)
-#end
+python
+import sys
+import os
+##sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/printer/python")
+sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/python")
+##sys.path.insert(0, "~/.jjjj222_setup/gdb/stl/printer/python")
+from libstdcxx.v6.printers import register_libstdcxx_printers
+##register_libstdcxx_printers (None)
+end
 #
 ##================== script ==========================================
-#source ~/.jjjj222_setup/gdb/stl/stl
+source ~/.jjjj222_setup/gdb/stl/stl
