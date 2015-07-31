@@ -258,6 +258,9 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " auto leave
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" no fancy char
+let g:NERDTreeDirArrows=0
+
 
 "------------------------------------------------------------------------------
 "   
