@@ -17,6 +17,9 @@ Plugin 'gmarik/Vundle.vim'
 " Nerd Tree
 Plugin 'scrooloose/nerdtree'
 
+" vimux
+Plugin 'benmills/vimux'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "filetype plugin indent on    " required
@@ -70,76 +73,118 @@ set viminfo+=n~/.vim_tmp/viminfo
 " enhance map "
 let mapleader = ","
 
-nmap    <C-g>       :tab split<CR> :Grep <cword> *.*<CR>
-nmap    <C-h>       :tab split<CR> :Grep <cword> *.h<CR>
-"nmap    <C-f>       <ESC>
-"vmap    <C-f>       <ESC>
-"imap    <C-f>       <ESC>
+nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.*<CR>
+"nnoremap    <C-h>           :tab split<CR> :Grep <cword> *.h<CR>
+"nnoremap    <C-f>       <ESC>
+"vnoremap    <C-f>       <ESC>
+"inoremap    <C-f>       <ESC>
 "nnoremap <C-d> ^<C-v>
-" nmap <leader>g :Grep <cword> %<CR>
-nmap    <F10>       :cclose<CR>
-nmap    <F11>       :cprev<CR>
-nmap    <F12>       :cnext<CR>
+" nnoremap <leader>g :Grep <cword> %<CR>
+nnoremap    <F10>           :cclose<CR>
+nnoremap    <F11>           :cprev<CR>
+nnoremap    <F12>           :cnext<CR>
 
-"nmap <F9> :TlistToggle<CR>
-"nmap    <F9>        :VCSAnnotate<CR>
-nmap    <F9>        :NERDTreeToggle<CR>
+"nnoremap <F9> :TlistToggle<CR>
+"nnoremap    <F9>        :VCSAnnotate<CR>
+nnoremap    <F9>            :NERDTreeToggle<CR>
 
-nmap    <leader>e   :tabnew ~/.vimrc<CR>
-nmap    <leader>s   :source ~/.vimrc<CR>
-nmap    <leader>o   :tabnew <cWORD><CR>
-nmap    <leader>m   :marks<CR>
+nnoremap    <leader>e       :tabnew $MYVIMRC<CR>
+nnoremap    <leader>s       :source $MYVIMRC<CR>
+"nnoremap    <leader>o       :tabnew <cWORD><CR>
+nnoremap    <leader>o       <C-w>gf
+nnoremap    <leader>lm      :marks<CR>
+nnoremap    <leader>lr      :reg<CR>
 
 " plain text"
-vmap    <C-d>       :call MakeAsComment()<CR><ESC>
-vmap    <C-g>       :call MakeMultiLineComment()<CR><ESC>
-nmap    <leader>a   :call AddHeader()<CR><ESC>
-nmap    <leader>d   A // TODO<ESC>
-nmap    +           m`O<ESC>``
-nmap    -           ddk
+vnoremap    <C-d>           :call MakeAsComment()<CR><ESC>
+vnoremap    <C-g>           :call MakeMultiLineComment()<CR><ESC>
+nnoremap    <leader>a       :call AddHeader()<CR><ESC>
+nnoremap    <leader>d       A // TODO<ESC>
+nnoremap    +               m`O<ESC>``
+nnoremap    -               ddp
+nnoremap    _               ddkkp
+inoremap    <C-d>           <ESC>ddi
+inoremap    <C-p>           <ESC>Pi
+"nnoremap    <leader>"       viw<esc>a"<esc>hbi"<esc>lel
+nnoremap    <leader><TAB>   wi<TAB><ESC>
+onoremap    in(             :<c-u>normal! f(vi(<cr>
+onoremap    il(             :<c-u>normal! F)vi(<cr>
+nnoremap    <leader>j       J
+
+" moving "
+inoremap    jk              <ESC>
+"inoremap    <esc>           <nop>
+"nnoremap    <right>         <nop>
+"nnoremap    <left>          <nop>
+"nnoremap    <up>            <nop>
+"nnoremap    <down>          <nop>
+"nnoremap    <C-j>           L
+"nnoremap    <C-k>           H
+nnoremap    <C-j>           <C-f>
+nnoremap    <C-k>           <C-b>
+nnoremap    J               L
+nnoremap    K               H
+"nnoremap    <C-l>           <C-f>
+"nnoremap    <C-h>           <C-b>
+"nnoremap    <C-l>           H
+"nnoremap    <C-h>           L
+nnoremap    H               ^
+nnoremap    L               $
 
 " save "
-nmap    <C-s>       :w<Enter>
-imap    <C-s>       <ESC>:w<Enter>
+nnoremap    <C-s>           :w<CR>
+inoremap    <C-s>           <ESC>:w<CR>
 
 " copy/paste "
-vmap    <C-c>       :w! ~/.vim_tmp/vim_clipboard<CR>
-nmap    <C-v>       :r ~/.vim_tmp/vim_clipboard<CR>
+vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>
+nnoremap    <C-v>           :r ~/.vim_tmp/vim_clipboard<CR>
 
 " tabpage "
-nmap    <leader>t   :tabs<CR>
-nmap    <leader>l   :tab split<CR>
-map     Q           :tabpre <Enter>
-map     W           :tabnext <Enter>
-nmap    <leader>0   :tabm0<CR>
-nmap    <leader>1   :tabm1<CR>
-nmap    <leader>2   :tabm2<CR>
-nmap    <leader>3   :tabm3<CR>
-nmap    <leader>4   :tabm4<CR>
-nmap    <leader>5   :tabm5<CR>
-nmap    <leader>6   :tabm6<CR>
-nmap    <leader>7   :tabm7<CR>
-nmap    <leader>8   :tabm8<CR>
-nmap    <leader>9   :tabm<CR>
+nnoremap    <leader>lt      :tabs<CR>
+nnoremap    <leader>ts      :tab split<CR>
+nnoremap    Q               :tabpre<CR>
+nnoremap    W               :tabnext<CR>
+nnoremap    <leader>tm0     :tabm0<CR>
+nnoremap    <leader>tm1     :tabm1<CR>
+nnoremap    <leader>tm2     :tabm2<CR>
+nnoremap    <leader>tm3     :tabm3<CR>
+nnoremap    <leader>tm4     :tabm4<CR>
+nnoremap    <leader>tm5     :tabm5<CR>
+nnoremap    <leader>tm6     :tabm6<CR>
+nnoremap    <leader>tm7     :tabm7<CR>
+nnoremap    <leader>tm8     :tabm8<CR>
+nnoremap    <leader>tm9     :tabm<CR>
 
 " ctags "
-map     <C-\>       :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap    <C-\>           :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " folding "
-nmap    <F1>        :set foldlevel=0<CR>
-nmap    <F2>        :set foldlevel=1<CR>
-nmap    <F3>        :set foldlevel=2<CR>
-nmap    <F4>        :set foldlevel=3<CR>
-nmap    <F5>        :set foldlevel=4<CR>
-nmap    <F6>        :set foldlevel=5<CR>
-nmap    <F7>        :set foldlevel=6<CR>
-nmap    <F8>        :set foldlevel=100<CR>
+nnoremap    <F1>            :set foldlevel=0<CR>
+nnoremap    <F2>            :set foldlevel=1<CR>
+nnoremap    <F3>            :set foldlevel=2<CR>
+nnoremap    <F4>            :set foldlevel=3<CR>
+nnoremap    <F5>            :set foldlevel=4<CR>
+nnoremap    <F6>            :set foldlevel=100<CR>
+"nnoremap    <F7>            :set foldlevel=100<CR>
+"nnoremap    <F8>            :set foldlevel=100<CR>
 
 " nerd tree "
-nmap    <C-n>       :NERDTreeToggle<CR>
-autocmd FileType nerdtree nmap <buffer> <CR> go
-autocmd FileType nerdtree nmap <buffer> <right> o
-autocmd FileType nerdtree nmap <buffer> <left> o
+nnoremap    <C-n>           :NERDTreeToggle<CR>
+augroup nerd_tree_hotkey
+    autocmd!
+    autocmd FileType nerdtree nmap <buffer> <CR>        go
+    autocmd FileType nerdtree nmap <buffer> <right>     o
+    autocmd FileType nerdtree nmap <buffer> <left>      o
+    autocmd FileType nerdtree nmap <buffer> l           o
+    autocmd FileType nerdtree nmap <buffer> h           o
+augroup END
+
+" vimux "
+nnoremap    <leader>mk      :VimuxRunCommand "make"<CR>
+nnoremap    <F8>            :VimuxRunCommand "make"<CR>
+nnoremap    <leader>mr      :VimuxRunCommand "make run"<CR>
+nnoremap    <F7>            :VimuxRunCommand "make run"<CR>
+nnoremap    <leader>mt      :VimuxRunCommand "make test"<CR>
 
 "------------------------------------------------------------------------------
 "   tab/space
@@ -163,10 +208,13 @@ highlight TrailingSpace ctermbg=red
 "------------------------------------------------------------------------------
 "   filetype setup
 "------------------------------------------------------------------------------
-au BufRead,BufNewFile cshrc         set filetype=csh
-au BufRead,BufNewFile *.cpf         set filetype=cpf
-au BufRead,BufNewFile *.upf         set filetype=upf
-au BufRead,BufNewFile *.md          set filetype=markdown
+augroup file_type_setup
+    autocmd!
+    autocmd BufRead,BufNewFile cshrc        set filetype=csh
+    autocmd BufRead,BufNewFile *.cpf        set filetype=cpf
+    autocmd BufRead,BufNewFile *.upf        set filetype=upf
+    autocmd BufRead,BufNewFile *.md         set filetype=markdown
+augroup END
 
 
 "------------------------------------------------------------------------------
@@ -207,6 +255,7 @@ set foldtext=SimpleFoldText() " Custom fold text function
 "------------------------------------------------------------------------------
 set laststatus=2 " alway shot status line
 " set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set statusline=%<%f\ %y\ %h%m%r%=%-18.(%l/%L,%c%V%)\ %P
 set ruler           " show the cursor position all the time
 set showcmd         " display incomplete commands
 highlight StatusLine    ctermfg=Blue        ctermbg=white
@@ -251,12 +300,15 @@ highlight Pmenu         ctermfg=Black       ctermbg=Magenta
 "------------------------------------------------------------------------------
 "   NerdTree
 "------------------------------------------------------------------------------
-" auto open
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+augroup nerd_tree_setup
+    autocmd!
+    " auto open
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" auto leave
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    " auto leave
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
 
 " no fancy char
 let g:NERDTreeDirArrows=0
@@ -275,7 +327,7 @@ let g:NERDTreeDirArrows=0
 "        cs add $CSCOPE_DB
 "    endif
 "    set cscopeverbose  
-"    nmap <leader>c :tab split<CR>:cs find c <C-R>=expand("<cword>")<CR><CR>	
+"    nnoremap <leader>c :tab split<CR>:cs find c <C-R>=expand("<cword>")<CR><CR>	
 "endif
 
 " OmniCppComplete
@@ -342,8 +394,6 @@ function! MakeAsComment() range
 
     let start_str = GetBlockCommentStartStr()
     let end_str = GetBlockCommentEndStr()
-    "let start_str = "/*"
-    "let end_str = "*/"
 
     call cursor( line_lr, col_lr )
     execute "normal A " . end_str
@@ -354,25 +404,6 @@ endfunction
 
 function! MakeMultiLineComment() range
     let comment_str = GetCommentStr()
-    "let cur_file = &filetype
-    "let l:comment_str = "//"
-    "if (cur_file == "vim")
-    "    let l:comment_str = "\""
-    "elseif (cur_file == "conf")
-    "    let l:comment_str = "#"
-    "elseif (cur_file == "perl")
-    "    let l:comment_str = "#"
-    "elseif (cur_file == "python")
-    "    let l:comment_str = "#"
-    "elseif (cur_file == "csh")
-    "    let l:comment_str = "#"
-    "elseif (cur_file == "gdb")
-    "    let l:comment_str = "#"
-    "elseif (cur_file == "cpf")
-    "    let l:comment_str = "#"
-    "elseif (cur_file == "upf")
-    "    let l:comment_str = "#"
-    "endif
 
     let line_u = line("'<")
     let line_l = line("'>")
@@ -393,13 +424,6 @@ function! MakeMultiLineComment() range
     endwhile
 endfunction
 
-"function! MakeLineComment(c)
-"    let line = line(".")
-"    let col = a:c
-"    call cursor( line, col )
-"    execute "normal i//"
-"endfunction
-
 
 function! AddHeader()
     let curLine = line(".")
@@ -409,24 +433,9 @@ function! AddHeader()
     call append(curLine + 2, comment_str . "------------------------------------------------------------------------------")
 
     call cursor(curLine + 2, 0)
-    "let curLine = line(".")
-    "let cur_file = &filetype
-    "if (cur_file == "vim")
-    "    call append(curLine + 0, "\"------------------------------------------------------------------------------")
-    "    call append(curLine + 1, "\"   ")
-    "    call append(curLine + 2, "\"------------------------------------------------------------------------------")
-    "elseif (cur_file == "cpf" || cur_file == "upf")
-    "    call append(curLine + 0, "#------------------------------------------------------------------------------")
-    "    call append(curLine + 1, "#   ")
-    "    call append(curLine + 2, "#------------------------------------------------------------------------------")
-    "else
-    "    call append(curLine + 0, "//------------------------------------------------------------------------------")
-    "    call append(curLine + 1, "//   ")
-    "    call append(curLine + 2, "//------------------------------------------------------------------------------")
-    "endif
 endfunction
 
-"nmap <leader>i :call AddIf()<CR><ESC>
+"nnoremap <leader>i :call AddIf()<CR><ESC>
 "function! AddIf()
 "    "let line_ul = line("'<")
 "    "let col_ul  = virtcol("'<")
