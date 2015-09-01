@@ -1,0 +1,8 @@
+Teminal - Features - Disable application keypad mode
+Window - Appearance - Font: Lucida Console, 14
+Window - Color - ANSI Blue - 100/100/187
+Window - Color - ANSI Yellow Bold - 187/187/0
+Connection - Data - Terminal-type string - xterm-256color
+Connection - SSH - X11 - Enable X11 forwarding
+
+[ssh login](http://www.tonido.com/blog/index.php/2009/02/20/ssh-without-password-using-putty/#.VbzZtO1sGko)
