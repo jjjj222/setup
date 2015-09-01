@@ -16,6 +16,5 @@ mkdir ~/.vim_tmp
 mkdir ~/.vim_tmp/backup
 mkdir ~/.vim_tmp/swp
 mkdir ~/.vim_tmp/undo
-mkdir bundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim -c ":PluginInstall | exit"
+vim -c ":PluginInstall"
