@@ -1,5 +1,5 @@
 #! /bin/csh
-ln -s 'pwe'                                 ~/.jjjj222_setup
+ln -s `pwd`                                 ~/.jjjj222_setup
 
 ln -s ~/.jjjj222_setup/bash/bash_profile    ~/.bash_profile
 
