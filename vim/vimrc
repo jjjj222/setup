@@ -359,6 +359,8 @@ function! GetCommentStr()
 
     if (cur_file == "vim")
         return "\""
+    elseif (cur_file == "tex")
+        return "%"
     elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "javascript")
         return "//"
     endif
