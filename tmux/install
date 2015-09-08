@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+
+TEMP_TMUX_INSTALL_DIR="tmux_install_tmp"
+TMUX_VERSION="1.9"
+
+#------------------------------------------------------------------------------
+#   
+#------------------------------------------------------------------------------
+mkdir $TEMP_TMUX_INSTALL_DIR
+cd $TEMP_TMUX_INSTALL_DIR
+
+wget http://sourceforge.net/projects/tmux/files/tmux/tmux-${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz/download
+wget http://sourceforge.net/projects/levent/files/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz/download
+wget ftp://ftp.gnu.org/gnu/ncurses/ncurses-5.9.tar.gz
+
+mkdir $HOME/local
+
+tar -zxvf libevent-2.0.22-stable.tar.gz
+cd libevent-2.0.22-stable
+./configure --prefix=$HOME/local --disable-shared
+make
+make install
+cd ..
+
+tar -zxvf ncurses-5.9.tar.gz
+cd ncurses-5.9
+./configure --prefix=$HOME/local
+make
+make install
+cd ..
+
+tar -zxvf tmux-${TMUX_VERSION}.tar.gz
+cd tmux-${TMUX_VERSION}
+./configure CFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-L$HOME/local/lib -L$HOME/local/include/ncurses -L$HOME/local/include"
+CPPFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" LDFLAGS="-static -L$HOME/local/include -L$HOME/local/include/ncurses -L$HOME/local/lib" make
+cp tmux $HOME/local/bin
+cd $HOME
+
+rm -rf $TEMP_TMUX_INSTALL_DIR
