@@ -20,6 +20,12 @@ Plugin 'scrooloose/nerdtree'
 " vimux
 Plugin 'benmills/vimux'
 
+" surround"
+Plugin 'tpope/vim-surround'
+
+" repeat "
+Plugin 'tpope/vim-repeat'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "filetype plugin indent on    " required
@@ -103,13 +109,14 @@ nnoremap    <leader>d       A // TODO<ESC>
 nnoremap    +               m`O<ESC>``
 nnoremap    -               ddp
 nnoremap    _               ddkkp
-inoremap    <C-d>           <ESC>ddi
+"inoremap    <C-d>           <ESC>ddi
 inoremap    <C-p>           <ESC>Pi
 "nnoremap    <leader>"       viw<esc>a"<esc>hbi"<esc>lel
 nnoremap    <leader><TAB>   wi<TAB><ESC>
 onoremap    in(             :<c-u>normal! f(vi(<cr>
 onoremap    il(             :<c-u>normal! F)vi(<cr>
 nnoremap    <leader>j       J
+"nnoremap    <leader>w$      bi$<ESC>ei$<ESC>
 
 " moving "
 inoremap    jk              <ESC>
