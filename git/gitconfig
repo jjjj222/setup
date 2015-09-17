@@ -4,6 +4,7 @@
 [core]
 	editor = vim
 	excludesfile = ~/.jjjj222_setup/git/gitignore
+	pager = less -R
 [merge]
 	tool = vimdiff
 [color]
