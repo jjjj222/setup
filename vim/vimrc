@@ -228,9 +228,13 @@ augroup END
 "   tabpage
 "------------------------------------------------------------------------------
 set showtabline=2 " always show
-highlight TabLine       ctermfg=darkgrey    ctermbg=black
 highlight TabLineFill   ctermfg=black       ctermbg=black
 highlight TabLineSel    ctermfg=white       ctermbg=black
+if ($TERM == "xterm-color")
+    highlight TabLine       ctermfg=yellow      ctermbg=black
+else
+    highlight TabLine       ctermfg=darkgrey    ctermbg=black
+endif
 
 
 "------------------------------------------------------------------------------
