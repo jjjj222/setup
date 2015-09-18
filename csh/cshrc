@@ -78,8 +78,8 @@ alias lscur 'ls ~/.cur_dir/'
 alias showcur 'cat ~/.cur_dir/dir_\!*'
 
 #output
-alias tofile '\!* | tee ~/.csh_clipboard'
-alias showfile 'cat ~/.csh_clipboard'
+#alias tofile '\!* | tee ~/.csh_clipboard'
+#alias showfile 'cat ~/.csh_clipboard'
 
 ###############################################################################
 #   prompt

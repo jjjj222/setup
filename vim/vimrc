@@ -104,7 +104,8 @@ nnoremap    <leader>lr      :reg<CR>
 " plain text"
 vnoremap    <C-d>           :call MakeAsComment()<CR><ESC>
 vnoremap    <C-g>           :call MakeMultiLineComment()<CR><ESC>
-nnoremap    <leader>a       :call AddHeader()<CR><ESC>
+nnoremap    <leader>ah      :call AddHeader()<CR><ESC>
+nnoremap    <leader>al      :call AddHorizontalLine()<CR><ESC>
 nnoremap    <leader>d       A // TODO<ESC>
 nnoremap    +               m`O<ESC>``
 nnoremap    -               ddp
@@ -120,6 +121,7 @@ nnoremap    <leader>j       J
 
 " moving "
 inoremap    jk              <ESC>
+vnoremap    jk              <ESC>
 "inoremap    <esc>           <nop>
 "nnoremap    <right>         <nop>
 "nnoremap    <left>          <nop>
@@ -192,6 +194,9 @@ nnoremap    <F8>            :VimuxRunCommand "make"<CR>
 nnoremap    <leader>mr      :VimuxRunCommand "make run"<CR>
 nnoremap    <F7>            :VimuxRunCommand "make run"<CR>
 nnoremap    <leader>mt      :VimuxRunCommand "make test"<CR>
+
+" preload"
+let @f="$xo{\n\n}ki\t"
 
 "------------------------------------------------------------------------------
 "   tab/space
@@ -440,6 +445,14 @@ function! AddHeader()
     call append(curLine + 0, comment_str . "------------------------------------------------------------------------------")
     call append(curLine + 1, comment_str . "   ")
     call append(curLine + 2, comment_str . "------------------------------------------------------------------------------")
+
+    call cursor(curLine + 2, 0)
+endfunction
+
+function! AddHorizontalLine()
+    let curLine = line(".")
+    let comment_str = GetCommentStr()
+    call append(curLine + 0, comment_str . "------------------------------------------------------------------------------")
 
     call cursor(curLine + 2, 0)
 endfunction
