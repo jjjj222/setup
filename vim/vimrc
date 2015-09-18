@@ -96,8 +96,8 @@ nnoremap    <F9>            :NERDTreeToggle<CR>
 
 nnoremap    <leader>e       :tabnew $MYVIMRC<CR>
 nnoremap    <leader>s       :source $MYVIMRC<CR>
-"nnoremap    <leader>o       :tabnew <cWORD><CR>
-nnoremap    <leader>o       <C-w>gf
+nnoremap    <leader>o       :tabnew <cWORD><CR>
+"nnoremap    <leader>o       <C-w>gf
 nnoremap    <leader>lm      :marks<CR>
 nnoremap    <leader>lr      :reg<CR>
 
