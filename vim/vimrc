@@ -96,8 +96,8 @@ nnoremap    <F9>            :NERDTreeToggle<CR>
 
 nnoremap    <leader>e       :tabnew $MYVIMRC<CR>
 nnoremap    <leader>s       :source $MYVIMRC<CR>
-"nnoremap    <leader>o       :tabnew <cWORD><CR>
-nnoremap    <leader>o       <C-w>gf
+nnoremap    <leader>o       :tabnew <cWORD><CR>
+"nnoremap    <leader>o       <C-w>gf
 nnoremap    <leader>lm      :marks<CR>
 nnoremap    <leader>lr      :reg<CR>
 
@@ -233,9 +233,13 @@ augroup END
 "   tabpage
 "------------------------------------------------------------------------------
 set showtabline=2 " always show
-highlight TabLine       ctermfg=darkgrey    ctermbg=black
 highlight TabLineFill   ctermfg=black       ctermbg=black
 highlight TabLineSel    ctermfg=white       ctermbg=black
+if ($TERM == "xterm-color")
+    highlight TabLine       ctermfg=yellow      ctermbg=black
+else
+    highlight TabLine       ctermfg=darkgrey    ctermbg=black
+endif
 
 
 "------------------------------------------------------------------------------

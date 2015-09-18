@@ -1,1 +1,4 @@
 exec /bin/csh
+
+source $HOME/.bashrc
+
