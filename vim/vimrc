@@ -133,6 +133,7 @@ nnoremap    <C-j>           <C-f>
 nnoremap    <C-k>           <C-b>
 nnoremap    J               L
 nnoremap    K               H
+nnoremap    <C-d>           <nop>
 "nnoremap    <C-l>           <C-f>
 "nnoremap    <C-h>           <C-b>
 "nnoremap    <C-l>           H

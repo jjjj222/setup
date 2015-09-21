@@ -27,11 +27,15 @@ define goto
     jump $arg0
 end
 
+define binary_mode
+    layout asm
+    layout reg
+    winheight reg -5
+end
+
 #------------------------------------------------------------------------------
 #   command
 #------------------------------------------------------------------------------
-#set breakpoint pending on
-#break main
 
 ##================== python ===============================================
 python
