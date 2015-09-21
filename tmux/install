@@ -2,7 +2,7 @@
 
 set -e
 
-TEMP_TMUX_INSTALL_DIR="tmux_install_tmp"
+TEMP_TMUX_INSTALL_DIR="$HOME/tmux_install_tmp"
 TMUX_VERSION="1.9"
 
 #------------------------------------------------------------------------------

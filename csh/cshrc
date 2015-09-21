@@ -15,6 +15,7 @@ set rmstar=1
 set savehist=( $history merge )
 set showdots=1
 set symlinks=expand
+set correct=command # don't correct typo
 
 ###############################################################################
 #   auto complete
@@ -35,7 +36,7 @@ stty -ixon
 #   path
 ###############################################################################
 
-set path = ( . ~/bin $path )
+set path = ( . ~/bin ~/local/bin $path )
 set cdpath= ( ~/build ~/lnk )
 
 

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+VERSION="2.7.10"
+
+#------------------------------------------------------------------------------
+#   
+#------------------------------------------------------------------------------
+TEMP_INSTALL_DIR="$HOME/python_install_tmp"
+mkdir $TEMP_INSTALL_DIR
+cd $TEMP_INSTALL_DIR
+
+wget http://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz
+tar -zxvf Python-${VERSION}.tgz
+cd Python-${VERSION}
+
+./configure --prefix=$HOME/local
+make
+make install
+rm -rf $TEMP_INSTALL_DIR
+
