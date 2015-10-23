@@ -33,6 +33,20 @@ define binary_mode
     winheight reg -5
 end
 
+define show_esp
+    if ( $argc == 0)
+        x/16xw $esp
+    else
+        x/16xw $esp - $arg0*4
+    end
+end
+
+define show_ebp
+    x/16xw $ebp - 16*4
+    x/1xw $ebp
+    x/16xw $ebp
+end
+
 #------------------------------------------------------------------------------
 #   command
 #------------------------------------------------------------------------------

@@ -57,6 +57,7 @@ set tags+=~/build/lmc/src/tags,~/build/cpu/tags
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,]
 set history=50
+set tabpagemax=100
 "set visualbell t_vb=    " turn off error beep/flash
 "set novisualbell    " turn off visual bell
 
@@ -79,7 +80,7 @@ set viminfo+=n~/.vim_tmp/viminfo
 " enhance map "
 let mapleader = ","
 
-nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.*<CR>
+nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* src/*.* include/*.*<CR>
 "nnoremap    <C-h>           :tab split<CR> :Grep <cword> *.h<CR>
 "nnoremap    <C-f>       <ESC>
 "vnoremap    <C-f>       <ESC>
@@ -96,17 +97,22 @@ nnoremap    <F9>            :NERDTreeToggle<CR>
 
 nnoremap    <leader>e       :tabnew $MYVIMRC<CR>
 nnoremap    <leader>s       :source $MYVIMRC<CR>
-nnoremap    <leader>o       :tabnew <cWORD><CR>
-"nnoremap    <leader>o       <C-w>gf
+"nnoremap    <leader>o       :tabnew <cWORD><CR>
+nnoremap    <leader>o       <C-w>gf
 nnoremap    <leader>lm      :marks<CR>
 nnoremap    <leader>lr      :reg<CR>
 
-" plain text"
+" comment "
 vnoremap    <C-d>           :call MakeAsComment()<CR><ESC>
 vnoremap    <C-g>           :call MakeMultiLineComment()<CR><ESC>
+vnoremap    <leader>ch      :call CommentOutLine("<!--", "-->")<CR><ESC>
+vnoremap    <leader>u       :call UndoCommentOutLine()<CR><ESC>
+
+" plain text"
 nnoremap    <leader>ah      :call AddHeader()<CR><ESC>
 nnoremap    <leader>al      :call AddHorizontalLine()<CR><ESC>
 nnoremap    <leader>d       A // TODO<ESC>
+
 nnoremap    +               m`O<ESC>``
 nnoremap    -               ddp
 nnoremap    _               ddkkp
@@ -119,9 +125,14 @@ onoremap    il(             :<c-u>normal! F)vi(<cr>
 nnoremap    <leader>j       J
 "nnoremap    <leader>w$      bi$<ESC>ei$<ESC>
 
+"hex "
+nnoremap    <leader>h       :%! xxd<cr>
+
+vnoremap    s               <nop>
+
 " moving "
 inoremap    jk              <ESC>
-vnoremap    jk              <ESC>
+vnoremap    <space>         <ESC>
 "inoremap    <esc>           <nop>
 "nnoremap    <right>         <nop>
 "nnoremap    <left>          <nop>
@@ -130,7 +141,9 @@ vnoremap    jk              <ESC>
 "nnoremap    <C-j>           L
 "nnoremap    <C-k>           H
 nnoremap    <C-j>           <C-f>
+vnoremap    <C-j>           <C-f>
 nnoremap    <C-k>           <C-b>
+vnoremap    <C-k>           <C-b>
 nnoremap    J               L
 nnoremap    K               H
 nnoremap    <C-d>           <nop>
@@ -378,7 +391,7 @@ function! GetCommentStr()
         return "\""
     elseif (cur_file == "tex")
         return "%"
-    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "javascript")
+    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "javascript" || cur_file == "lex" || cur_file == "yacc")
         return "//"
     endif
 
@@ -403,6 +416,32 @@ function! GetBlockCommentEndStr()
     endif
 
     return "*/"
+endfunction
+
+function! CommentOutLine(start_str, end_str)
+    "let line_ul = line("'<")
+    "let col_ul  = virtcol("'<")
+    "let line_lr = line("'>")
+    "let col_lr  = virtcol("'>")
+
+    "call cursor( line_lr, col_lr )
+    execute "normal A " . a:end_str
+    "call cursor( line_ul, col_ul )
+    execute "normal I" . a:start_str . " "
+    "execute "normal za"
+endfunction
+
+function! UndoCommentOutLine()
+    "let line_ul = line("'<")
+    "let col_ul  = virtcol("'<")
+    "let line_lr = line("'>")
+    "let col_lr  = virtcol("'>")
+
+    "call cursor( line_lr, col_lr )
+    execute "normal ^df "
+    "call cursor( line_ul, col_ul )
+    execute "normal $dF d$"
+    "execute "normal za"
 endfunction
 
 function! MakeAsComment() range

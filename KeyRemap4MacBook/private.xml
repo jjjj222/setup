@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<root>
+    <appdef>
+        <appname>anki</appname>
+        <equal>net.ichi2.anki</equal>
+    </appdef>
+
+    <item>
+        <name>Anki Hacks</name>
+        <identifier>private.app_anki_ctrl_to_command</identifier>
+        <appendix>Map Ctrl+C/X/V/F to Command+C/X/V/F and C+W/Q to ESC For Anki-1.2.8</appendix>
+        <only>anki</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::C, VK_CONTROL,
+            KeyCode::C, VK_COMMAND
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::X, VK_CONTROL,
+            KeyCode::X, VK_COMMAND
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::V, VK_CONTROL,
+            KeyCode::V, VK_COMMAND
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::F, VK_CONTROL,
+            KeyCode::F, VK_COMMAND
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::W, VK_COMMAND,
+            KeyCode::ESCAPE
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::Q, VK_COMMAND,
+            KeyCode::ESCAPE
+        </autogen>
+    </item>
+
+    <appdef>
+        <appname>Chrome</appname>
+        <equal>com.google.Chrome</equal>
+    </appdef>
+
+    <item>
+        <name>Chrome Hacks</name>
+        <identifier>private.app_chrome_command_q_to_command_m</identifier>
+        <appendix>Map Ctrl+Q to Ctrl+M For Chrome</appendix>
+        <only>Chrome</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::Q, VK_COMMAND,
+            KeyCode::M, VK_COMMAND
+        </autogen>
+    </item>
+
+    <appdef>
+        <appname>DVDPlayer</appname>
+        <equal>com.apple.DVDPlayer</equal>
+    </appdef>
+
+    <item>
+        <name>DVDPlayer Hacks</name>
+        <identifier>private.app_dvdplayer_arrow_to_back_5_second</identifier>
+        <appendix>Map Arrow to Forward/Back 5 Seconds</appendix>
+        <only>DVDPlayer</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::CURSOR_LEFT, ModifierFlag::NONE,
+            KeyCode::CURSOR_LEFT, VK_COMMAND | VK_OPTION,
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::CURSOR_RIGHT, ModifierFlag::NONE,
+            KeyCode::CURSOR_RIGHT, VK_COMMAND | VK_OPTION,
+        </autogen>
+    </item>
+</root>
