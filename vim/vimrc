@@ -161,6 +161,7 @@ inoremap    <C-s>           <ESC>:w<CR>
 " copy/paste "
 vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>
 nnoremap    <C-v>           :r ~/.vim_tmp/vim_clipboard<CR>
+vnoremap    <C-x>           :!pbcopy<CR>
 
 " tabpage "
 nnoremap    <leader>lt      :tabs<CR>
@@ -296,6 +297,10 @@ highlight StatusLineNC  ctermfg=white       ctermbg=black
 "   cursor
 "------------------------------------------------------------------------------
 highlight Cursor        ctermfg=Black       ctermbg=Green       cterm=bold
+"highlight Cursor        ctermfg=Black       ctermbg=White       cterm=bold
+"highlight Cursor        ctermfg=Black       ctermbg=LightGrey   cterm=bold
+highlight MatchParen    ctermfg=NONE        ctermbg=Brown       cterm=NONE
+"highlight MatchParen    ctermfg=Black       ctermbg=White       cterm=NONE
 " set cursorline
 " highlight CursorLine   cterm=bold
 " highlight CursorLine   cterm=underline
@@ -391,7 +396,7 @@ function! GetCommentStr()
         return "\""
     elseif (cur_file == "tex")
         return "%"
-    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "javascript" || cur_file == "lex" || cur_file == "yacc")
+    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "javascript" || cur_file == "lex" || cur_file == "yacc" || cur_file == "java")
         return "//"
     endif
 

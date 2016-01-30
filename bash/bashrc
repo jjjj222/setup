@@ -1,6 +1,55 @@
+export EDITOR="vim"
 
+###############################################################################
+#   keyboard
+###############################################################################
 
+# disable ctrl + s
+stty -ixon
 
+###############################################################################
+#   alias
+###############################################################################
+unalias -a
 
+# grep
+alias grep='grep --color=auto -n -r'
 
-#PS1="\e[0;36m\H: \e[0;34m[\e[0;31m\D{%b.%d} \e[0;33m\t\e[0;34m] \e[0;32m\W \e[0;34m>\e[m "
+# ls
+if [ "$OSTYPE" = "darwin" ]; then
+    alias ls='ls -FG'
+else
+    alias ls='ls --color=auto -F'
+fi
+alias ll='ls -al'
+
+# vi
+alias vi='vim -p'
+
+# git
+#alias gittree 'git log --graph --all --decorate --oneline'
+alias gittree='git tree'
+alias gitdiff='git diff -w'
+
+# rm
+alias rmswp='rm .*.swp'
+alias rmallswp='rm ~/.vim_tmp/swp/*'
+
+# pwd
+alias cwd='echo $cwd'
+
+# cur
+alias setcur='pwd > ~/.cur_dir/dir_\!*'
+alias setcurcwd='cwd > ~/.cur_dir/dir_\!*'
+alias cdcur='cd `cat ~/.cur_dir/dir_$1`'
+alias lscur='ls ~/.cur_dir/'
+alias showcur='cat ~/.cur_dir/dir_\!*'
+
+###############################################################################
+#   prompt
+###############################################################################
+export PROMPT_DIRTRIM=1
+#PS1="[bash]\e[0;36m\h: \e[0;34m[\e[0;31m\D{%b.%d} \e[0;33m\t\e[0;34m] \e[0;32m\W \e[0;34m>\e[m "
+#PS1="[bash]\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\W \[\e[0;34m\]>\[\e[m\] "
+PS1="[bash] \[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w \[\e[0;34m\]>\[\e[m\] "
+

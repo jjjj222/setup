@@ -22,6 +22,10 @@ define ll
     ls 60
 end
 
+define dump
+    call $arg0.dump()
+end
+
 define goto
     tb $arg0
     jump $arg0

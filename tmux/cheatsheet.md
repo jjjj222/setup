@@ -10,8 +10,8 @@
 #Session
 - new session                   --> tmux new -s $NAME
 - attach session                --> tmux attach -t $NAME
-- rename session                --> :rename-session $NAME
 - list session                  --> tmux ls
+- rename session                --> <prefix>S
 - choose session                --> <prefix>s
 
 #Window
@@ -23,6 +23,8 @@
 #Pane
 - focus pane                    --> <prefix>z
 - last pane                     --> <prefix>;
+- swap pane                     --> <prefix>{
+- swap pane                     --> <prefix>}
 
 #Reference
 - [main page](http://tmux.github.io/)

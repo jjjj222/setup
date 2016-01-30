@@ -28,6 +28,7 @@ set complete
 #   keyboard
 ###############################################################################
 
+# disable ctrl + s
 stty -ixon
 
 
@@ -73,6 +74,7 @@ alias cwd 'echo $cwd'
 
 # cur
 alias setcur 'pwd > ~/.cur_dir/dir_\!*'
+alias setcurcwd 'cwd > ~/.cur_dir/dir_\!*'
 alias cdcur 'cd `cat ~/.cur_dir/dir_\!*`'
 alias lscur 'ls ~/.cur_dir/'
 alias showcur 'cat ~/.cur_dir/dir_\!*'
