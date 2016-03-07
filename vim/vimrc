@@ -22,9 +22,14 @@ Plugin 'benmills/vimux'
 
 " surround"
 Plugin 'tpope/vim-surround'
+" ysiw]
+" cs'
 
 " repeat "
 Plugin 'tpope/vim-repeat'
+
+" tabular "
+Plugin 'godlygeek/tabular'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,7 +58,7 @@ set completeopt-=preview
 set formatoptions-=cro
 
 set nocompatible
-set tags+=~/build/lmc/src/tags,~/build/cpu/tags
+"set tags+=~/build/lmc/src/tags,~/build/cpu/tags
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,]
 set history=50
@@ -65,6 +70,18 @@ set tabpagemax=100
 set wildmode=longest,list
 set wildmenu
 
+
+"------------------------------------------------------------------------------
+"   mouse
+"------------------------------------------------------------------------------
+"set mouse=a
+"noremap <LeftMouse> <nop>
+"noremap <RightMouse> <nop>
+"noremap <MiddleMouse> <nop>
+
+"------------------------------------------------------------------------------
+"   
+"------------------------------------------------------------------------------
 if has('persistent_undo')
     "set undofile
     set undodir=~/.vim_tmp/undo//
@@ -106,12 +123,12 @@ nnoremap    <leader>lr      :reg<CR>
 vnoremap    <C-d>           :call MakeAsComment()<CR><ESC>
 vnoremap    <C-g>           :call MakeMultiLineComment()<CR><ESC>
 vnoremap    <leader>ch      :call CommentOutLine("<!--", "-->")<CR><ESC>
-vnoremap    <leader>u       :call UndoCommentOutLine()<CR><ESC>
+"vnoremap    <leader>u       :call undocommentoutline()<cr><esc>
 
 " plain text"
 nnoremap    <leader>ah      :call AddHeader()<CR><ESC>
 nnoremap    <leader>al      :call AddHorizontalLine()<CR><ESC>
-nnoremap    <leader>d       A // TODO<ESC>
+"nnoremap    <leader>d       A // TODO<ESC>
 
 nnoremap    +               m`O<ESC>``
 nnoremap    -               ddp
@@ -123,12 +140,14 @@ nnoremap    <leader><TAB>   wi<TAB><ESC>
 onoremap    in(             :<c-u>normal! f(vi(<cr>
 onoremap    il(             :<c-u>normal! F)vi(<cr>
 nnoremap    <leader>j       J
+nnoremap    <leader>w       W
 "nnoremap    <leader>w$      bi$<ESC>ei$<ESC>
 
 "hex "
 nnoremap    <leader>h       :%! xxd<cr>
 
 vnoremap    s               <nop>
+"vnoremap    u               <ESC>u
 
 " moving "
 inoremap    jk              <ESC>
@@ -157,6 +176,7 @@ nnoremap    L               $
 " save "
 nnoremap    <C-s>           :w<CR>
 inoremap    <C-s>           <ESC>:w<CR>
+vnoremap    <C-s>           <ESC>:w<CR>
 
 " copy/paste "
 vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>
@@ -189,12 +209,11 @@ nnoremap    <F3>            :set foldlevel=2<CR>
 nnoremap    <F4>            :set foldlevel=3<CR>
 nnoremap    <F5>            :set foldlevel=4<CR>
 nnoremap    <F6>            :set foldlevel=100<CR>
-"nnoremap    <F7>            :set foldlevel=100<CR>
-"nnoremap    <F8>            :set foldlevel=100<CR>
 
 " nerd tree "
 nnoremap    <C-n>           :NERDTreeToggle<CR>
 augroup nerd_tree_hotkey
+    "Can't use nnoremap here
     autocmd!
     autocmd FileType nerdtree nmap <buffer> <CR>        go
     autocmd FileType nerdtree nmap <buffer> <right>     o
@@ -210,8 +229,54 @@ nnoremap    <leader>mr      :VimuxRunCommand "make run"<CR>
 nnoremap    <F7>            :VimuxRunCommand "make run"<CR>
 nnoremap    <leader>mt      :VimuxRunCommand "make test"<CR>
 
+" indent "
+"nnoremap    <Tab>           I<Tab><ESC>l
+nnoremap    <Tab>           heT<space>i<Tab><ESC>l
+"nnoremap    <S-Tab>         <<
+vnoremap    <Tab>           >gv
+vnoremap    <S-Tab>         <gv
+
+" paste "
+nnoremap    <leader>po      :set paste<CR>
+nnoremap    <leader>pf      :set nopaste<CR>
+
+" align"
+"vnoremap    <leader>a&      :Tab /&<CR>
+"vnoremap    <leader>a|      :Tab /|<CR>
+
 " preload"
 let @f="$xo{\n\n}ki\t"
+
+"------------------------------------------------------------------------------
+"   <leader>
+"------------------------------------------------------------------------------
+" a : add (h: header, l: line), align(&, |)
+" b
+" c : comment (h: html)
+" d
+" e
+" f
+" g
+" h : hex
+" i
+" j : J
+" k
+" l : list (m: marks, r: regs, t: tabs)
+" m : make (k: make, r: run, t: test)
+" n
+" o : open
+" p : paste (o: on, f: off)
+" q
+" r
+" s : source - vimrc
+" t : tab (s: split, m: move)
+" u
+" v
+" w : W
+" x
+" y
+" z
+
 
 "------------------------------------------------------------------------------
 "   tab/space
@@ -223,14 +288,14 @@ else
 endif
 set tabstop=4
 set shiftwidth=4
-" set softtabstop=4
+"set softtabstop=4
 highlight Tab           ctermbg=blue
 match Tab /\t/
 highlight TrailingSpace ctermbg=red
 2match TrailingSpace /\s\+$/
 "filetype on
 "filetype indent on
-
+"set autoindent 
 
 "------------------------------------------------------------------------------
 "   filetype setup
@@ -350,6 +415,15 @@ let g:NERDTreeDirArrows=0
 
 
 "------------------------------------------------------------------------------
+"   ruby
+"------------------------------------------------------------------------------
+"if (&filetype == "ruby")
+if (&filetype == "ruby")
+    set nofoldenable
+    set regexpengine=1
+    set lazyredraw
+endif
+"------------------------------------------------------------------------------
 "   
 "------------------------------------------------------------------------------
 "let g:closetag_html_style=1
@@ -396,6 +470,8 @@ function! GetCommentStr()
         return "\""
     elseif (cur_file == "tex")
         return "%"
+    elseif (cur_file == "haml")
+        return "-#"
     elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "javascript" || cur_file == "lex" || cur_file == "yacc" || cur_file == "java")
         return "//"
     endif

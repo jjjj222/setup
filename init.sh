@@ -31,6 +31,7 @@ ln -s ~/.jjjj222_setup/git/gitconfig        ~/.gitconfig
 #   tmux
 #------------------------------------------------------------------------------
 ln -s ~/.jjjj222_setup/tmux/tmux.conf       ~/.tmux.conf
+ln -s ~/.jjjj222_setup/tmux/tmux-osx.conf   ~/.tmux-osx.conf
 
 #------------------------------------------------------------------------------
 #   screen
