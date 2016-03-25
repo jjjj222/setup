@@ -30,6 +30,7 @@ Plugin 'tpope/vim-repeat'
 
 " tabular "
 Plugin 'godlygeek/tabular'
+" :Tab /:\zs
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -56,6 +57,9 @@ set completeopt-=preview
 
 " disable auto comment
 set formatoptions-=cro
+
+"disable modeline"
+set modelines=0
 
 set nocompatible
 "set tags+=~/build/lmc/src/tags,~/build/cpu/tags
@@ -144,7 +148,8 @@ nnoremap    <leader>w       W
 "nnoremap    <leader>w$      bi$<ESC>ei$<ESC>
 
 "hex "
-nnoremap    <leader>h       :%! xxd<cr>
+nnoremap    <leader>fx      :%! xxd<cr>
+nnoremap    <leader>fj      :%! python -m json.tool<cr>
 
 vnoremap    s               <nop>
 "vnoremap    u               <ESC>u
@@ -241,8 +246,8 @@ nnoremap    <leader>po      :set paste<CR>
 nnoremap    <leader>pf      :set nopaste<CR>
 
 " align"
-"vnoremap    <leader>a&      :Tab /&<CR>
-"vnoremap    <leader>a|      :Tab /|<CR>
+vnoremap    <leader>a&      :Tab /&<CR>
+vnoremap    <leader>a\|     :Tab /\|<CR>
 
 " preload"
 let @f="$xo{\n\n}ki\t"
@@ -255,9 +260,9 @@ let @f="$xo{\n\n}ki\t"
 " c : comment (h: html)
 " d
 " e
-" f
+" f : format (j: json, x: hex)
 " g
-" h : hex
+" h
 " i
 " j : J
 " k
@@ -306,6 +311,7 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile *.cpf        set filetype=cpf
     autocmd BufRead,BufNewFile *.upf        set filetype=upf
     autocmd BufRead,BufNewFile *.md         set filetype=markdown
+    autocmd BufRead,BufNewFile *.cls         set filetype=tex
 augroup END
 
 

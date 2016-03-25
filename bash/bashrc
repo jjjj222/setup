@@ -163,6 +163,7 @@ export PATH="$HOME/bin:$PATH"
 #    done
 #    echo "${p[*]}"
 #}
+
 ###############################################################################
 #   prompt
 ###############################################################################
@@ -183,8 +184,17 @@ short_prompt() {
 long_prompt() {
     export PS1='\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w \[\e[0;34m\]>\[\e[m\] '
 }
+long_prompt_with_git() {
+    export PS1='\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w \[\e[m\]$(__git_ps1 "(%s)") \[\e[0;34m\]>\[\e[m\] '
+}
 long_prompt
 
+
+if [ -e "/usr/local/etc/bash_completion.d/git-prompt.sh" ]
+then
+    source /usr/local/etc/bash_completion.d/git-prompt.sh
+    long_prompt_with_git
+fi
 #export PS1='[$(uptime) ]\$ '
 #export PS1='[$(pwd) ]\$ '
 
