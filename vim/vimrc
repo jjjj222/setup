@@ -22,14 +22,15 @@ Plugin 'benmills/vimux'
 
 " surround"
 Plugin 'tpope/vim-surround'
-" ysiw]
-" cs'
+" ysiw] : add ]
+" cs' : change the '
 
 " repeat "
 Plugin 'tpope/vim-repeat'
 
 " tabular "
 Plugin 'godlygeek/tabular'
+" :Tab /:
 " :Tab /:\zs
 
 " All of your Plugins must be added before the following line
@@ -51,6 +52,7 @@ filetype plugin on
 "   start
 "------------------------------------------------------------------------------
 syntax on
+"filetype on
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 set completeopt-=preview
@@ -249,6 +251,12 @@ nnoremap    <leader>pf      :set nopaste<CR>
 vnoremap    <leader>a&      :Tab /&<CR>
 vnoremap    <leader>a\|     :Tab /\|<CR>
 
+" external "
+command! -nargs=1 Silent
+\ | execute ':silent !'.<q-args>
+\ | execute ':redraw!'
+nnoremap    <leader>xc      :Silent open -a "Google Chrome" '%:p'<cr>
+
 " preload"
 let @f="$xo{\n\n}ki\t"
 
@@ -278,7 +286,7 @@ let @f="$xo{\n\n}ki\t"
 " u
 " v
 " w : W
-" x
+" x : external
 " y
 " z
 
@@ -286,21 +294,33 @@ let @f="$xo{\n\n}ki\t"
 "------------------------------------------------------------------------------
 "   tab/space
 "------------------------------------------------------------------------------
-if (&filetype == "make")
-    set noexpandtab
-else
-    set expandtab
-endif
+set expandtab
 set tabstop=4
 set shiftwidth=4
 "set softtabstop=4
 highlight Tab           ctermbg=blue
-match Tab /\t/
 highlight TrailingSpace ctermbg=red
+match Tab /\t/
 2match TrailingSpace /\s\+$/
+
+augroup match_white_space
+    autocmd BufWinEnter * match Tab /\t/
+    autocmd BufWinEnter * 2match TrailingSpace /\s\+$/
+augroup END
+"match
+"match TrailingSpace /\s\+$/
 "filetype on
 "filetype indent on
 "set autoindent 
+
+"if (&filetype == "make")
+"    set noexpandtab
+"endif
+
+"if (&filetype == "cucumber")
+"    set tabstop=2
+"    set shiftwidth=2
+"endif
 
 "------------------------------------------------------------------------------
 "   filetype setup
@@ -311,7 +331,7 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile *.cpf        set filetype=cpf
     autocmd BufRead,BufNewFile *.upf        set filetype=upf
     autocmd BufRead,BufNewFile *.md         set filetype=markdown
-    autocmd BufRead,BufNewFile *.cls         set filetype=tex
+    autocmd BufRead,BufNewFile *.cls        set filetype=tex
 augroup END
 
 
@@ -393,13 +413,16 @@ highlight Search        ctermfg=Black       ctermbg=DarkRed     cterm=NONE
 "   theme
 "------------------------------------------------------------------------------
 highlight Normal        ctermfg=LightGrey
+"highlight NonText       ctermfg=Red
 highlight Visual                            ctermbg=Black       cterm=reverse
 highlight Special       ctermfg=Brown
 highlight Comment       ctermfg=Blue
 highlight Statement     ctermfg=Yellow                          cterm=NONE
 highlight Type                                                  cterm=NONE
 
-" omni "
+"------------------------------------------------------------------------------
+"   popup menu
+"------------------------------------------------------------------------------
 highlight Pmenu         ctermfg=Black       ctermbg=Magenta
 
 
@@ -424,11 +447,11 @@ let g:NERDTreeDirArrows=0
 "   ruby
 "------------------------------------------------------------------------------
 "if (&filetype == "ruby")
-if (&filetype == "ruby")
-    set nofoldenable
-    set regexpengine=1
-    set lazyredraw
-endif
+"if (&filetype == "ruby")
+"    set nofoldenable
+"    set regexpengine=1
+"    set lazyredraw
+"endif
 "------------------------------------------------------------------------------
 "   
 "------------------------------------------------------------------------------
