@@ -1,3 +1,5 @@
+.jjjj222_tmp
+
 # Compiled source #
 ###################
 *.com
@@ -110,3 +112,4 @@ test/tmp
 test/version_tmp
 .yardoc
 _yardoc
+.byebug_history

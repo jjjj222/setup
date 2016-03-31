@@ -13,6 +13,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+" :PluginInstall
+" :PluginUpdate
 
 " Nerd Tree
 Plugin 'scrooloose/nerdtree'
@@ -214,8 +216,7 @@ nnoremap    <F1>            :set foldlevel=0<CR>
 nnoremap    <F2>            :set foldlevel=1<CR>
 nnoremap    <F3>            :set foldlevel=2<CR>
 nnoremap    <F4>            :set foldlevel=3<CR>
-nnoremap    <F5>            :set foldlevel=4<CR>
-nnoremap    <F6>            :set foldlevel=100<CR>
+nnoremap    <F5>            :set foldlevel=100<CR>
 
 " nerd tree "
 nnoremap    <C-n>           :NERDTreeToggle<CR>
@@ -235,6 +236,8 @@ nnoremap    <F8>            :VimuxRunCommand "make"<CR>
 nnoremap    <leader>mr      :VimuxRunCommand "make run"<CR>
 nnoremap    <F7>            :VimuxRunCommand "make run"<CR>
 nnoremap    <leader>mt      :VimuxRunCommand "make test"<CR>
+"nnoremap    <F6>            :VimuxCloseRunner<CR>
+nnoremap    <leader>mc      :VimuxCloseRunner<CR>
 
 " indent "
 "nnoremap    <Tab>           I<Tab><ESC>l
@@ -311,17 +314,7 @@ augroup END
 "match TrailingSpace /\s\+$/
 "filetype on
 "filetype indent on
-"set autoindent 
-
-"if (&filetype == "make")
-"    set noexpandtab
-"endif
-
-"if (&filetype == "cucumber")
-"    set tabstop=2
-"    set shiftwidth=2
-"endif
-
+"set autoindent
 "------------------------------------------------------------------------------
 "   filetype setup
 "------------------------------------------------------------------------------
@@ -444,14 +437,37 @@ let g:NERDTreeDirArrows=0
 
 
 "------------------------------------------------------------------------------
-"   ruby
+"   NerdTree New Version
 "------------------------------------------------------------------------------
-"if (&filetype == "ruby")
-"if (&filetype == "ruby")
-"    set nofoldenable
-"    set regexpengine=1
-"    set lazyredraw
-"endif
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '~'
+"
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+    exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+    exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+"------------------------------------------------------------------------------
+"   Vimux
+"------------------------------------------------------------------------------
+let g:VimuxHeight = "30"
+let g:VimuxOrientation = "h"
+
 "------------------------------------------------------------------------------
 "   
 "------------------------------------------------------------------------------
@@ -629,3 +645,26 @@ endfunction
 "    "execute "normal I/* "
 "    "execute "normal za"
 "endfunction
+
+"------------------------------------------------------------------------------
+"   after
+"------------------------------------------------------------------------------
+
+if (&filetype == "make")
+    "set noexpandtab
+    source $HOME/.vim/after/ftplugin/make.vim
+endif
+
+if (&filetype == "cucumber")
+    source $HOME/.vim/after/ftplugin/cucumber.vim
+endif
+
+if (&filetype == "ruby")
+    source $HOME/.vim/after/ftplugin/ruby.vim
+endif
+
+if (&filetype == "haml")
+    source $HOME/.vim/after/ftplugin/haml.vim
+endif
+
+"source $HOME/.vim/after/ftplugin/&filetype.vim

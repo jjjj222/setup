@@ -48,7 +48,6 @@ alias cwd='echo $PWD'
 setcur() {
     local cur_dir=`pwd` 
     echo ${cur_dir//\ /\\ } > ~/.cur_dir/dir_$1
-    #pwd > ~/.cur_dir/dir_$1
 }
 setcurcwd() {
     cwd > ~/.cur_dir/dir_$1
@@ -56,7 +55,6 @@ setcurcwd() {
 cdcur() {
     local target_dir=`cat ~/.cur_dir/dir_$1`
     eval cd $target_dir
-    #cd `cat ~/.cur_dir/dir_$1`
 }
 lscur() {
     ls ~/.cur_dir/
@@ -69,6 +67,7 @@ showcur() {
 #alias cdcur='cd `cat ~/.cur_dir/dir_$1`'
 #alias lscur='ls ~/.cur_dir/'
 #alias showcur='cat ~/.cur_dir/dir_\!*'
+alias c9railsserver="rails s -b $IP -p $PORT"
 
 #------------------------------------------------------------------------------
 #   
@@ -190,10 +189,21 @@ long_prompt_with_git() {
 long_prompt
 
 
-if [ -e "/usr/local/etc/bash_completion.d/git-prompt.sh" ]
-then
-    source /usr/local/etc/bash_completion.d/git-prompt.sh
-fi
+
+include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+# for mac
+include /usr/local/etc/bash_completion.d/git-prompt.sh
+# for linux
+include /etc/bash_completion.d/git-prompt
+
+#if [ -e "/usr/local/etc/bash_completion.d/git-prompt.sh" ]
+#then
+#    source /usr/local/etc/bash_completion.d/git-prompt.sh
+#fi
+#source /etc/bash_completion.d/git-prompt
 
 if [ -n "$(type -t __git_ps1)" ]
 then
