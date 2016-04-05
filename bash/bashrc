@@ -1,21 +1,21 @@
 export EDITOR="vim"
 
 #------------------------------------------------------------------------------
-#   
+#   mask
 #------------------------------------------------------------------------------
 umask 0027
 
-###############################################################################
+#------------------------------------------------------------------------------
 #   keyboard
-###############################################################################
+#------------------------------------------------------------------------------
 
 # disable ctrl + s
 stty -ixon
 bind -r '\C-s'
 
-###############################################################################
+#------------------------------------------------------------------------------
 #   alias
-###############################################################################
+#------------------------------------------------------------------------------
 unalias -a
 
 # grep
@@ -62,110 +62,31 @@ lscur() {
 showcur() {
     cat ~/.cur_dir/dir_$1
 }
-#alias setcur='pwd > ~/.cur_dir/dir_\!*'
-#alias setcurcwd='cwd > ~/.cur_dir/dir_\!*'
-#alias cdcur='cd `cat ~/.cur_dir/dir_$1`'
-#alias lscur='ls ~/.cur_dir/'
-#alias showcur='cat ~/.cur_dir/dir_\!*'
+
+# c9
 alias c9railsserver="rails s -b $IP -p $PORT"
 
 #------------------------------------------------------------------------------
-#   
+#   path
 #------------------------------------------------------------------------------
 export PATH="$HOME/bin:$PATH"
 
+#------------------------------------------------------------------------------
+#   include
+#------------------------------------------------------------------------------
+include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+# for mac - __git_ps1
+include /usr/local/etc/bash_completion.d/git-prompt.sh
+
+# for linux - __git_ps1
+include /etc/bash_completion.d/git-prompt
 
 #------------------------------------------------------------------------------
-#   
-#------------------------------------------------------------------------------
-# Simple BASH function that shortens
-# a very long path for display by removing
-# the left most parts and replacing them
-# with a leading ...
-#
-# the first argument is the path
-#
-# the second argument is the maximum allowed
-# length including the '/'s and ...
-#
-#shorten_path() {
-#  x=${1}
-#  len=${#x}
-#  max_len=$2
-# 
-#  if [ $len -gt $max_len ]
-#  then
-#      # finds all the '/' in
-#      # the path and stores their
-#      # positions
-#      #
-#      pos=()
-#      for ((i=0;i<len;i++))
-#      do
-#          if [ "${x:i:1}" == "/" ]
-#          then
-#              pos=(${pos[@]} $i)
-#          fi
-#      done
-#      pos=(${pos[@]} $len)
-#   
-#      # we have the '/'s, let's find the
-#      # left-most that doesn't break the
-#      # length limit
-#      #
-#      i=0
-#      while [ $((len-pos[i])) -gt $((max_len-3)) ]
-#      do
-#          i=$((i+1))
-#      done
-# 
-#      # let us check if it's OK to
-#      # print the whole thing
-#      #
-#      if [ ${pos[i]} == 0 ]
-#      then
-#          # the path is shorter than
-#          # the maximum allowed length,
-#          # so no need for ...
-#          #
-#          echo ${x}
-#       
-#      elif [ ${pos[i]} == $len ]
-#      then
-#          # constraints are broken because
-#          # the maximum allowed size is smaller
-#          # than the last part of the path, plus
-#          # '...'
-#          #
-#          echo ...${x:((len-max_len+3))}
-#      else
-#          # constraints are satisfied, at least
-#          # some parts of the path, plus ..., are
-#          # shorter than the maximum allowed size
-#          #
-#          echo ...${x:pos[i]}
-#      fi
-#  else
-#      echo ${x}
-#  fi
-#}
-#_dir_chomp () {
-#    local IFS=/ c=1 n d
-#    local p=(${1/#$HOME/\~}) r=${p[*]}
-#    local s=${#r}
-#    while ((s>$2&&c<${#p[*]}-1))
-#    do
-#        d=${p[c]}
-#        n=1;[[ $d = .* ]]&&n=2
-#        ((s-=${#d}-n))
-#        p[c++]=${d:0:n}
-#    done
-#    echo "${p[*]}"
-#}
-
-###############################################################################
 #   prompt
-###############################################################################
+#------------------------------------------------------------------------------
 export PROMPT_DIRTRIM=1
 #PS1="[bash]\e[0;36m\h: \e[0;34m[\e[0;31m\D{%b.%d} \e[0;33m\t\e[0;34m] \e[0;32m\W \e[0;34m>\e[m "
 #PS1="[bash]\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\W \[\e[0;34m\]>\[\e[m\] "
@@ -176,28 +97,19 @@ export PROMPT_DIRTRIM=1
 #export PS1="\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w \[\e[0;34m\]>\[\e[m\] "
 #export PS1='\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]$(_dir_chomp $(pwd) 20) \[\e[0;34m\]>\[\e[m\] '
 
-#export PS1='\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w \[\e[0;34m\]>\[\e[m\] '
-short_prompt() {
-    export PS1='\[\e[0;36m\]: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\W \[\e[0;34m\]>\[\e[m\] '
-}
-long_prompt() {
-    export PS1='\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w \[\e[0;34m\]>\[\e[m\] '
-}
-long_prompt_with_git() {
-    export PS1='\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w\[\e[0;35m\]$(__git_ps1 " (%s)") \[\e[0;34m\]>\[\e[m\] '
-}
-long_prompt
+#short_prompt() {
+#    export PS1='\[\e[0;36m\]: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\W \[\e[0;34m\]>\[\e[m\] '
+#}
+#long_prompt() {
+#    export PS1='\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w \[\e[0;34m\]>\[\e[m\] '
+#}
+#long_prompt_with_git() {
+#    export PS1='\[\e[0;36m\]\h: \[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]] \[\e[0;32m\]\w\[\e[0;35m\]$(__git_ps1 " (%s)") \[\e[0;34m\]>\[\e[m\] '
+#}
+#long_prompt
 
 
 
-include () {
-    [[ -f "$1" ]] && source "$1"
-}
-
-# for mac
-include /usr/local/etc/bash_completion.d/git-prompt.sh
-# for linux
-include /etc/bash_completion.d/git-prompt
 
 #if [ -e "/usr/local/etc/bash_completion.d/git-prompt.sh" ]
 #then
@@ -205,12 +117,28 @@ include /etc/bash_completion.d/git-prompt
 #fi
 #source /etc/bash_completion.d/git-prompt
 
-if [ -n "$(type -t __git_ps1)" ]
-then
-    long_prompt_with_git
-fi
+#if [ -n "$(type -t __git_ps1)" ]
+#then
+#    long_prompt_with_git
+#fi
 
+set_prompt() {
+    hostname='\[\e[0;36m\]\h:'
+    datetime='\[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]]'
+    folder='\[\e[0;32m\]\w'
+    end='\[\e[0;34m\]>\[\e[m\] '
+    git='\[\e[0;35m\]$(__git_ps1 " (%s)")'
 
+    if [ ! -n "$(type -t __git_ps1)" ]
+    then
+        git=""
+    fi
+
+    prompt="$hostname $datetime $folder$git $end"
+    export PS1="$prompt"
+}
+
+set_prompt
 
 #export PS1='[$(uptime) ]\$ '
 #export PS1='[$(pwd) ]\$ '
