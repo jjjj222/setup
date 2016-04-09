@@ -13,6 +13,6 @@
 	prompt = false
 [alias]
 	#tree = log --graph --all --decorate --oneline --date-order
-	#tree = log --graph --all --pretty=format:'%C(yellow)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date-order
 	tree = log --graph --all --pretty=format:'%C(yellow)%h%Creset%C(auto)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit --date-order
-	#newtree = log --graph --all --pretty=format:'%C(yellow)%h%Creset%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date-order
+[push]
+	default = simple
