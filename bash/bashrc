@@ -126,8 +126,8 @@ set_prompt() {
     hostname='\[\e[0;36m\]\h:'
     datetime='\[\e[0;34m\][\[\e[0;31m\]\D{%b.%d} \[\e[0;33m\]\t\[\e[0;34m\]]'
     folder='\[\e[0;32m\]\w'
-    end='\[\e[0;34m\]>\[\e[m\] '
     git='\[\e[0;35m\]$(__git_ps1 " (%s)")'
+    end='\[\e[0;34m\]>\[\e[m\] '
 
     if [ ! -n "$(type -t __git_ps1)" ]
     then

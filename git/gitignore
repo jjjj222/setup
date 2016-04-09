@@ -73,7 +73,7 @@ node_modules
 *.lib
 *.dll
 *.exe
-*.out
+#*.out
 *.app
 install_manifest.txt
 CMakeCache.txt
