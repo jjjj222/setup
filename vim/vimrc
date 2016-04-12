@@ -347,6 +347,7 @@ endif
 set number
 set numberwidth=4
 set cpoptions+=n
+"highlight LineNr        ctermfg=yellow      ctermbg=black
 highlight LineNr        ctermfg=yellow      ctermbg=black
 
 
@@ -405,6 +406,7 @@ highlight Search        ctermfg=Black       ctermbg=DarkRed     cterm=NONE
 "------------------------------------------------------------------------------
 "   theme
 "------------------------------------------------------------------------------
+"set background=dark
 highlight Normal        ctermfg=LightGrey
 "highlight NonText       ctermfg=Red
 highlight Visual                            ctermbg=Black       cterm=reverse
