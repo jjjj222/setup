@@ -35,6 +35,13 @@ Plugin 'godlygeek/tabular'
 " :Tab /:
 " :Tab /:\zs
 
+" rils
+Plugin 'tpope/vim-rails'
+" :Econtroller
+
+" git
+Plugin 'tpope/vim-fugitive'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "filetype plugin indent on    " required
@@ -120,8 +127,6 @@ nnoremap    <F12>           :cnext<CR>
 "nnoremap    <F9>        :VCSAnnotate<CR>
 nnoremap    <F9>            :NERDTreeToggle<CR>
 
-nnoremap    <leader>e       :tabnew $MYVIMRC<CR>
-nnoremap    <leader>s       :source $MYVIMRC<CR>
 "nnoremap    <leader>o       :tabnew <cWORD><CR>
 nnoremap    <leader>o       <C-w>gf
 nnoremap    <leader>lm      :marks<CR>
@@ -260,6 +265,14 @@ command! -nargs=1 Silent
 \ | execute ':redraw!'
 nnoremap    <leader>xc      :Silent open -a "Google Chrome" '%:p'<cr>
 
+" vimrc "
+nnoremap    <leader>ee      :tabnew $MYVIMRC<CR>
+nnoremap    <leader>ss      :source $MYVIMRC<CR>
+nnoremap    <leader>er      :tabnew ~/.vimrc_recent<CR>
+nnoremap    <leader>sr      :source ~/.vimrc_recent<CR>
+nnoremap    <leader>ea      :execute "tabnew ~/.vim/after/ftplugin/" . &filetype . ".vim"<CR>
+nnoremap    <leader>sa      :execute "source ~/.vim/after/ftplugin/" . &filetype . ".vim"<CR>
+
 " preload"
 let @f="$xo{\n\n}ki\t"
 
@@ -270,7 +283,7 @@ let @f="$xo{\n\n}ki\t"
 " b
 " c : comment (h: html)
 " d
-" e
+" e : edit (e: vimrc, r: recent, a: after)
 " f : format (j: json, x: hex)
 " g
 " h
@@ -284,7 +297,7 @@ let @f="$xo{\n\n}ki\t"
 " p : paste (o: on, f: off)
 " q
 " r
-" s : source - vimrc
+" s : source (s: vimrc, r: recent, a: after)
 " t : tab (s: split, m: move)
 " u
 " v
@@ -321,6 +334,7 @@ augroup END
 augroup file_type_setup
     autocmd!
     autocmd BufRead,BufNewFile cshrc        set filetype=csh
+    autocmd BufRead,BufNewFile vim_recent   set filetype=vim
     autocmd BufRead,BufNewFile *.cpf        set filetype=cpf
     autocmd BufRead,BufNewFile *.upf        set filetype=upf
     autocmd BufRead,BufNewFile *.md         set filetype=markdown
@@ -356,8 +370,9 @@ highlight LineNr        ctermfg=yellow      ctermbg=black
 "------------------------------------------------------------------------------
 set foldenable
 set foldmarker={,}
-" set foldmethod=marker
-set foldmethod=syntax
+"set foldmethod=marker
+"set foldmethod=syntax
+set foldmethod=indent
 set foldlevel=1000
 set foldcolumn=4
 highlight Folded        ctermfg=Cyan        ctermbg=Black
@@ -651,22 +666,29 @@ endfunction
 "------------------------------------------------------------------------------
 "   after
 "------------------------------------------------------------------------------
+function! SourceVimAfter()
+    let afterfile = $HOME . "/.vim/after/ftplugin/" . &filetype . ".vim"
+    if filereadable(afterfile)
+        source afterfile
+    endif
+endfunction
+call SourceVimAfter()
 
-if (&filetype == "make")
-    "set noexpandtab
-    source $HOME/.vim/after/ftplugin/make.vim
-endif
-
-if (&filetype == "cucumber")
-    source $HOME/.vim/after/ftplugin/cucumber.vim
-endif
-
-if (&filetype == "ruby")
-    source $HOME/.vim/after/ftplugin/ruby.vim
-endif
-
-if (&filetype == "haml")
-    source $HOME/.vim/after/ftplugin/haml.vim
-endif
+"if (&filetype == "make")
+"    "set noexpandtab
+"    source $HOME/.vim/after/ftplugin/make.vim
+"endif
+"
+"if (&filetype == "cucumber")
+"    source $HOME/.vim/after/ftplugin/cucumber.vim
+"endif
+"
+"if (&filetype == "ruby")
+"    source $HOME/.vim/after/ftplugin/ruby.vim
+"endif
+"
+"if (&filetype == "haml")
+"    source $HOME/.vim/after/ftplugin/haml.vim
+"endif
 
 "source $HOME/.vim/after/ftplugin/&filetype.vim

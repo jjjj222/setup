@@ -63,6 +63,7 @@ ln -s ~/.jjjj222_setup/gnuplot/gnuplot      ~/.gnuplot
 ln -s ~/.jjjj222_setup/vim                  ~/.vim
 ln -s ~/.vim/vimrc                          ~/.vimrc
 ln -s ~/.vim/vimrc_after                    ~/.vimrc_after
+ln -s ~/.vim/vimrc_recent                   ~/.vimrc_recent
 mkdir                                       ~/.vim_tmp
 mkdir                                       ~/.vim_tmp/backup
 mkdir                                       ~/.vim_tmp/swp
