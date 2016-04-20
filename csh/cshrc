@@ -63,7 +63,8 @@ alias ll 'ls -al'
 alias vi 'vim -p'
 
 # git
-alias gittree 'git log --graph --all --decorate --oneline'
+#alias gittree 'git log --graph --all --decorate --oneline'
+alias gittree 'git tree'
 alias gitdiff 'git diff -w'
 
 # rm
