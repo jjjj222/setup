@@ -1,31 +1,27 @@
 #Configure
-- file                          --> ~/.tmux.conf
-- re-source configure file      --> <prefix>r
+- file                            --> ~/.tmux.conf
+- re-source configure file        --> <prefix>r
 
 #Info
-- list shortcut                 --> <prefix>?
-- list commands                 --> :list-commands
-- list hotkey                   --> :list-keys
-                                --> :list-keys -t vi-copy
+- list shortcut                   --> <prefix>?
+- list commands                   --> :list-commands
+- list hotkey                     --> :list-keys
+                                  --> :list-keys -t vi-copy
 #Session
-- new session                   --> tmux new -s $NAME
-- attach session                --> tmux attach -t $NAME
-- list session                  --> tmux ls
-- rename session                --> <prefix>S
-- choose session                --> <prefix>s
+- new session                     --> tmux new -s $NAME
+- attach session                  --> tmux attach -t $NAME
+- list session                    --> tmux ls
+- rename session                  --> <prefix>S
+- choose session                  --> <prefix>s
 
 #Window
-- new window                    --> <prefix>c
-- rename window                 --> <prefix>A
-- move window                   --> <prefix>w
-- move to previous window       --> <prefix><C-a>
+- new window                      --> <prefix>c
+- rename window                   --> <prefix>A
+- move window                     --> <prefix>w
+- move to previous window         --> <prefix><C-a>
 
 #Pane
-- focus pane                    --> <prefix>z
-- last pane                     --> <prefix>;
-- swap pane                     --> <prefix>{
-- swap pane                     --> <prefix>}
-
-#Reference
-- [main page](http://tmux.github.io/)
-- [manual](http://www.openbsd.org/cgi-bin/man.cgi/OpenBSD-current/man1/tmux.1?query=tmux&sec=1)
+- focus pane                      --> <prefix>z
+- last pane                       --> <prefix>;
+- swap pane                       --> <prefix>{
+- swap pane                       --> <prefix>}

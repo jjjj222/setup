@@ -259,6 +259,7 @@ nnoremap    <leader>pf      :set nopaste<CR>
 " align"
 vnoremap    <leader>a&      :Tab /&<CR>
 vnoremap    <leader>a\|     :Tab /\|<CR>
+nnoremap    <leader>ac      :1,$Tab /--><CR>
 
 " external "
 command! -nargs=1 Silent
@@ -267,7 +268,8 @@ command! -nargs=1 Silent
 nnoremap    <leader>xc      :Silent open -a "Google Chrome" '%:p'<cr>
 
 " vimrc "
-nnoremap    <leader>ee      :tabnew $MYVIMRC<CR>
+nnoremap    <leader>e       :tabnew $MYVIMRC<CR>
+nnoremap    <leader>ee       :tabnew $MYVIMRC<CR>
 nnoremap    <leader>ss      :source $MYVIMRC<CR>
 nnoremap    <leader>er      :tabnew ~/.vimrc_recent<CR>
 nnoremap    <leader>sr      :source ~/.vimrc_recent<CR>
@@ -626,21 +628,40 @@ function! MakeMultiLineComment() range
     endwhile
 endfunction
 
+function! GetSepLineStr()
+    let comment_str = GetCommentStr()
+    let additional_char = ""
+    if (strlen(comment_str) == 1)
+        let additional_char = "-"
+    endif
+    return comment_str . additional_char . "------------------------------------------------------------------------------"
+endfunction
 
 function! AddHeader()
     let curLine = line(".")
     let comment_str = GetCommentStr()
-    call append(curLine + 0, comment_str . "------------------------------------------------------------------------------")
+    "let addition_char = ""
+    "if (strlen(comment_str) == 1)
+    "    let addition_char = "-"
+    "endif
+    let sep_line_str = GetSepLineStr()
+
+    "call append(curLine + 0, comment_str . addition_char . sep_line_str)
+    "call append(curLine + 1, comment_str . "   ")
+    "call append(curLine + 2, comment_str . addition_char . sep_line_str)
+    call append(curLine + 0, sep_line_str)
     call append(curLine + 1, comment_str . "   ")
-    call append(curLine + 2, comment_str . "------------------------------------------------------------------------------")
+    call append(curLine + 2, sep_line_str)
 
     call cursor(curLine + 2, 0)
 endfunction
 
 function! AddHorizontalLine()
     let curLine = line(".")
-    let comment_str = GetCommentStr()
-    call append(curLine + 0, comment_str . "------------------------------------------------------------------------------")
+    "let comment_str = GetCommentStr()
+    let sep_line_str = GetSepLineStr()
+    "call append(curLine + 0, comment_str . sep_line_str)
+    call append(curLine + 0, sep_line_str)
 
     call cursor(curLine + 2, 0)
 endfunction
