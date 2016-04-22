@@ -461,7 +461,8 @@ let g:NERDTreeDirArrows=0
 "------------------------------------------------------------------------------
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '~'
-"
+"let g:NERDTreeDirArrowCollapsible = '>'
+
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
     exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -475,7 +476,7 @@ endfunction
 "call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
 "call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
 "call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
 "call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
 "call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 "call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
@@ -537,7 +538,9 @@ function! GetCommentStr()
         return "%"
     elseif (cur_file == "haml")
         return "-#"
-    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "javascript" || cur_file == "lex" || cur_file == "yacc" || cur_file == "java")
+    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "lex" || cur_file == "yacc")
+        return "//"
+    elseif (cur_file == "java" || cur_file == "javascript")
         return "//"
     endif
 
@@ -634,7 +637,8 @@ function! GetSepLineStr()
     if (strlen(comment_str) == 1)
         let additional_char = "-"
     endif
-    return comment_str . additional_char . "------------------------------------------------------------------------------"
+    let char_78 = "------------------------------------------------------------------------------"
+    return comment_str . additional_char . char_78
 endfunction
 
 function! AddHeader()
