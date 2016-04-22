@@ -63,6 +63,36 @@ showcur() {
     cat ~/.cur_dir/dir_$1
 }
 
+# cheatsheet
+cheatsheet() {
+    setup_dir="$HOME/.jjjjj222_setup"
+    if  [[ $1 == "" ]];
+    then
+        for dir in $HOME/.jjjj222_setup/*/
+        do
+            if [[ -f "$dir/$1/cheatsheet" ]];
+            then
+                tmp_dir=${dir%*/}
+                echo ${tmp_dir##*/}
+            fi
+        done
+        return
+    fi
+
+    file="$HOME/.jjjj222_setup/$1/cheatsheet"
+
+    if [[ -f "$file" ]];
+    then
+        if  [[ $2 == "open" ]];
+        then
+            vi $file
+        else
+            cat $file
+        fi
+    fi
+}
+alias cs="cheatsheet"
+
 # c9
 alias c9railsserver="rails s -b $IP -p $PORT"
 

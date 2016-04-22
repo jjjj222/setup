@@ -1,0 +1,16 @@
+# Move                     |
+Ctrl-o                     | jump to last cursor position
+Ctrl-i                     | jump to next cursor position
+                           |
+# Tab Width                |
+:set tabstop=4             | reset
+                           |
+# Turn off match highlight |
+:match                     | turn off match
+                           |
+# Rotate pane              |
+<C-W> H                    | :split -> :vsplit
+                           |
+# Plugin: surround         |
+:ysiw]                     | add ]
+:cs'                       | change the '

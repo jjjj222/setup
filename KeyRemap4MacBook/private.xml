@@ -80,4 +80,26 @@
             KeyCode::CURSOR_RIGHT, VK_COMMAND | VK_OPTION,
         </autogen>
     </item>
+
+    <appdef>
+        <appname>iTunes</appname>
+        <equal>com.apple.iTunes</equal>
+    </appdef>
+
+    <item>
+        <name>iTunes Hacks</name>
+        <identifier>private.app_itune_arrow_to_back_5_second</identifier>
+        <appendix>Map Arrow to Forward/Back 5 Seconds</appendix>
+        <only>iTunes</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::CURSOR_LEFT, ModifierFlag::NONE,
+            KeyCode::CURSOR_LEFT, VK_COMMAND | VK_OPTION,
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::CURSOR_RIGHT, ModifierFlag::NONE,
+            KeyCode::CURSOR_RIGHT, VK_COMMAND | VK_OPTION,
+        </autogen>
+    </item>
 </root>

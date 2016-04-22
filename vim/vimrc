@@ -112,7 +112,8 @@ set viminfo+=n~/.vim_tmp/viminfo
 " enhance map "
 let mapleader = ","
 
-nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* src/*.* include/*.*<CR>
+"nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* src/*.* include/*.*<CR>
+nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* */*.*<CR>
 "nnoremap    <C-h>           :tab split<CR> :Grep <cword> *.h<CR>
 "nnoremap    <C-f>       <ESC>
 "vnoremap    <C-f>       <ESC>
