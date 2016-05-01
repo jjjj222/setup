@@ -180,7 +180,8 @@ nnoremap    <C-k>           <C-b>
 vnoremap    <C-k>           <C-b>
 nnoremap    J               L
 nnoremap    K               H
-nnoremap    <C-d>           <nop>
+"nnoremap    <C-d>           <nop>
+nnoremap    <C-d>           :q<CR>
 "nnoremap    <C-l>           <C-f>
 "nnoremap    <C-h>           <C-b>
 "nnoremap    <C-l>           H

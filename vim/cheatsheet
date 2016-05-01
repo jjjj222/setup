@@ -1,17 +1,21 @@
 # Move
-Ctrl-o                     --> jump to last cursor position
-Ctrl-i                     --> jump to next cursor position
+jump to last cursor position --> Ctrl-o
+jump to next cursor position --> Ctrl-i
 
 # Tab Width
-:set tabstop=4             --> reset
+reset tap width              --> :set tabsop=4
 
 # Turn off match highlight
-:match                     --> turn off match
+turn off match highlight     --> :match
 
 # Rotate pane
-<C-W> H                    --> :split -> :vsplit
+hsplit to vsplit             --> <C-W> H
 
-# Plugin: surround
-:ysiw]                     --> add ]
-:cs'                       --> change the '
-QQ                         --> QQ
+# Plugin: "surround"
+add "                        --> ysiw"
+change " to <p>              --> cs"<p>
+delete "                     --> ds"
+
+# Open
+open link                    --> gx
+open file                    --> ,o

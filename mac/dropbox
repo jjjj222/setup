@@ -1,1 +1,1 @@
-/Applications/Dropbox.app/Contents/MacOS/Dropbox --move-to-dropbox=False
+/Applications/Dropbox.app/Contents/MacOS/Dropbox --move-to-dropbox=False    # remove option in right-click menu
