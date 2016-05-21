@@ -48,7 +48,7 @@
     </appdef>
 
     <item>
-        <name>Chrome Hacks</name>
+        <name>Chrome Hacks Disable Quit</name>
         <identifier>private.app_chrome_command_q_to_command_m</identifier>
         <appendix>Map Ctrl+Q to Ctrl+M For Chrome</appendix>
         <only>Chrome</only>
@@ -56,6 +56,23 @@
             __KeyToKey__
             KeyCode::Q, VK_COMMAND,
             KeyCode::M, VK_COMMAND
+        </autogen>
+    </item>
+
+    <item>
+        <name>Chrome Hacks Map Ctrl Arrow</name>
+        <identifier>private.app_chrome_control_arrow_to_command_option_arrow</identifier>
+        <appendix>Map Ctrl+Left/Right For Chrome</appendix>
+        <only>Chrome</only>
+        <autogen>
+            __KeyToKey__
+            KeyCode::CURSOR_LEFT, VK_CONTROL,
+            KeyCode::CURSOR_LEFT, VK_COMMAND | VK_OPTION
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::CURSOR_RIGHT, VK_CONTROL,
+            KeyCode::CURSOR_RIGHT, VK_COMMAND | VK_OPTION
         </autogen>
     </item>
 
@@ -72,12 +89,12 @@
         <autogen>
             __KeyToKey__
             KeyCode::CURSOR_LEFT, ModifierFlag::NONE,
-            KeyCode::CURSOR_LEFT, VK_COMMAND | VK_OPTION,
+            KeyCode::CURSOR_LEFT, VK_COMMAND | VK_OPTION
         </autogen>
         <autogen>
             __KeyToKey__
             KeyCode::CURSOR_RIGHT, ModifierFlag::NONE,
-            KeyCode::CURSOR_RIGHT, VK_COMMAND | VK_OPTION,
+            KeyCode::CURSOR_RIGHT, VK_COMMAND | VK_OPTION
         </autogen>
     </item>
 
@@ -94,12 +111,12 @@
         <autogen>
             __KeyToKey__
             KeyCode::CURSOR_LEFT, ModifierFlag::NONE,
-            KeyCode::CURSOR_LEFT, VK_COMMAND | VK_OPTION,
+            KeyCode::CURSOR_LEFT, VK_COMMAND | VK_OPTION
         </autogen>
         <autogen>
             __KeyToKey__
             KeyCode::CURSOR_RIGHT, ModifierFlag::NONE,
-            KeyCode::CURSOR_RIGHT, VK_COMMAND | VK_OPTION,
+            KeyCode::CURSOR_RIGHT, VK_COMMAND | VK_OPTION
         </autogen>
     </item>
 </root>

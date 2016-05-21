@@ -1,3 +1,10 @@
 push to heroku --> git push heroku master
+push to heroku --> git push heroku other_branch:master
 db migrate     --> heroku run rake db:migrate
 open           --> heorku open
+
+# reset db
+heroku pg:reset DATABASE_URL
+heroku run rake db:migrate
+heroku run rake db:seed
+heroku restart

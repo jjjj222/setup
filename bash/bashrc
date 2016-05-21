@@ -83,7 +83,7 @@ cheatsheet() {
 
     if [[ -f "$file" ]];
     then
-        if  [[ $2 == "open" ]];
+        if  [[ $2 == "edit" ]];
         then
             vi $file
         else

@@ -1,0 +1,6 @@
+brew cask install #NAME
+
+# check
+brew outdated
+brew list --versions
+brew doctor

@@ -85,6 +85,12 @@ set tabpagemax=100
 set wildmode=longest,list
 set wildmenu
 
+"-------------------------------------------------------------------------------
+"   wrap
+"-------------------------------------------------------------------------------
+"set wrap
+"let &showbreak='+ '
+"set cpo=n
 
 "------------------------------------------------------------------------------
 "   mouse
@@ -174,20 +180,22 @@ vnoremap    <space>         <ESC>
 "nnoremap    <down>          <nop>
 "nnoremap    <C-j>           L
 "nnoremap    <C-k>           H
+nnoremap    j               gj
+nnoremap    k               gk
 nnoremap    <C-j>           <C-f>
 vnoremap    <C-j>           <C-f>
 nnoremap    <C-k>           <C-b>
 vnoremap    <C-k>           <C-b>
 nnoremap    J               L
 nnoremap    K               H
-"nnoremap    <C-d>           <nop>
-nnoremap    <C-d>           :q<CR>
+nnoremap    <C-d>           <nop>
+"nnoremap    <C-d>           :q<CR>
 "nnoremap    <C-l>           <C-f>
 "nnoremap    <C-h>           <C-b>
 "nnoremap    <C-l>           H
 "nnoremap    <C-h>           L
-nnoremap    H               ^
-nnoremap    L               $
+nnoremap    H               g^
+nnoremap    L               g$
 
 " save "
 nnoremap    <C-s>           :w<CR>
@@ -270,12 +278,16 @@ nnoremap    <leader>xc      :Silent open -a "Google Chrome" '%:p'<cr>
 
 " vimrc "
 nnoremap    <leader>e       :tabnew $MYVIMRC<CR>
-nnoremap    <leader>ee       :tabnew $MYVIMRC<CR>
+nnoremap    <leader>ee      :tabnew $MYVIMRC<CR>
 nnoremap    <leader>ss      :source $MYVIMRC<CR>
 nnoremap    <leader>er      :tabnew ~/.vimrc_recent<CR>
 nnoremap    <leader>sr      :source ~/.vimrc_recent<CR>
 nnoremap    <leader>ea      :execute "tabnew ~/.vim/after/ftplugin/" . &filetype . ".vim"<CR>
 nnoremap    <leader>sa      :execute "source ~/.vim/after/ftplugin/" . &filetype . ".vim"<CR>
+
+" split "
+nnoremap    <leader>vs      :vsplit<CR><C-w>w
+nnoremap    <leader>hs      :split<CR><C-w>w
 
 " preload"
 let @f="$xo{\n\n}ki\t"
@@ -290,7 +302,7 @@ let @f="$xo{\n\n}ki\t"
 " e : edit (e: vimrc, r: recent, a: after)
 " f : format (j: json, x: hex)
 " g
-" h
+" h : horizental (s: split)
 " i
 " j : J
 " k
@@ -304,7 +316,7 @@ let @f="$xo{\n\n}ki\t"
 " s : source (s: vimrc, r: recent, a: after)
 " t : tab (s: split, m: move)
 " u
-" v
+" v : vertical (s: split)
 " w : W
 " x : external
 " y
@@ -607,7 +619,7 @@ function! MakeAsComment() range
     execute "normal A " . end_str
     call cursor( line_ul, col_ul )
     execute "normal I" . start_str . " "
-    execute "normal za"
+    "execute "normal za"
 endfunction
 
 function! MakeMultiLineComment() range
@@ -696,7 +708,7 @@ endfunction
 function! SourceVimAfter()
     let afterfile = $HOME . "/.vim/after/ftplugin/" . &filetype . ".vim"
     if filereadable(afterfile)
-        source afterfile
+        exec "source " . afterfile
     endif
 endfunction
 call SourceVimAfter()
