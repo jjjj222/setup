@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <root>
+    <item>
+      <name>Disable Command + H</name>
+      <identifier>private.no_command_h</identifier>
+      <autogen>__KeyToKey__ KeyCode::H, VK_COMMAND | ModifierFlag::NONE, KeyCode::VK_NONE</autogen>
+    </item>
+
     <appdef>
         <appname>anki</appname>
         <equal>net.ichi2.anki</equal>
@@ -39,6 +45,31 @@
             __KeyToKey__
             KeyCode::Q, VK_COMMAND,
             KeyCode::ESCAPE
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::F12,
+            KeyCode::RETURN
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::F11,
+            KeyCode::F5
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::F2,
+            KeyCode::RETURN
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::F1,
+            KeyCode::F5
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::A, VK_COMMAND,
+            KeyCode::RETURN, VK_COMMAND,
         </autogen>
     </item>
 

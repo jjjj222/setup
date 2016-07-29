@@ -186,16 +186,20 @@ nnoremap    <C-j>           <C-f>
 vnoremap    <C-j>           <C-f>
 nnoremap    <C-k>           <C-b>
 vnoremap    <C-k>           <C-b>
-nnoremap    J               L
-nnoremap    K               H
 nnoremap    <C-d>           <nop>
 "nnoremap    <C-d>           :q<CR>
 "nnoremap    <C-l>           <C-f>
 "nnoremap    <C-h>           <C-b>
 "nnoremap    <C-l>           H
 "nnoremap    <C-h>           L
-nnoremap    H               g^
-nnoremap    L               g$
+"nnoremap    J               L
+"nnoremap    K               H
+nnoremap    J               <C-e>
+nnoremap    K               <C-y>
+"nnoremap    H               g^
+"nnoremap    L               g$
+nnoremap    H               B
+nnoremap    L               W
 
 " save "
 nnoremap    <C-s>           :w<CR>
@@ -203,9 +207,11 @@ inoremap    <C-s>           <ESC>:w<CR>
 vnoremap    <C-s>           <ESC>:w<CR>
 
 " copy/paste "
-vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>
+"vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>
+vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>gv:!pbcopy<CR>u
 nnoremap    <C-v>           :r ~/.vim_tmp/vim_clipboard<CR>
-vnoremap    <C-x>           :!pbcopy<CR>
+"vnoremap    <C-x>           :!pbcopy<CR>
+vnoremap    <C-x>           :w! ~/.vim_tmp/vim_clipboard<CR>gv:!pbcopy<CR>
 
 " tabpage "
 nnoremap    <leader>lt      :tabs<CR>
@@ -248,6 +254,7 @@ augroup END
 " vimux "
 nnoremap    <leader>mk      :VimuxRunCommand "make"<CR>
 nnoremap    <F8>            :VimuxRunCommand "make"<CR>
+nnoremap    <C-c>           :VimuxRunCommand "make"<CR>
 nnoremap    <leader>mr      :VimuxRunCommand "make run"<CR>
 nnoremap    <F7>            :VimuxRunCommand "make run"<CR>
 nnoremap    <leader>mt      :VimuxRunCommand "make test"<CR>
@@ -289,8 +296,20 @@ nnoremap    <leader>sa      :execute "source ~/.vim/after/ftplugin/" . &filetype
 nnoremap    <leader>vs      :vsplit<CR><C-w>w
 nnoremap    <leader>hs      :split<CR><C-w>w
 
+" hightlight"
+nnoremap <silent> <leader>/ :nohlsearch<CR>
+
 " preload"
 let @f="$xo{\n\n}ki\t"
+
+"-------------------------------------------------------------------------------
+"   autocomplete
+"-------------------------------------------------------------------------------
+"inoremap { {}<ESC>i
+"inoremap ( ()<ESC>i
+"inoremap [ []<ESC>i
+"inoremap ' ''<ESC>i
+"inoremap " ""<ESC>i
 
 "------------------------------------------------------------------------------
 "   <leader>
@@ -321,7 +340,7 @@ let @f="$xo{\n\n}ki\t"
 " x : external
 " y
 " z
-
+" / : clear highlight search
 
 "------------------------------------------------------------------------------
 "   tab/space
@@ -680,7 +699,7 @@ function! AddHorizontalLine()
     "call append(curLine + 0, comment_str . sep_line_str)
     call append(curLine + 0, sep_line_str)
 
-    call cursor(curLine + 2, 0)
+    call cursor(curLine + 1, 0)
 endfunction
 
 "nnoremap <leader>i :call AddIf()<CR><ESC>

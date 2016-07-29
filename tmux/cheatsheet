@@ -1,3 +1,5 @@
+- All info                        --> man tmux
+
 #Configure
 - file                            --> ~/.tmux.conf
 - re-source configure file        --> <prefix>r

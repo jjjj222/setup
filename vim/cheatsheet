@@ -1,5 +1,5 @@
 # Move
-jump to last cursor position --> Ctrl-o
+jump to last cursor position --> Ctrl-o (or `` or '')
 jump to next cursor position --> Ctrl-i
 
 # Tab Width
