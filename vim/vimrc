@@ -86,6 +86,10 @@ set wildmode=longest,list
 set wildmenu
 
 "-------------------------------------------------------------------------------
+"   paste
+"-------------------------------------------------------------------------------
+set pastetoggle=<F5>
+"-------------------------------------------------------------------------------
 "   wrap
 "-------------------------------------------------------------------------------
 "set wrap
@@ -186,6 +190,10 @@ nnoremap    <C-j>           <C-f>
 vnoremap    <C-j>           <C-f>
 nnoremap    <C-k>           <C-b>
 vnoremap    <C-k>           <C-b>
+nnoremap    <C-l>           L
+vnoremap    <C-l>           L
+nnoremap    <C-h>           H
+vnoremap    <C-h>           H
 nnoremap    <C-d>           <nop>
 "nnoremap    <C-d>           :q<CR>
 "nnoremap    <C-l>           <C-f>
@@ -720,6 +728,23 @@ endfunction
 "    "execute "normal I/* "
 "    "execute "normal za"
 "endfunction
+
+
+function! IndentEnterInBrace()
+    " Use with
+    " set autoindent
+    " inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
+    if (getline('.')[col('.')] == "}")
+        execute "normal l\"_x"
+        execute "normal o}"
+        execute "normal Oq"
+        execute "normal >>\"_x"
+        call feedkeys("A", "n")
+    else
+        call feedkeys("a", "n")
+        call feedkeys("\<CR>", "n")
+    endif
+endfunction
 
 "------------------------------------------------------------------------------
 "   after
