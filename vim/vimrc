@@ -35,7 +35,7 @@ Plugin 'godlygeek/tabular'
 " :Tab /:
 " :Tab /:\zs
 
-" rils
+" rails
 Plugin 'tpope/vim-rails'
 " :Econtroller
 
@@ -75,7 +75,7 @@ set modelines=0
 set nocompatible
 "set tags+=~/build/lmc/src/tags,~/build/cpu/tags
 set backspace=indent,eol,start
-set whichwrap+=<,>,[,]
+set whichwrap+=<,>,[,],h,l
 set history=50
 set tabpagemax=100
 "set visualbell t_vb=    " turn off error beep/flash
@@ -209,6 +209,9 @@ nnoremap    K               <C-y>
 nnoremap    H               B
 nnoremap    L               W
 
+inoremap    <C-e>           <C-o>A
+inoremap    <C-a>           <C-o>I
+
 " save "
 nnoremap    <C-s>           :w<CR>
 inoremap    <C-s>           <ESC>:w<CR>
@@ -290,6 +293,8 @@ command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
 \ | execute ':redraw!'
 nnoremap    <leader>xc      :Silent open -a "Google Chrome" '%:p'<cr>
+nnoremap    <leader>xx      :VimuxRunCommand ""<LEFT>
+"nnoremap    <leader>xp      :<C-p><CR>
 
 " vimrc "
 nnoremap    <leader>e       :tabnew $MYVIMRC<CR>
