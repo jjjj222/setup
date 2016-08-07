@@ -1,1 +1,2 @@
 type $CMD           --> check alias
+read                --> check keyboard input

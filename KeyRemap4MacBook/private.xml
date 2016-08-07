@@ -6,6 +6,36 @@
       <autogen>__KeyToKey__ KeyCode::H, VK_COMMAND | ModifierFlag::NONE, KeyCode::VK_NONE</autogen>
     </item>
 
+    <item>
+        <name>Vim Move</name>
+        <identifier>private.vim_move</identifier>
+        <appendix>Map Fn + H/J/K/L to Arrows</appendix>
+        <autogen>
+            __KeyToKey__
+            KeyCode::J,
+            ModifierFlag::FN,
+            KeyCode::CURSOR_DOWN
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::K,
+            ModifierFlag::FN,
+            KeyCode::CURSOR_UP
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::H,
+            ModifierFlag::FN,
+            KeyCode::CURSOR_LEFT
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::L,
+            ModifierFlag::FN,
+            KeyCode::CURSOR_RIGHT
+        </autogen>
+    </item>
+
     <appdef>
         <appname>anki</appname>
         <equal>net.ichi2.anki</equal>
