@@ -1,2 +1,8 @@
 # Undo
-reset branch --> git reset --hard
+reset branch                    --> git reset --hard
+reset git add -A                --> git reset
+modify commit message           --> git commit --amend
+
+# Show
+alias                           --> git myalias
+diff with previous commit       --> git show

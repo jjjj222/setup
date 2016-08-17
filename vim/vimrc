@@ -280,8 +280,9 @@ vnoremap    <Tab>           >gv
 vnoremap    <S-Tab>         <gv
 
 " paste "
-nnoremap    <leader>po      :set paste<CR>
-nnoremap    <leader>pf      :set nopaste<CR>
+"nnoremap    <leader>po      :set paste<CR>
+"nnoremap    <leader>pf      :set nopaste<CR>
+nnoremap    <leader>p       "*p
 
 " align"
 vnoremap    <leader>a&      :Tab /&<CR>
@@ -739,8 +740,8 @@ function! IndentEnterInBrace()
     " Use with
     " set autoindent
     " inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
-    if (getline('.')[col('.')] == "}")
-        execute "normal l\"_x"
+    if (getline('.')[col('.')-1] == "{")
+        "execute "normal l\"_x"
         execute "normal o}"
         execute "normal Oq"
         execute "normal >>\"_x"

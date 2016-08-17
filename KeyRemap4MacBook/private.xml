@@ -36,6 +36,22 @@
         </autogen>
     </item>
 
+    <item>
+        <name>Switch Space</name>
+        <identifier>private.switch_space</identifier>
+        <appendix>Map Fn + ,/. to Alt + Left/Right</appendix>
+        <autogen>
+            __KeyToKey__
+            KeyCode::COMMA, ModifierFlag::FN,
+            KeyCode::CURSOR_LEFT, VK_OPTION
+        </autogen>
+        <autogen>
+            __KeyToKey__
+            KeyCode::DOT, ModifierFlag::FN,
+            KeyCode::CURSOR_RIGHT, VK_OPTION
+        </autogen>
+    </item>
+
     <appdef>
         <appname>anki</appname>
         <equal>net.ichi2.anki</equal>

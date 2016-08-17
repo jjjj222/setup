@@ -14,5 +14,8 @@
 [alias]
 	#tree = log --graph --all --decorate --oneline --date-order
 	tree = log --graph --all --pretty=format:'%C(yellow)%h%Creset%C(auto)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit --date-order
+    myalias = config --get-regexp alias
+    aa = !git add -A && git status
+    dp = diff HEAD^ HEAD
 [push]
 	default = simple
