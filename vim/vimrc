@@ -202,8 +202,8 @@ nnoremap    <C-d>           <nop>
 "nnoremap    <C-h>           L
 "nnoremap    J               L
 "nnoremap    K               H
-nnoremap    J               <C-e>
-nnoremap    K               <C-y>
+nnoremap    K               <C-e>
+nnoremap    J               <C-y>
 "nnoremap    H               g^
 "nnoremap    L               g$
 nnoremap    H               B
@@ -310,6 +310,9 @@ nnoremap    <leader>sa      :execute "source ~/.vim/after/ftplugin/" . &filetype
 nnoremap    <leader>vs      :vsplit<CR><C-w>w
 nnoremap    <leader>hs      :split<CR><C-w>w
 
+" reload "
+nnoremap    <leader>r       :edit<CR>
+
 " hightlight"
 nnoremap <silent> <leader>/ :nohlsearch<CR>
 
@@ -345,7 +348,7 @@ let @f="$xo{\n\n}ki\t"
 " o : open
 " p : paste (o: on, f: off)
 " q
-" r
+" r : reload
 " s : source (s: vimrc, r: recent, a: after)
 " t : tab (s: split, m: move)
 " u
@@ -626,19 +629,6 @@ function! CommentOutLine(start_str, end_str)
     "execute "normal za"
 endfunction
 
-function! UndoCommentOutLine()
-    "let line_ul = line("'<")
-    "let col_ul  = virtcol("'<")
-    "let line_lr = line("'>")
-    "let col_lr  = virtcol("'>")
-
-    "call cursor( line_lr, col_lr )
-    execute "normal ^df "
-    "call cursor( line_ul, col_ul )
-    execute "normal $dF d$"
-    "execute "normal za"
-endfunction
-
 function! MakeAsComment() range
     let line_ul = line("'<")
     let col_ul  = virtcol("'<")
@@ -648,11 +638,18 @@ function! MakeAsComment() range
     let start_str = GetBlockCommentStartStr()
     let end_str = GetBlockCommentEndStr()
 
-    call cursor( line_lr, col_lr )
-    execute "normal A " . end_str
-    call cursor( line_ul, col_ul )
-    execute "normal I" . start_str . " "
-    "execute "normal za"
+    if ((split(getline(line_ul), " ")[0] == start_str) && (split(getline(line_lr), " ")[-1] == end_str))
+        call cursor( line_lr, col_lr )
+        execute "normal dF x"
+        call cursor( line_ul, col_ul )
+        execute "normal wdf "
+    else
+        call cursor( line_lr, col_lr )
+        execute "normal A " . end_str
+        call cursor( line_ul, col_ul )
+        execute "normal I" . start_str . " "
+        "execute "normal za"
+    endif
 endfunction
 
 function! MakeMultiLineComment() range

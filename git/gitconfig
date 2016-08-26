@@ -17,5 +17,6 @@
     myalias = config --get-regexp alias
     aa = !git add -A && git status
     dp = diff HEAD^ HEAD
+    ll = log --color --graph --stat --abbrev-commit
 [push]
 	default = simple
