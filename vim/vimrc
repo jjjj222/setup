@@ -642,7 +642,7 @@ function! MakeAsComment() range
         call cursor( line_lr, col_lr )
         execute "normal dF x"
         call cursor( line_ul, col_ul )
-        execute "normal wdf "
+        execute "normal ^df "
     else
         call cursor( line_lr, col_lr )
         execute "normal A " . end_str
