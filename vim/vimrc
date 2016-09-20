@@ -85,6 +85,10 @@ set tabpagemax=100
 set wildmode=longest,list
 set wildmenu
 
+" auto wrap "
+"set nowrap
+set tw=0
+
 "-------------------------------------------------------------------------------
 "   paste
 "-------------------------------------------------------------------------------
@@ -170,6 +174,7 @@ nnoremap    <leader>w       W
 "hex "
 nnoremap    <leader>fx      :%! xxd<cr>
 nnoremap    <leader>fj      :%! python -m json.tool<cr>
+nnoremap    <leader>fs      :%! js-beautify<cr>
 
 vnoremap    s               <nop>
 "vnoremap    u               <ESC>u
@@ -269,7 +274,7 @@ nnoremap    <C-c>           :VimuxRunCommand "make"<CR>
 nnoremap    <leader>mr      :VimuxRunCommand "make run"<CR>
 nnoremap    <F7>            :VimuxRunCommand "make run"<CR>
 nnoremap    <leader>mt      :VimuxRunCommand "make test"<CR>
-"nnoremap    <F6>            :VimuxCloseRunner<CR>
+nnoremap    <F6>            :VimuxRunCommand "make test"<CR>
 nnoremap    <leader>mc      :VimuxCloseRunner<CR>
 
 " indent "
@@ -314,7 +319,7 @@ nnoremap    <leader>hs      :split<CR><C-w>w
 nnoremap    <leader>r       :edit<CR>
 
 " hightlight"
-nnoremap <silent> <leader>/ :nohlsearch<CR>
+nnoremap <silent> <leader>/ :nohlsearch<CR>:syntax sync fromstart<CR>
 
 " preload"
 let @f="$xo{\n\n}ki\t"
@@ -587,7 +592,7 @@ function! GetCommentStr()
         return "%"
     elseif (cur_file == "haml")
         return "-#"
-    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "lex" || cur_file == "yacc")
+    elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "lex" || cur_file == "yacc" || cur_file == "html")
         return "//"
     elseif (cur_file == "java" || cur_file == "javascript")
         return "//"

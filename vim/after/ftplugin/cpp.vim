@@ -2,4 +2,5 @@
 call omni#cpp#complete#Init()
 source ~/.vimrc_after
 
-iabbrev <buffer> iff if () {}<left><left><left><left>
+set autoindent
+inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
