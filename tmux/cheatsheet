@@ -27,3 +27,7 @@
 - last pane                       --> <prefix>;
 - swap pane                       --> <prefix>{
 - swap pane                       --> <prefix>}
+- vs <-> hs                       --> <prefix><space>
+
+#Command
+- send commands                   --> tmux send-keys -t $SESSION:$WINDOW $COMMANDS Enter

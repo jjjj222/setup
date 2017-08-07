@@ -18,5 +18,6 @@
     aa = !git add -A && git status
     dp = diff HEAD^ HEAD
     ll = log --color --graph --stat --abbrev-commit
+    t = !git tree
 [push]
 	default = simple

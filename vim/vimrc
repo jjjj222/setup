@@ -26,6 +26,7 @@ Plugin 'benmills/vimux'
 Plugin 'tpope/vim-surround'
 " ysiw] : add ]
 " cs' : change the '
+" S : visual mode
 
 " repeat "
 Plugin 'tpope/vim-repeat'
@@ -41,6 +42,10 @@ Plugin 'tpope/vim-rails'
 
 " git
 Plugin 'tpope/vim-fugitive'
+
+
+" jsx highlight
+Plugin 'mxw/vim-jsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -120,6 +125,12 @@ set directory=~/.vim_tmp/swp//
 set viminfo+=n~/.vim_tmp/viminfo
 "set clipboard=unnamed
 
+"-------------------------------------------------------------------------------
+"   
+"-------------------------------------------------------------------------------
+command! -nargs=1 Silent
+\ | execute ':silent !'.<q-args>
+\ | execute ':redraw!'
 "------------------------------------------------------------------------------
 "   maps
 "------------------------------------------------------------------------------
@@ -135,8 +146,8 @@ nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* */*.*<CR>
 "nnoremap <C-d> ^<C-v>
 " nnoremap <leader>g :Grep <cword> %<CR>
 nnoremap    <F10>           :cclose<CR>
-nnoremap    <F11>           :cprev<CR>
-nnoremap    <F12>           :cnext<CR>
+nnoremap    <F11>           :cnext<CR>
+nnoremap    <F12>           :cprev<CR>
 
 "nnoremap <F9> :TlistToggle<CR>
 "nnoremap    <F9>        :VCSAnnotate<CR>
@@ -158,9 +169,9 @@ nnoremap    <leader>ah      :call AddHeader()<CR><ESC>
 nnoremap    <leader>al      :call AddHorizontalLine()<CR><ESC>
 "nnoremap    <leader>d       A // TODO<ESC>
 
-nnoremap    +               m`O<ESC>``
-nnoremap    -               ddp
-nnoremap    _               ddkkp
+"nnoremap    +               m`O<ESC>``
+"nnoremap    -               ddp
+"nnoremap    _               ddkkp
 "inoremap    <C-d>           <ESC>ddi
 inoremap    <C-p>           <ESC>Pi
 "nnoremap    <leader>"       viw<esc>a"<esc>hbi"<esc>lel
@@ -168,6 +179,7 @@ nnoremap    <leader><TAB>   wi<TAB><ESC>
 onoremap    in(             :<c-u>normal! f(vi(<cr>
 onoremap    il(             :<c-u>normal! F)vi(<cr>
 nnoremap    <leader>j       J
+vnoremap    <leader>j       J
 nnoremap    <leader>w       W
 "nnoremap    <leader>w$      bi$<ESC>ei$<ESC>
 
@@ -181,6 +193,9 @@ vnoremap    s               <nop>
 
 " moving "
 inoremap    jk              <ESC>
+inoremap    JK              <ESC>
+inoremap    kj              <ESC>
+inoremap    KJ              <ESC>
 vnoremap    <space>         <ESC>
 "inoremap    <esc>           <nop>
 "nnoremap    <right>         <nop>
@@ -191,15 +206,21 @@ vnoremap    <space>         <ESC>
 "nnoremap    <C-k>           H
 nnoremap    j               gj
 nnoremap    k               gk
-nnoremap    <C-j>           <C-f>
-vnoremap    <C-j>           <C-f>
-nnoremap    <C-k>           <C-b>
-vnoremap    <C-k>           <C-b>
+"nnoremap    <C-j>           <C-e>
+"vnoremap    <C-j>           <C-e>
+"nnoremap    <C-k>           <C-y>
+"vnoremap    <C-k>           <C-y>
+"nnoremap    <C-j>           <C-f>
+"vnoremap    <C-j>           <C-f>
+"nnoremap    <C-k>           <C-b>
+"vnoremap    <C-k>           <C-b>
 nnoremap    <C-l>           L
 vnoremap    <C-l>           L
 nnoremap    <C-h>           H
 vnoremap    <C-h>           H
 nnoremap    <C-d>           <nop>
+nnoremap    <C-f>           <nop>
+vnoremap    <C-f>           <nop>
 "nnoremap    <C-d>           :q<CR>
 "nnoremap    <C-l>           <C-f>
 "nnoremap    <C-h>           <C-b>
@@ -207,12 +228,16 @@ nnoremap    <C-d>           <nop>
 "nnoremap    <C-h>           L
 "nnoremap    J               L
 "nnoremap    K               H
-nnoremap    K               <C-e>
-nnoremap    J               <C-y>
+nnoremap    K               10k
+vnoremap    K               10k
+nnoremap    J               10j
+vnoremap    J               10j
 "nnoremap    H               g^
 "nnoremap    L               g$
-nnoremap    H               B
-nnoremap    L               W
+nnoremap    L               <C-b>
+vnoremap    L               <C-b>
+nnoremap    H               <C-f>
+vnoremap    H               <C-f>
 
 inoremap    <C-e>           <C-o>A
 inoremap    <C-a>           <C-o>I
@@ -252,8 +277,8 @@ nnoremap    <C-\>           :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap    <F1>            :set foldlevel=0<CR>
 nnoremap    <F2>            :set foldlevel=1<CR>
 nnoremap    <F3>            :set foldlevel=2<CR>
-nnoremap    <F4>            :set foldlevel=3<CR>
-nnoremap    <F5>            :set foldlevel=100<CR>
+nnoremap    <F4>            :set foldlevel=100<CR>
+"nnoremap    <F5>            :set foldlevel=100<CR>
 
 " nerd tree "
 nnoremap    <C-n>           :NERDTreeToggle<CR>
@@ -295,9 +320,6 @@ vnoremap    <leader>a\|     :Tab /\|<CR>
 nnoremap    <leader>ac      :1,$Tab /--><CR>
 
 " external "
-command! -nargs=1 Silent
-\ | execute ':silent !'.<q-args>
-\ | execute ':redraw!'
 nnoremap    <leader>xc      :Silent open -a "Google Chrome" '%:p'<cr>
 nnoremap    <leader>xx      :VimuxRunCommand ""<LEFT>
 "nnoremap    <leader>xp      :<C-p><CR>
@@ -317,6 +339,8 @@ nnoremap    <leader>hs      :split<CR><C-w>w
 
 " reload "
 nnoremap    <leader>r       :edit<CR>
+
+nnoremap    <leader>$       viwS$
 
 " hightlight"
 nnoremap <silent> <leader>/ :nohlsearch<CR>:syntax sync fromstart<CR>
@@ -542,6 +566,7 @@ endfunction
 "------------------------------------------------------------------------------
 let g:VimuxHeight = "30"
 let g:VimuxOrientation = "h"
+"let g:VimuxRunnerType = "window"
 
 "------------------------------------------------------------------------------
 "   
@@ -592,9 +617,11 @@ function! GetCommentStr()
         return "%"
     elseif (cur_file == "haml")
         return "-#"
+    elseif (cur_file == "lisp")
+        return ";"
     elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "lex" || cur_file == "yacc" || cur_file == "html")
         return "//"
-    elseif (cur_file == "java" || cur_file == "javascript")
+    elseif (cur_file == "java" || cur_file == "javascript" || cur_file == "javascript.jsx")
         return "//"
     endif
 
@@ -643,7 +670,7 @@ function! MakeAsComment() range
     let start_str = GetBlockCommentStartStr()
     let end_str = GetBlockCommentEndStr()
 
-    if ((split(getline(line_ul), " ")[0] == start_str) && (split(getline(line_lr), " ")[-1] == end_str))
+    if ((split(getline(line_ul), '\s')[0] == start_str) && (split(getline(line_lr), '\s')[-1] == end_str))
         call cursor( line_lr, col_lr )
         execute "normal dF x"
         call cursor( line_ul, col_ul )
@@ -653,7 +680,12 @@ function! MakeAsComment() range
         execute "normal A " . end_str
         call cursor( line_ul, col_ul )
         execute "normal I" . start_str . " "
+
+
         "execute "normal za"
+        "execute "normal A ~" . getline(line_ul) . "~"
+        "execute "normal A ~" . split(getline(line_ul), '\s')[0] . "~"
+        "execute "normal A ~" . split(getline(line_lr), " ")[-1] . "~"
     endif
 endfunction
 

@@ -1,0 +1,1 @@
+update                  --> pip install --upgrade $PACKAGE

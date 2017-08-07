@@ -2,6 +2,7 @@
 reset branch                    --> git reset --hard
 reset git add -A                --> git reset
 modify commit message           --> git commit --amend
+remove untracked file           --> git clean -df
 
 # Show
 alias                           --> git myalias

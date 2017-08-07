@@ -40,6 +40,9 @@ alias less='less -R'
 # vi
 alias vi='vim -p'
 
+# gcc
+alias g++11='g++ -std=c++11'
+
 # git
 #alias gittree 'git log --graph --all --decorate --oneline'
 alias gittree='git tree'
@@ -103,6 +106,9 @@ alias cs="cheatsheet"
 
 # c9
 alias c9railsserver="rails s -b $IP -p $PORT"
+
+#
+alias pyserver="python -m SimpleHTTPServer"
 
 #------------------------------------------------------------------------------
 #   path

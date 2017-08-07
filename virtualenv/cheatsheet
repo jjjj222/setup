@@ -1,0 +1,2 @@
+active              --> source ~/$DIR/bin/activate
+deactivate          --> deactivate
