@@ -32,7 +32,13 @@ if [[ "$OSTYPE" =~ darwin ]]; then
 else
     alias ls='ls --color=auto -F'
 fi
-alias ll='ls -al'
+alias ll='ls -ald'
+
+# cp
+alias cp='cp -i'
+
+# mv
+alias mv='mv -i'
 
 # less
 alias less='less -R'

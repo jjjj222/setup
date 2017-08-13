@@ -1,2 +1,15 @@
 type $CMD           --> check alias
 read                --> check keyboard input
+$CMD 2> $FILE       --> direct only stderr to a file
+!!                  --> run previous command
+!$                  --> last parameter of previous command
+!*                  --> all parameters of previous command
+jobs                --> list current jobs
+
+
+# regex
+*
+?
+[set]
+[^set]
+{A,B,C} // A or B or C
