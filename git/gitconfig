@@ -19,5 +19,8 @@
     dp = diff HEAD^ HEAD
     ll = log --color --graph --stat --abbrev-commit
     t = !git tree
+    cm = commit -m
+    s = status
+    d = diff
 [push]
 	default = simple
