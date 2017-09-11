@@ -1,10 +1,21 @@
-type $CMD           --> check alias
-read                --> check keyboard input
-$CMD 2> $FILE       --> direct only stderr to a file
-!!                  --> run previous command
-!$                  --> last parameter of previous command
-!*                  --> all parameters of previous command
-jobs                --> list current jobs
+type $CMD                           --> check alias
+read                                --> check keyboard input
+$CMD 2> $FILE                       --> direct only stderr to a file
+!!                                  --> run previous command
+!$                                  --> last parameter of previous command
+!*                                  --> all parameters of previous command
+jobs                                --> list current jobs
+stat $FILE                          --> display attributes of a file/dir
+file $FILE                          --> display file type
+find . -type f -name myfi\* -print  --> find myfi*
+
+
+
+# zip
+.gz                                 --> gzip/gunzip
+.bz2                                --> bzip2/bunzip2
+.Z                                  --> compress/uncompress
+.zip                                --> zip/unzip
 
 
 # regex
