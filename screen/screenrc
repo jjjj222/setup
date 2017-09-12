@@ -28,6 +28,6 @@ nonblock on
 vbell off
 msgwait 10
 
-shell -$SHELL
+#shell -$SHELL
 
 defscrollback 10000

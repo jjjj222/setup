@@ -172,6 +172,7 @@ export PROMPT_DIRTRIM=1
 #then
 #    long_prompt_with_git
 #fi
+source ~/.jjjj222_setup/git/git-prompt.sh
 
 set_prompt() {
     hostname='\[\e[0;36m\]\h:'

@@ -62,6 +62,9 @@ alias ll 'ls -al'
 # vi
 alias vi 'vim -p'
 
+# tmux
+alias tmux "tmux -u"
+
 # git
 #alias gittree 'git log --graph --all --decorate --oneline'
 alias gittree 'git tree'
@@ -84,6 +87,12 @@ alias showcur 'cat ~/.cur_dir/dir_\!*'
 #output
 #alias tofile '\!* | tee ~/.csh_clipboard'
 #alias showfile 'cat ~/.csh_clipboard'
+alias pp 'source ~/.jjjj222_setup/csh/cshrc_prompt'
+
+
+# vnc
+alias vnc_on 'vncserver :16322' # :22222
+alias vnc_off 'vncserver -kill :16322' # :22222
 
 ###############################################################################
 #   prompt
@@ -91,6 +100,17 @@ alias showcur 'cat ~/.cur_dir/dir_\!*'
 
 set ellipsis
 #set prompt = '%{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
-set prompt = '[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
+set prompt='[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
+#setenv PROMPT '[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
+#set prompt = 'QQQQQQQ> '
+#echo 123
+#echo XXX
 
-
+#echo tcshrc
+#if($?loginsh) then
+#    echo login
+#endif
+#if($?prompt) then
+#    echo prompt
+#endif
+#
