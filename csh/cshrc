@@ -1,4 +1,5 @@
 setenv EDITOR "vim"
+setenv DIFF "vimdiff"
 umask 027
 limit coredumpsize 10k
 unset autologout
@@ -47,8 +48,12 @@ set cdpath= ( ~/build ~/lnk )
 
 unalias *
 
+# precmd
+alias precmd "source ~/.jjjj222_setup/csh/cshrc_prompt"
+
 # grep
-alias grep 'grep --color=auto -n -r'
+alias grep 'grep --color=auto -n'
+#alias grep 'grep --color=auto -n -r'
 
 # ls
 if ($OSTYPE == "darwin") then
@@ -91,16 +96,18 @@ alias pp 'source ~/.jjjj222_setup/csh/cshrc_prompt'
 
 
 # vnc
-alias vnc_on 'vncserver :16322' # :22222
+alias vnc_on 'vncserver  -geometry 1920x1080 :16322' # :22222
 alias vnc_off 'vncserver -kill :16322' # :22222
 
 ###############################################################################
 #   prompt
 ###############################################################################
 
-set ellipsis
+source ~/.jjjj222_setup/csh/cshrc_prompt
+#set ellipsis
+#set prompt='[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
+
 #set prompt = '%{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
-set prompt='[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
 #setenv PROMPT '[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
 #set prompt = 'QQQQQQQ> '
 #echo 123
@@ -114,3 +121,21 @@ set prompt='[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%
 #    echo prompt
 #endif
 #
+#set     red="%{\033[1;31m%}"
+#set   green="%{\033[0;32m%}"
+#set  yellow="%{\033[1;33m%}"
+#set    blue="%{\033[1;34m%}"
+#set magenta="%{\033[1;35m%}"
+#set    cyan="%{\033[1;36m%}"
+#set   white="%{\033[0;37m%}"
+#set     end="%{\033[0m%}" # This is needed at the end... :(
+
+# Setting the actual prompt.  I made two separate versions for you to try, pick
+# # whichever one you like better, and change the colors as you want.  Just don't
+# # mess with the ${end} guy in either line...  Comment out or delete the prompt you don't use.
+#
+# set prompt="${green}%n${blue}@%m ${white}%~ ${green}%%${end} "
+# set prompt="[${green}%n${blue}@%m ${white}%~ ]${end} "
+#
+# # Clean up after ourselves...
+# unset red green yellow blue magenta cyan yellow white end

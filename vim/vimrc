@@ -253,10 +253,15 @@ vnoremap    <C-s>           <ESC>:w<CR>
 
 " copy/paste "
 "vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>
-vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>gv:!pbcopy<CR>u
 nnoremap    <C-v>           :r ~/.vim_tmp/vim_clipboard<CR>
 "vnoremap    <C-x>           :!pbcopy<CR>
-vnoremap    <C-x>           :w! ~/.vim_tmp/vim_clipboard<CR>gv:!pbcopy<CR>
+if ($USER == "jtso")
+    vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>
+    vnoremap    <C-x>           :w! ~/.vim_tmp/vim_clipboard<CR>
+else
+    vnoremap    <C-c>           :w! ~/.vim_tmp/vim_clipboard<CR>gv:!pbcopy<CR>u
+    vnoremap    <C-x>           :w! ~/.vim_tmp/vim_clipboard<CR>gv:!pbcopy<CR>
+endif
 
 " tabpage "
 nnoremap    <leader>lt      :tabs<CR>
@@ -419,6 +424,8 @@ augroup END
 augroup file_type_setup
     autocmd!
     autocmd BufRead,BufNewFile cshrc        set filetype=csh
+    autocmd BufRead,BufNewFile cshrc_prompt set filetype=csh
+    autocmd BufRead,BufNewFile cshrc_precmd set filetype=csh
     autocmd BufRead,BufNewFile vim_recent   set filetype=vim
     autocmd BufRead,BufNewFile *.cpf        set filetype=cpf
     autocmd BufRead,BufNewFile *.upf        set filetype=upf
