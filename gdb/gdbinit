@@ -62,16 +62,16 @@ define cache_dump
     call cache_dump(cp, stdout)
 end
 
-##================== python ===============================================
-python
-import sys
-import os
-##sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/printer/python")
-sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/python")
-##sys.path.insert(0, "~/.jjjj222_setup/gdb/stl/printer/python")
-from libstdcxx.v6.printers import register_libstdcxx_printers
-##register_libstdcxx_printers (None)
-end
-#
-##================== script ==========================================
-source ~/.jjjj222_setup/gdb/stl/stl
+###================== python ===============================================
+#python
+#import sys
+#import os
+###sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/printer/python")
+#sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/python")
+###sys.path.insert(0, "~/.jjjj222_setup/gdb/stl/printer/python")
+#from libstdcxx.v6.printers import register_libstdcxx_printers
+###register_libstdcxx_printers (None)
+#end
+##
+###================== script ==========================================
+#source ~/.jjjj222_setup/gdb/stl/stl

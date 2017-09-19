@@ -94,10 +94,20 @@ alias showcur 'cat ~/.cur_dir/dir_\!*'
 #alias showfile 'cat ~/.csh_clipboard'
 alias pp 'source ~/.jjjj222_setup/csh/cshrc_prompt'
 
+# tmux
+#alias setpane 'tmux rename-window -t${TMUX_PANE} $HOST'
+alias tmuxpanehost 'printf "\033k$HOST\033\\"'
+alias tmuxpaneauto 'tmux setw automatic-rename'
 
 # vnc
 alias vnc_on 'vncserver  -geometry 1920x1080 :16322' # :22222
 alias vnc_off 'vncserver -kill :16322' # :22222
+
+# perforce
+alias p4root 'p4 -F %clientRoot% -ztag info'
+
+# ctag
+alias ctags 'ctags -R --c++-kinds=+p --fields=+iaS --extra=+q'
 
 ###############################################################################
 #   prompt

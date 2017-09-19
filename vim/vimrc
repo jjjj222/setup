@@ -83,6 +83,7 @@ set modelines=0
 
 set nocompatible
 "set tags+=~/build/lmc/src/tags,~/build/cpu/tags
+let &tags=$NVDEV."/nvtools/cad/cadlib/tags"
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,],h,l
 set history=50
@@ -426,6 +427,7 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile cshrc        set filetype=csh
     autocmd BufRead,BufNewFile cshrc_prompt set filetype=csh
     autocmd BufRead,BufNewFile cshrc_precmd set filetype=csh
+    autocmd BufRead,BufNewFile gdbinit      set filetype=gdb
     autocmd BufRead,BufNewFile vim_recent   set filetype=vim
     autocmd BufRead,BufNewFile *.cpf        set filetype=cpf
     autocmd BufRead,BufNewFile *.upf        set filetype=upf
