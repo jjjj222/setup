@@ -104,7 +104,9 @@ alias vnc_on 'vncserver  -geometry 1920x1080 :16322' # :22222
 alias vnc_off 'vncserver -kill :16322' # :22222
 
 # perforce
+alias p4exist 'p4 -ztag -F "%Update%" client -o \!*'
 alias p4root 'p4 -F %clientRoot% -ztag info'
+alias cdp4root 'cd `p4root`'
 
 # ctag
 alias ctags 'ctags -R --c++-kinds=+p --fields=+iaS --extra=+q'

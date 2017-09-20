@@ -82,8 +82,12 @@ set formatoptions-=cro
 set modelines=0
 
 set nocompatible
-"set tags+=~/build/lmc/src/tags,~/build/cpu/tags
-let &tags=$NVDEV."/nvtools/cad/cadlib/tags"
+"let tagsvector=$NVDEV."/nvtools/cad/cadlib/vector/tags"
+"let &tagsvector=$NVDEV."/nvtools/cad/cadlib/vector/tags"
+"let &tagsbasic=$NVDEV."/nvtools/cad/cadlib/basic/tags"
+"set tags=&tagsvector,&tagsbasic
+let &tags=$NVDEV."/nvtools/cad/cadlib/vector/tags"
+\    .",".$NVDEV."/nvtools/cad/cadlib/basic/tags"
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,],h,l
 set history=50
@@ -143,7 +147,7 @@ command! -nargs=1 Silent
 let mapleader = ","
 
 "nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* src/*.* include/*.*<CR>
-nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* */*.*<CR>
+nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* <CR>
 "nnoremap    <C-h>           :tab split<CR> :Grep <cword> *.h<CR>
 "nnoremap    <C-f>       <ESC>
 "vnoremap    <C-f>       <ESC>
@@ -215,6 +219,8 @@ nnoremap    k               gk
 "vnoremap    <C-j>           <C-e>
 "nnoremap    <C-k>           <C-y>
 "vnoremap    <C-k>           <C-y>
+nnoremap    <C-j>           :tnext<CR>
+nnoremap    <C-k>           :tprev<CR>
 "nnoremap    <C-j>           <C-f>
 "vnoremap    <C-j>           <C-f>
 "nnoremap    <C-k>           <C-b>
@@ -440,6 +446,7 @@ augroup END
 "   tabpage
 "------------------------------------------------------------------------------
 set showtabline=2 " always show
+"set guitablabel=%t " name only
 highlight TabLineFill   ctermfg=black       ctermbg=black
 highlight TabLineSel    ctermfg=white       ctermbg=black
 if ($TERM == "xterm-color")
