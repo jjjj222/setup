@@ -221,14 +221,16 @@ nnoremap    k               gk
 "vnoremap    <C-k>           <C-y>
 nnoremap    <C-j>           :tnext<CR>
 nnoremap    <C-k>           :tprev<CR>
+nnoremap    <C-h>           <C-t>
+nnoremap    <C-l>           <C-]>
 "nnoremap    <C-j>           <C-f>
 "vnoremap    <C-j>           <C-f>
 "nnoremap    <C-k>           <C-b>
 "vnoremap    <C-k>           <C-b>
-nnoremap    <C-l>           L
-vnoremap    <C-l>           L
-nnoremap    <C-h>           H
-vnoremap    <C-h>           H
+"nnoremap    <C-l>           L
+"vnoremap    <C-l>           L
+"nnoremap    <C-h>           H
+"vnoremap    <C-h>           H
 nnoremap    <C-d>           <nop>
 nnoremap    <C-f>           <nop>
 vnoremap    <C-f>           <nop>
@@ -472,8 +474,8 @@ highlight LineNr        ctermfg=yellow      ctermbg=black
 set foldenable
 set foldmarker={,}
 "set foldmethod=marker
-"set foldmethod=syntax
-set foldmethod=indent
+set foldmethod=syntax
+"set foldmethod=indent
 set foldlevel=1000
 set foldcolumn=4
 highlight Folded        ctermfg=Cyan        ctermbg=Black
