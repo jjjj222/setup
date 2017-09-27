@@ -100,7 +100,7 @@ alias tmuxpanehost 'printf "\033k$HOST\033\\"'
 alias tmuxpaneauto 'tmux setw automatic-rename'
 
 # vnc
-alias vnc_on 'vncserver  -geometry 1920x1080 :16322' # :22222
+alias vnc_on 'vncserver -geometry 1920x1200 :16322' # :22222
 alias vnc_off 'vncserver -kill :16322' # :22222
 
 # perforce
@@ -110,6 +110,9 @@ alias cdp4root 'cd `p4root`'
 
 # ctag
 alias ctags 'ctags -R --c++-kinds=+p --fields=+iaS --extra=+q'
+
+# cheatsheet
+alias cs 'bash -c "cs \!*"'
 
 ###############################################################################
 #   prompt

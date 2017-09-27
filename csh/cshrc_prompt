@@ -1,7 +1,10 @@
 setenv GIT_BRANCH_CMD "sh -c 'git branch --no-color 2> /dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'"
+#setenv NVDEV_CMD "sh -c 'printenv NVDEV | xargs basename 2> /dev/null' | cut -d'_' -f2"
+setenv NVDEV_CMD "sh -c 'printenv NVDEV | xargs basename 2> /dev/null'"
 set ellipsis
 #set prompt = '[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
-set prompt = "[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[35m%}`$GIT_BRANCH_CMD`%{\033[34m%}>%{\033[0m%} "
+#set prompt = "[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[35m%}`$GIT_BRANCH_CMD`%{\033[34m%}>%{\033[0m%} "
+set prompt = "[`$NVDEV_CMD`] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[35m%}`$GIT_BRANCH_CMD`%{\033[34m%}>%{\033[0m%} "
 
 
 

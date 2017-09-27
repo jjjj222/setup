@@ -1,0 +1,3 @@
+Run command while start up                  --> gdb -ex $CMD
+Set run arguments                           --> gdb --args $ARG0 $ARG1
+See struct def                              --> ptype $OBJ
