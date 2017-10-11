@@ -19,3 +19,6 @@ delete "                     --> ds"
 # Open
 open link                    --> gx
 open file                    --> ,o
+
+# Commands
+change file type             --> :set filetype=tcl

@@ -21,6 +21,7 @@
 - rename window                   --> <prefix>A
 - move window                     --> <prefix>w
 - move to previous window         --> <prefix><C-a>
+- kill window                     --> :kill-window
 
 #Pane
 - focus pane                      --> <prefix>z

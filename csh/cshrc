@@ -49,7 +49,7 @@ set cdpath= ( ~/build ~/lnk )
 unalias *
 
 # precmd
-alias precmd "source ~/.jjjj222_setup/csh/cshrc_prompt"
+alias precmd "source ~/.cshrc_precmd"
 
 # grep
 alias grep 'grep --color=auto -n'
@@ -69,6 +69,7 @@ alias vi 'vim -p'
 
 # tmux
 alias tmux "tmux -u"
+alias tmuxspacename "tmux display-message -p '#S'"
 
 # git
 #alias gittree 'git log --graph --all --decorate --oneline'
@@ -113,6 +114,9 @@ alias ctags 'ctags -R --c++-kinds=+p --fields=+iaS --extra=+q'
 
 # cheatsheet
 alias cs 'bash -c "cs \!*"'
+
+#date
+alias timestamp 'date +"%Y/%m/%d (%a) %H:%M:%S"'
 
 ###############################################################################
 #   prompt

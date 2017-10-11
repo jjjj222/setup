@@ -154,6 +154,7 @@ nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* <CR>
 "inoremap    <C-f>       <ESC>
 "nnoremap <C-d> ^<C-v>
 " nnoremap <leader>g :Grep <cword> %<CR>
+"copen
 nnoremap    <F10>           :cclose<CR>
 nnoremap    <F11>           :cnext<CR>
 nnoremap    <F12>           :cprev<CR>
@@ -360,6 +361,11 @@ nnoremap    <leader>r       :edit<CR>
 
 nnoremap    <leader>$       viwS$
 
+" perforce "
+"set autoread
+nnoremap    <leader>4e      :Silent p4 edit %<CR> :e<CR>
+nnoremap    <leader>4r      :Silent p4 revert %<CR> :e<CR>
+
 " hightlight"
 nnoremap <silent> <leader>/ :nohlsearch<CR>:syntax sync fromstart<CR>
 
@@ -437,10 +443,12 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile cshrc_precmd set filetype=csh
     autocmd BufRead,BufNewFile gdbinit      set filetype=gdb
     autocmd BufRead,BufNewFile vim_recent   set filetype=vim
+    autocmd BufRead,BufNewFile *.gdb        set filetype=gdb
     autocmd BufRead,BufNewFile *.cpf        set filetype=cpf
     autocmd BufRead,BufNewFile *.upf        set filetype=upf
     autocmd BufRead,BufNewFile *.md         set filetype=markdown
     autocmd BufRead,BufNewFile *.cls        set filetype=tex
+    autocmd BufRead,BufNewFile *.tn         set filetype=tcl
 augroup END
 
 
@@ -509,6 +517,9 @@ highlight MatchParen    ctermfg=NONE        ctermbg=Brown       cterm=NONE
 " highlight CursorLine   cterm=underline
 " set cursorcolumn
 " highlight CursorColumn ctermfg=Brown
+
+"highlight CursorLine    ctermfg=greens
+"highlight CursorLineNR  ctermfg=green      ctermbg=black cterm=bold
 
 
 "------------------------------------------------------------------------------
