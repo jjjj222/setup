@@ -71,7 +71,7 @@ alias vi 'vim -p'
 # tmux
 alias tmux "tmux -u"
 alias tmuxspacename "tmux display-message -p '#S'"
-alias cdspace 'set spacename=`tmuxspacename`; cdcur $spacename; pwd'
+alias cdtmux 'set tmux_space_name=`tmuxspacename`; cdcur $tmux_space_name; pwd'
 
 # git
 #alias gittree 'git log --graph --all --decorate --oneline'
@@ -123,6 +123,8 @@ alias timestamp 'date +"%Y/%m/%d (%a) %H:%M:%S"'
 ###############################################################################
 #   prompt
 ###############################################################################
+setenv GIT_BRANCH_CMD "sh -c 'git branch --no-color 2> /dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'"
+setenv NVDEV_CMD "sh -c 'printenv NVDEV | xargs basename 2> /dev/null'"
 
 source ~/.jjjj222_setup/csh/cshrc_prompt
 #set ellipsis
