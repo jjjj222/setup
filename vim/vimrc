@@ -88,6 +88,7 @@ set nocompatible
 "set tags=&tagsvector,&tagsbasic
 let &tags=$NVDEV."/nvtools/cad/cadlib/vector/tags"
 \    .",".$NVDEV."/nvtools/cad/cadlib/basic/tags"
+\    .",".$NVDEV."/nvtools/cad/cadlib/orcl/tags"
 set backspace=indent,eol,start
 set whichwrap+=<,>,[,],h,l
 set history=50
