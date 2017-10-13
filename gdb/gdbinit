@@ -22,8 +22,13 @@ define ll
     ls 60
 end
 
-define dump
-    call $arg0.dump()
+#define dump
+#    call $arg0.dump()
+#end
+
+define cto
+    tb $arg0
+    continue
 end
 
 define goto

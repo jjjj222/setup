@@ -1,7 +1,7 @@
 setenv EDITOR "vim"
 setenv DIFF "vimdiff"
 setenv TERM xterm-256color
-umask 027
+umask 077
 limit coredumpsize 10k
 unset autologout
 unset ignoreeof
@@ -70,7 +70,7 @@ alias vi 'vim -p'
 
 # tmux
 alias tmux "tmux -u"
-alias tmuxspacename "tmux display-message -p '#S'"
+alias tmuxsession "tmux display-message -p '#S'"
 alias cdtmux 'set tmux_space_name=`tmuxspacename`; cdcur $tmux_space_name; pwd'
 
 # git
@@ -126,7 +126,7 @@ alias timestamp 'date +"%Y/%m/%d (%a) %H:%M:%S"'
 setenv GIT_BRANCH_CMD "sh -c 'git branch --no-color 2> /dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'"
 setenv NVDEV_CMD "sh -c 'printenv NVDEV | xargs basename 2> /dev/null'"
 
-source ~/.jjjj222_setup/csh/cshrc_prompt
+#source ~/.jjjj222_setup/csh/cshrc_prompt
 #set ellipsis
 #set prompt='[csh] %{\033[36m%}%m: %{\033[34m%}[%{\033[31m%}%w.%D%{\033[33m%} %P%{\033[34m%}]%{\033[32m%} %c0 %{\033[34m%}>%{\033[0m%} '
 
