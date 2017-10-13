@@ -39,7 +39,7 @@ stty -ixon
 #   path
 ###############################################################################
 
-set path = ( . ~/bin ~/local/bin $path )
+set path = ( . ~/bin ~/.jjjj222_setup/util ~/local/bin $path )
 set cdpath= ( ~/build ~/lnk )
 
 
@@ -118,7 +118,7 @@ alias ctags 'ctags -R --c++-kinds=+p --fields=+iaS --extra=+q'
 alias cs 'bash -c "cs \!*"'
 
 #date
-alias timestamp 'date +"%Y/%m/%d (%a) %H:%M:%S"'
+#alias timestamp 'date +"%Y/%m/%d (%a) %H:%M:%S"'
 
 ###############################################################################
 #   prompt

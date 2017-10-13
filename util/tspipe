@@ -1,0 +1,5 @@
+#! /bin/bash
+IFS=''
+while read data; do
+    echo "`timestamp` - $data"
+done
