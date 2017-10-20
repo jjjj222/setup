@@ -1,6 +1,7 @@
 # Undo
 reset branch                    --> git reset --hard
 reset git add -A                --> git reset
+undo the merge                  --> git reset --hard HEAD~1
 modify commit message           --> git commit --amend
 remove untracked file           --> git clean -df
 

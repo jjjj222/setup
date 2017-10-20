@@ -1,7 +1,7 @@
 setenv EDITOR "vim"
 setenv DIFF "vimdiff"
 setenv TERM xterm-256color
-umask 077
+#umask 077
 limit coredumpsize 10k
 unset autologout
 unset ignoreeof

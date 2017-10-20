@@ -442,6 +442,7 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile cshrc        set filetype=csh
     autocmd BufRead,BufNewFile cshrc_prompt set filetype=csh
     autocmd BufRead,BufNewFile cshrc_precmd set filetype=csh
+    autocmd BufRead,BufNewFile *.cshrc      set filetype=csh
     autocmd BufRead,BufNewFile gdbinit      set filetype=gdb
     autocmd BufRead,BufNewFile vim_recent   set filetype=vim
     autocmd BufRead,BufNewFile *.gdb        set filetype=gdb
