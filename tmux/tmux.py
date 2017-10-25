@@ -115,6 +115,11 @@ class Pane:
     def vim_exec(self, cmd):
         self.send_keys(["Escape", cmd, 'Enter'])
 
+    def vim_exec_async(self, cmd):
+        args = ['tmux', 'send-keys', '-t', self.id, "Escape", cmd, "Enter"]
+        p = subprocess.Popen(args)
+        p.terminate()
+
 
 #-------------------------------------------------------------------------------
 #   

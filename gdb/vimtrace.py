@@ -11,8 +11,9 @@ import tmux
 #-------------------------------------------------------------------------------
 linked_pane = None
 is_new_pane = False
+is_vim = False
 
-def close_new_pane():
+def close_pane():
     global linked_pane, is_new_pane
 
     if linked_pane == None:
@@ -26,6 +27,7 @@ def close_new_pane():
 
     linked_pane = None
     is_new_pane = False
+    is_vim = False
 
 #-------------------------------------------------------------------------------
 #   
@@ -62,7 +64,7 @@ class VimTrace(gdb.Command):
         if not is_new_pane:
             print "unlinked from: " + linked_pane.id
 
-        close_new_pane()
+        close_pane()
 
     def new_pane(self, target):
         global linked_pane, is_new_pane
@@ -96,7 +98,7 @@ class VimTraceExit(gdb.Command):
         super (VimTraceExit, self).__init__ ("vimtraceexit", gdb.COMMAND_USER)
 
     def invoke(self, argv, from_tty):
-        close_new_pane()
+        close_pane()
 
 
 #-------------------------------------------------------------------------------
@@ -110,12 +112,15 @@ class VimTraceAlign(gdb.Command):
         self.current_file = None
 
     def invoke(self, argv, from_tty):
-        global linked_pane
+        global linked_pane, is_vim
 
         if linked_pane == None:
             return
 
-        if not linked_pane.is_vim():
+        if not is_vim:
+            is_vim = linked_pane.is_vim()
+
+        if not is_vim:
             print "Not vim"
             return
 
@@ -132,11 +137,12 @@ class VimTraceAlign(gdb.Command):
         except:
             return
 
-        if self.current_file != fullname:
+        if self.current_file != fullname or argv != "":
             self.current_file = fullname
             linked_pane.vim_exec(":view +" + line + " " + fullname)
             linked_pane.vim_exec(":set cursorline")
         else:
+            #linked_pane.vim_exec_async(":" + line)
             linked_pane.vim_exec(":" + line)
 
         linked_pane.send_key("zz")

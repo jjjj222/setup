@@ -131,6 +131,9 @@ end
 
 define cto
     tb $arg0
+    commands
+        silent
+    end
     continue
 end
 
