@@ -13,118 +13,18 @@ set disassembly-flavor intel
 #set print sevenbit-strings off
 
 #-------------------------------------------------------------------------------
-#   color
+#   source 
 #-------------------------------------------------------------------------------
-# __________________color functions_________________
-#
-# color codes
-set $BLACK = 0
-set $RED = 1
-set $GREEN = 2
-set $YELLOW = 3
-set $BLUE = 4
-set $MAGENTA = 5
-set $CYAN = 6
-set $WHITE = 7
+source ~/.jjjj222_setup/gdb/stl/stl.gdb
+#source ~/.jjjj222_setup/gdb/color.gdb
 
-# CHANGME: If you want to modify the "theme" change the colors here
-#          or just create a ~/.gdbinit.local and set these variables there
-set $COLOR_REGNAME = $GREEN
-set $COLOR_REGVAL = $BLACK
-set $COLOR_REGVAL_MODIFIED  = $RED
-set $COLOR_SEPARATOR = $BLUE
-set $COLOR_CPUFLAGS = $RED
-
-# this is ugly but there's no else if available :-(
-define color
- if $USECOLOR == 1
-    # BLACK
-    if $arg0 == 0
-        echo \033[30m
-    else
-        # RED
-        if $arg0 == 1
-            echo \033[31m
-        else
-            # GREEN
-            if $arg0 == 2
-                echo \033[32m
-            else
-                # YELLOW
-                if $arg0 == 3
-                    echo \033[33m
-                else
-                    # BLUE
-                    if $arg0 == 4
-                        echo \033[34m
-                    else
-                        # MAGENTA
-                        if $arg0 == 5
-                            echo \033[35m
-                        else
-                            # CYAN
-                            if $arg0 == 6
-                                echo \033[36m
-                            else
-                                # WHITE
-                                if $arg0 == 7
-                                    echo \033[37m
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-     end
- end
-end
-
-define color_reset
-    if $USECOLOR == 1
-       echo \033[0m
-    end
-end
-
-define color_bold
-    if $USECOLOR == 1
-       echo \033[1m
-    end
-end
-
-define color_underline
-    if $USECOLOR == 1
-       echo \033[4m
-    end
-end
-
-# this way anyone can have their custom prompt - argp's idea :-)
-# can also be used to redefine anything else in particular the colors aka theming
-# just remap the color variables defined above
-#source ~/.gdbinit.local
-
-# can't use the color functions because we are using the set command
-#if $COLOREDPROMPT == 1
-#    set prompt \033[31mgdb$ \033[0m
-#end
-#set prompt \033[32m(gdb) \033[0m
-#set extended-prompt \f (gdb)
-#set extented-prompt \[\e[0;34m\](gdb)\[\e[0m\]
 python
-import pdb
-def get_prompt(prompt):
-    try:
-        name = str(gdb.selected_frame().name())
-        #pdb.set_trace()
-    except:
-    #pdb.set_trace()
-        name = "QQ"
-
-    get_prompt.count += 1
-    return gdb.prompt.substitute_prompt("\[\e[0;31m\](gdb)\[\e[0m\] %s %d > " % (name , get_prompt.count))
-get_prompt.count = 1
-
-gdb.prompt_hook = get_prompt
+import sys
+import os
+path = os.path.expanduser('~/.jjjj222_setup/gdb');
+path = os.path.realpath(path)
+sys.path.insert(1, path)
+import prompt
 end
 #-------------------------------------------------------------------------------
 #   
@@ -189,16 +89,30 @@ define cache_dump
     call cache_dump(cp, stdout)
 end
 
-###================== python ===============================================
-#python
-#import sys
-#import os
-###sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/printer/python")
-#sys.path.insert(0, os.environ['HOME'] + "/.jjjj222_setup/gdb/stl/python")
-###sys.path.insert(0, "~/.jjjj222_setup/gdb/stl/printer/python")
-#from libstdcxx.v6.printers import register_libstdcxx_printers
-###register_libstdcxx_printers (None)
-#end
-##
-###================== script ==========================================
-source ~/.jjjj222_setup/gdb/stl/stl
+#-------------------------------------------------------------------------------
+#   pretty-print stl (included)
+#-------------------------------------------------------------------------------
+python
+import sys
+import os
+path = os.path.expanduser('~/.jjjj222_setup/gdb/pretty_printer/stl');
+path = os.path.realpath(path)
+sys.path.insert(1, path)
+from libstdcxx.v6.printers import register_libstdcxx_printers
+register_libstdcxx_printers (None)
+end
+
+
+#-------------------------------------------------------------------------------
+#   pretty-print boost (included)
+#-------------------------------------------------------------------------------
+python
+import sys
+path = os.path.expanduser('~/.jjjj222_setup/gdb/pretty_printer/boost/Boost-Pretty-Printer')
+path = os.path.realpath(path)
+sys.path.insert(1, path)
+import boost
+boost.register_printers(boost_version=(1,58,0))
+end
+
+
