@@ -18,10 +18,11 @@ def close_new_pane():
     if linked_pane == None:
         return
 
-    program = linked_pane.get_running_program()
-    if program == "vim":
-        linked_pane.vim_exec(":qa!")
-    linked_pane.shell_exec("exit")
+    if is_new_pane:
+        program = linked_pane.get_running_program()
+        if program == "vim":
+            linked_pane.vim_exec(":qa!")
+        linked_pane.shell_exec("exit")
 
     linked_pane = None
     is_new_pane = False
@@ -134,6 +135,7 @@ class VimTraceAlign(gdb.Command):
         if self.current_file != fullname:
             self.current_file = fullname
             linked_pane.vim_exec(":view +" + line + " " + fullname)
+            linked_pane.vim_exec(":set cursorline")
         else:
             linked_pane.vim_exec(":" + line)
 
