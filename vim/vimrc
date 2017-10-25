@@ -104,6 +104,9 @@ set wildmenu
 "set nowrap
 set tw=0
 
+" tabnew autocomplete case insensitive
+set wildignorecase
+
 "-------------------------------------------------------------------------------
 "   paste
 "-------------------------------------------------------------------------------
@@ -164,8 +167,8 @@ nnoremap    <F12>           :cprev<CR>
 "nnoremap    <F9>        :VCSAnnotate<CR>
 nnoremap    <F9>            :NERDTreeToggle<CR>
 
-"nnoremap    <leader>o       :tabnew <cWORD><CR>
 nnoremap    <leader>o       <C-w>gf
+nnoremap    <leader>O       :tabnew <cWORD><CR>
 nnoremap    <leader>lm      :marks<CR>
 nnoremap    <leader>lr      :reg<CR>
 
