@@ -142,15 +142,21 @@ class VimTraceAlign(gdb.Command):
         except:
             return
 
+        cmds = []
+
         if self.current_file != fullname or argv != "":
             self.current_file = fullname
-            linked_pane.vim_exec(":view +" + line + " " + fullname)
-            linked_pane.vim_exec(":set cursorline")
+            #linked_pane.vim_exec(":view +" + line + " " + fullname)
+            #linked_pane.vim_exec(":set cursorline")
+            cmds.append(":view +" + line + " " + fullname)
+            cmds.append(":set cursorline")
         else:
-            #linked_pane.vim_exec_async(":" + line)
-            linked_pane.vim_exec(":" + line)
+            #linked_pane.vim_exec(":" + line)
+            cmds.append(":" + line)
 
-        linked_pane.send_key("zz")
+        #linked_pane.send_key("zzzv")
+        #linked_pane.send_key("zz")
+        linked_pane.vim_exec_cmds(cmds, "zzzv")
 
 
 #-------------------------------------------------------------------------------

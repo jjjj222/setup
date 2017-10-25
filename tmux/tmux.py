@@ -95,6 +95,9 @@ class Pane:
         args = ['tmux', 'send-keys', '-t', self.id] + keys
         subprocess.call(args)
 
+    def send_cmds(self, cmds):
+        subprocess.call(args)
+
     def get_pid(self):
         if self.pid == None:
             self.pid = get_list_panes_all_id_pid()[self.id]
@@ -114,6 +117,14 @@ class Pane:
 
     def vim_exec(self, cmd):
         self.send_keys(["Escape", cmd, 'Enter'])
+
+    def vim_exec_cmds(self, cmds, key):
+        keys = ["Escape"]
+        for c in cmds:
+            keys.extend(c)
+            keys.append('Enter')
+        keys.append(key)
+        self.send_keys(keys)
 
     def vim_exec_async(self, cmd):
         args = ['tmux', 'send-keys', '-t', self.id, "Escape", cmd, "Enter"]

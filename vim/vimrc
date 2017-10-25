@@ -490,7 +490,7 @@ set foldmarker={,}
 set foldmethod=syntax
 "set foldmethod=indent
 set foldlevel=1000
-set foldcolumn=4
+set foldcolumn=6
 highlight Folded        ctermfg=Cyan        ctermbg=Black
 highlight FoldColumn    ctermfg=Cyan        ctermbg=Black
 set foldtext=SimpleFoldText() " Custom fold text function
