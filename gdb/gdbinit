@@ -27,54 +27,16 @@ path = os.path.realpath(path)
 sys.path.insert(1, path)
 import vimtrace
 import prompt
+import stop_handler
 #import hello
 #import ls
 end
 #-------------------------------------------------------------------------------
 #   hook
 #-------------------------------------------------------------------------------
-python
-import gdb
-class Executor:
-    def __init__(self, cmd):
-        self.__cmd = cmd
-
-    def __call__(self):
-        gdb.execute(self.__cmd)
-
-def stop_handler (event):
-    #print "QQ stop"
-    #b =  event.breakpoint
-    #print b.type
-    #print b.number
-    #print b.location
-    #print b.expression
-    #print b.condition
-    try:
-        frame = str(gdb.selected_frame().name())
-    except:
-        frame = "<no frame>"
-
-    #print frame
-    if "@plt" in frame:
-        #print "plt"
-        gdb.execute("continue")
-        #gdb.post_event(Executor("continue"))
-        #b.delete()
-    #print "event type: exit"
-    #print "exit code: %d" % (event.exit_code)
-
-gdb.events.stop.connect (stop_handler)
-#class DebugPrintingBreakpoint(gdb.Breakpoint):
-#    def __init__(self, spec, command):
-#        super(DebugPrintingBreakpoint, self).__init__(spec, gdb.BP_BREAKPOINT, internal = False)
-#        self.command = command
-#
-#    def stop(self):
-#        print "QQ"
-#        return True
-#
-#DebugPrintingBreakpoint()
+alias vt = vimtrace
+define vts
+    vimtracealign sync
 end
 #-------------------------------------------------------------------------------
 #define hook-step

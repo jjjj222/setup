@@ -12,6 +12,7 @@ import tmux
 linked_pane = None
 is_new_pane = False
 is_vim = False
+VIM_STATUSLINE = "%<%f\ %y\ %h%m%r%=%-18.(%l/%L,%c%V%)\ %P"
 
 def close_pane():
     global linked_pane, is_new_pane
@@ -24,6 +25,9 @@ def close_pane():
         if program == "vim":
             linked_pane.vim_exec(":qa!")
         linked_pane.shell_exec("exit")
+    else:
+        linked_pane.vim_exec(':set statusline=' + VIM_STATUSLINE)
+        linked_pane.vim_exec(':echo "Disconnected from gdb"')
 
     linked_pane = None
     is_new_pane = False
@@ -85,6 +89,7 @@ class VimTrace(gdb.Command):
                 print "link error: not running vim !!"
                 return
 
+            linked_pane.vim_exec(':set statusline=(GDB)\ ' + VIM_STATUSLINE)
             print "linked to: " + linked_pane.id
 
 

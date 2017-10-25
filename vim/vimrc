@@ -500,6 +500,7 @@ set foldtext=SimpleFoldText() " Custom fold text function
 "------------------------------------------------------------------------------
 "   status bar
 "------------------------------------------------------------------------------
+let g:normal_statusline='qq%<%f\ %y\ %h%m%r%=%-18.(%l/%L,%c%V%)\ %P'
 set laststatus=2 " alway shot status line
 " set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set statusline=%<%f\ %y\ %h%m%r%=%-18.(%l/%L,%c%V%)\ %P
