@@ -88,6 +88,9 @@ class Pane:
         self.id = id
         self.pid = pid
 
+    def send_key(self, key):
+        self.send_keys([key])
+
     def send_keys(self, keys):
         args = ['tmux', 'send-keys', '-t', self.id] + keys
         subprocess.call(args)
@@ -103,11 +106,14 @@ class Pane:
         program = get_program_name(output)
         return program
 
+    def is_vim(self):
+        return self.get_running_program() == "vim"
+
     def shell_exec(self, cmd):
-        self.send_keys([cmd, 'Enter'])
+        self.send_keys(["C-u", cmd, 'Enter'])
 
     def vim_exec(self, cmd):
-        self.send_keys([cmd, 'Enter'])
+        self.send_keys(["Escape", cmd, 'Enter'])
 
 
 #-------------------------------------------------------------------------------
@@ -115,8 +121,10 @@ class Pane:
 #-------------------------------------------------------------------------------
 def main():
     p = Pane("%252")
-    program = p.get_running_program()
-    print get_program_name(program)
+    #program = p.get_running_program()
+    #print get_program_name(program)
+    p.send_key("a")
+    p.send_key("C-u")
 
 if __name__ == "__main__":
     main()

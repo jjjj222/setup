@@ -23,6 +23,7 @@ def get_prompt(prompt):
     o.write(color("end"))
     o.write(" ")
 
+    gdb.execute("vimtracealign")
     return gdb.prompt.substitute_prompt(o.getvalue())
 
 

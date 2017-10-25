@@ -2,6 +2,7 @@
 set print pretty on
 set print object on
 set print static-members off
+set confirm off
 #set pagination off
 #set print array on
 #set tui border-kind ascii
@@ -24,37 +25,57 @@ import os
 path = os.path.expanduser('~/.jjjj222_setup/gdb');
 path = os.path.realpath(path)
 sys.path.insert(1, path)
+import vimtrace
 import prompt
 #import hello
 #import ls
-import vimtrace
 end
 #-------------------------------------------------------------------------------
 #   hook
 #-------------------------------------------------------------------------------
-define hook-step
-    echo hook-step
-    echo \n
-end
+#python
+#import gdb
+#class DebugPrintingBreakpoint(gdb.Breakpoint):
+#    def __init__(self, spec, command):
+#        super(DebugPrintingBreakpoint, self).__init__(spec, gdb.BP_BREAKPOINT, internal = False)
+#        self.command = command
+#
+#    def stop(self):
+#        print "QQ"
+#        return True
+#
+#DebugPrintingBreakpoint()
+#oend
+#-------------------------------------------------------------------------------
+#define hook-step
+#    echo hook-step
+#    echo \n
+#end
+#
+#define hook-next
+#    echo hook-next
+#    echo \n
+#end
+#
+#define hookpost-next
+#    echo hookpost-next
+#    echo \n
+#    ls
+#    #vimtracealign
+#end
+#
+#define hook-continue
+#    echo hook-continue
+#    echo \n
+#end
+#
+#define hook-finish
+#    echo hook-finish
+#    echo \n
+#end
 
-define hook-next
-    echo hook-next
-    echo \n
-end
-
-define hookpost-next
-    echo hookpost-next
-    echo \n
-end
-
-define hook-continue
-    echo hook-continue
-    echo \n
-end
-
-define hook-finish
-    echo hook-finish
-    echo \n
+define hook-quit
+    vimtraceexit
 end
 #-------------------------------------------------------------------------------
 #   
