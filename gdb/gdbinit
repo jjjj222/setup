@@ -25,6 +25,36 @@ path = os.path.expanduser('~/.jjjj222_setup/gdb');
 path = os.path.realpath(path)
 sys.path.insert(1, path)
 import prompt
+#import hello
+#import ls
+import vimtrace
+end
+#-------------------------------------------------------------------------------
+#   hook
+#-------------------------------------------------------------------------------
+define hook-step
+    echo hook-step
+    echo \n
+end
+
+define hook-next
+    echo hook-next
+    echo \n
+end
+
+define hookpost-next
+    echo hookpost-next
+    echo \n
+end
+
+define hook-continue
+    echo hook-continue
+    echo \n
+end
+
+define hook-finish
+    echo hook-finish
+    echo \n
 end
 #-------------------------------------------------------------------------------
 #   

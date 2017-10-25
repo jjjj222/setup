@@ -27,9 +27,12 @@ def get_prompt(prompt):
 
 
 def reduce_frame_str(f):
-    begin = f.index('(')
+    begin = f.find('(')
+    if begin == -1:
+        return f
+
     end = f.index(')', begin)
-    f = f[:begin+1] + f[end:]
+    f = f[:begin] + f[end+1:]
 
     return f
 
