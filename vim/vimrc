@@ -331,6 +331,7 @@ nnoremap    <Tab>           heT<space>i<Tab><ESC>l
 "nnoremap    <S-Tab>         <<
 vnoremap    <Tab>           >gv
 vnoremap    <S-Tab>         <gv
+noremap     <C-i>           <Tab>
 
 " paste "
 "nnoremap    <leader>po      :set paste<CR>

@@ -31,6 +31,7 @@ import stop_handler
 #import hello
 #import ls
 end
+
 #-------------------------------------------------------------------------------
 #   hook
 #-------------------------------------------------------------------------------
@@ -39,6 +40,11 @@ define vts
     vimtracealign sync
 end
 #-------------------------------------------------------------------------------
+#set logging redirect on
+#set logging file /dev/null
+#set logging on
+#set logging off
+
 #define hook-step
 #    echo hook-step
 #    echo \n
@@ -72,6 +78,10 @@ end
 #-------------------------------------------------------------------------------
 #   
 #-------------------------------------------------------------------------------
+define f
+    finish
+end
+
 set listsize 20
 define ls
     if ( $argc == 0)
@@ -101,6 +111,9 @@ end
 
 define goto
     tb $arg0
+    commands
+        silent
+    end
     jump $arg0
 end
 
@@ -161,4 +174,28 @@ import boost
 boost.register_printers(boost_version=(1,58,0))
 end
 
+#-------------------------------------------------------------------------------
+#   my pretty-print std
+#-------------------------------------------------------------------------------
+python
+import sys
+import os
+path = os.path.expanduser('~/.jjjj222_setup/gdb/pretty_printer/std');
+path = os.path.realpath(path)
+sys.path.insert(1, path)
+import gdb.printing
+import my_std_printer
+gdb.printing.register_pretty_printer(
+    gdb.current_objfile(),
+    my_std_printer.build_pretty_printer())
+end
 
+define reload_my_std_printer
+python
+reload(my_std_printer)
+gdb.printing.register_pretty_printer(
+    gdb.current_objfile(),
+    my_std_printer.build_pretty_printer(),
+    replace=True)
+end
+end
