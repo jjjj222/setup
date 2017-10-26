@@ -76,7 +76,7 @@ class VimTrace(gdb.Command):
         if target == None:
             linked_pane = tmux.get_split_window()
             linked_pane.shell_exec("vim .")
-            linked_pane.vim_exec(":set cursorline")
+            #linked_pane.vim_exec(":set cursorline")
 
             is_new_pane = True
         else:
@@ -149,7 +149,7 @@ class VimTraceAlign(gdb.Command):
             #linked_pane.vim_exec(":view +" + line + " " + fullname)
             #linked_pane.vim_exec(":set cursorline")
             cmds.append(":view +" + line + " " + fullname)
-            cmds.append(":set cursorline")
+            #cmds.append(":set cursorline")
         else:
             #linked_pane.vim_exec(":" + line)
             cmds.append(":" + line)

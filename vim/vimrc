@@ -151,7 +151,7 @@ command! -nargs=1 Silent
 let mapleader = ","
 
 "nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* src/*.* include/*.*<CR>
-nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* <CR>
+nnoremap    <C-g>           :tab split<CR> :Grep -w <cword> *.* <CR>
 "nnoremap    <C-h>           :tab split<CR> :Grep <cword> *.h<CR>
 "nnoremap    <C-f>       <ESC>
 "vnoremap    <C-f>       <ESC>
@@ -501,10 +501,11 @@ set foldtext=SimpleFoldText() " Custom fold text function
 "------------------------------------------------------------------------------
 "   status bar
 "------------------------------------------------------------------------------
-let g:normal_statusline='qq%<%f\ %y\ %h%m%r%=%-18.(%l/%L,%c%V%)\ %P'
+let g:normal_statusline='%<%f %y %h%m%r%=%-18.(%l/%L,%c%V%) %P'
 set laststatus=2 " alway shot status line
 " set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set statusline=%<%f\ %y\ %h%m%r%=%-18.(%l/%L,%c%V%)\ %P
+"set statusline=%!g:normal_statusline
 set ruler           " show the cursor position all the time
 set showcmd         " display incomplete commands
 highlight StatusLine    ctermfg=Blue        ctermbg=white
@@ -514,12 +515,13 @@ highlight StatusLineNC  ctermfg=white       ctermbg=black
 "------------------------------------------------------------------------------
 "   cursor
 "------------------------------------------------------------------------------
+set cursorline
+
 highlight Cursor        ctermfg=Black       ctermbg=Green       cterm=bold
 "highlight Cursor        ctermfg=Black       ctermbg=White       cterm=bold
 "highlight Cursor        ctermfg=Black       ctermbg=LightGrey   cterm=bold
 highlight MatchParen    ctermfg=NONE        ctermbg=Brown       cterm=NONE
 "highlight MatchParen    ctermfg=Black       ctermbg=White       cterm=NONE
-" set cursorline
 " highlight CursorLine   cterm=bold
 " highlight CursorLine   cterm=underline
 " set cursorcolumn
