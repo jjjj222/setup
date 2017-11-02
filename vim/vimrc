@@ -50,6 +50,8 @@ Plugin 'mxw/vim-jsx'
 " pug highlight
 Plugin 'digitaltoad/vim-pug'
 
+" asyncrun
+Plugin 'skywind3000/asyncrun.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -72,8 +74,8 @@ filetype plugin on
 syntax on
 "filetype on
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-set completeopt-=preview
+"set omnifunc=syntaxcomplete#Complete
+"set completeopt-=preview
 
 " disable auto comment
 set formatoptions-=cro
@@ -106,6 +108,11 @@ set tw=0
 
 " tabnew autocomplete case insensitive
 set wildignorecase
+
+"-------------------------------------------------------------------------------
+"   
+"-------------------------------------------------------------------------------
+set makeprg=make\ -j\ 8\ install\ NO_PERFORCE=1\ STRIP=\ NO_OPT=1
 
 "-------------------------------------------------------------------------------
 "   paste
@@ -151,7 +158,7 @@ command! -nargs=1 Silent
 let mapleader = ","
 
 "nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* src/*.* include/*.*<CR>
-nnoremap    <C-g>           :tab split<CR> :Grep -w <cword> *.* <CR>
+nnoremap    <C-g>           :tab split<CR> :Grep -w <cword> *.cc *.h <CR>
 "nnoremap    <C-h>           :tab split<CR> :Grep <cword> *.h<CR>
 "nnoremap    <C-f>       <ESC>
 "vnoremap    <C-f>       <ESC>
@@ -159,13 +166,14 @@ nnoremap    <C-g>           :tab split<CR> :Grep -w <cword> *.* <CR>
 "nnoremap <C-d> ^<C-v>
 " nnoremap <leader>g :Grep <cword> %<CR>
 "copen
-nnoremap    <F10>           :cclose<CR>
+nnoremap    <F10>           :call asyncrun#quickfix_toggle(8)<CR>
 nnoremap    <F11>           :cnext<CR>
 nnoremap    <F12>           :cprev<CR>
 
 "nnoremap <F9> :TlistToggle<CR>
 "nnoremap    <F9>        :VCSAnnotate<CR>
-nnoremap    <F9>            :NERDTreeToggle<CR>
+"nnoremap    <F9>            :NERDTreeToggle<CR>
+"nnoremap    <F9>            :call asyncrun#quickfix_toggle(8)<CR>
 
 nnoremap    <leader>o       <C-w>gf
 nnoremap    <leader>O       :tabnew <cWORD><CR>
@@ -315,15 +323,20 @@ augroup nerd_tree_hotkey
     autocmd FileType nerdtree nmap <buffer> h           o
 augroup END
 
+" asyncrun "
+nnoremap    <leader>mk      :AsyncRun -program=make<CR>
+nnoremap    <leader>ms      :AsyncStop<CR>
+nnoremap    <leader>mo      :call asyncrun#quickfix_toggle(8)<CR>
+
 " vimux "
-nnoremap    <leader>mk      :VimuxRunCommand "make"<CR>
+"nnoremap    <leader>mk      :VimuxRunCommand "make"<CR>
 nnoremap    <F8>            :VimuxRunCommand "make"<CR>
-nnoremap    <C-c>           :VimuxRunCommand "make"<CR>
-nnoremap    <leader>mr      :VimuxRunCommand "make run"<CR>
+"nnoremap    <C-c>           :VimuxRunCommand "make"<CR>
+"nnoremap    <leader>mr      :VimuxRunCommand "make run"<CR>
 nnoremap    <F7>            :VimuxRunCommand "make run"<CR>
-nnoremap    <leader>mt      :VimuxRunCommand "make test"<CR>
+"nnoremap    <leader>mt      :VimuxRunCommand "make test"<CR>
 nnoremap    <F6>            :VimuxRunCommand "make test"<CR>
-nnoremap    <leader>mc      :VimuxCloseRunner<CR>
+"nnoremap    <leader>mc      :VimuxCloseRunner<CR>
 
 " indent "
 "nnoremap    <Tab>           I<Tab><ESC>l
@@ -340,6 +353,7 @@ nnoremap    <leader>p       "*p
 
 " align"
 vnoremap    <leader>a&      :Tab /&<CR>
+vnoremap    <leader>a=      :Tab /=<CR>
 vnoremap    <leader>a\|     :Tab /\|<CR>
 nnoremap    <leader>ac      :1,$Tab /--><CR>
 
@@ -370,6 +384,10 @@ nnoremap    <leader>$       viwS$
 "set autoread
 nnoremap    <leader>4e      :Silent p4 edit %<CR> :e<CR>
 nnoremap    <leader>4r      :Silent p4 revert %<CR> :e<CR>
+
+" vimdiff"
+vnoremap    <leader>dp      :diffput<CR>
+vnoremap    <leader>dg      :diffget<CR>
 
 " hightlight"
 nnoremap <silent> <leader>/ :nohlsearch<CR>:syntax sync fromstart<CR>
@@ -657,6 +675,8 @@ function! GetCommentStr()
         return "\""
     elseif (cur_file == "tex")
         return "%"
+    elseif (cur_file == "sql")
+        return "--"
     elseif (cur_file == "haml")
         return "-#"
     elseif (cur_file == "lisp")

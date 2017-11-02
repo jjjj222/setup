@@ -2,8 +2,8 @@
 set print pretty on
 set print object on
 set print static-members off
+set pagination off
 #set confirm off
-#set pagination off
 #set print array on
 #set tui border-kind ascii
 #set tui active-border-mode bold

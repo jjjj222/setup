@@ -1,3 +1,7 @@
+obj_x86_64_linux_*/
+dox_x86_64_linux_*/
+tags
+
 .jjjj222_tmp
 
 # Compiled source #
@@ -28,7 +32,7 @@
 #   Logs and databases
 #------------------------------------------------------------------------------
 *.log
-*.sql
+#*.sql
 *.sqlite
 *.sqlite3
 

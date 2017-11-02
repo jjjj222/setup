@@ -142,7 +142,8 @@ class VimTraceAlign(gdb.Command):
         except:
             return
 
-        cmds = []
+        cmds = [":tabfirst"]
+        #cmds = []
 
         if self.current_file != fullname or argv != "":
             self.current_file = fullname
