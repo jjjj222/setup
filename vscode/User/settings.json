@@ -7,6 +7,7 @@
         ]
     },
     "vim.disableAnnoyingNeovimMessage": true,
+    "vim.hlsearch": true,
     "vim.leader": ",",
     "vim.insertModeKeyBindings": [
         {
@@ -23,6 +24,15 @@
         }
     ],
     "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before":["<leader>", "O"],
+            "after":[],
+            "commands": [
+                {
+                    "command": ":tabnew"
+                }
+            ]
+        },
         {
             "before":["J"],
             "after":["1", "0", "j"]

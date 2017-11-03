@@ -1,0 +1,2 @@
+echo dir/w %1 > %systemroot%\system32\ls.bat
+echo dir %1 > %systemroot%\system32\ll.bat
