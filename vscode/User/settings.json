@@ -1,0 +1,70 @@
+{
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "macros": {
+        "save_and_esc": [
+            "workbench.action.files.save",
+            "extension.vim_escape"
+        ]
+    },
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.leader": ",",
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["c-a"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["k", "j"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before":["J"],
+            "after":["1", "0", "j"]
+        },
+        {
+            "before":["K"],
+            "after":["1", "0", "k"]
+        },
+        {
+            "before":["<leader>", "j"],
+            "after":["J"]
+        },
+        {
+            "before":["Q"],
+            "after":[],
+            "commands": [
+                {
+                    "command": ":tabp"
+                }
+            ]
+        },
+        {
+            "before":["W"],
+            "after":[],
+            "commands": [
+                {
+                    "command": ":tabn"
+                }
+            ]
+        },
+        {
+            "before":["Z", "Q"],
+            "after":[],
+            "commands": [
+                {
+                    "command": ":tabclose"
+                }
+            ]
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-s>": true
+    },
+    "window.zoomLevel": 2
+}
