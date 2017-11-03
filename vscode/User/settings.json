@@ -25,6 +25,16 @@
     ],
     "vim.otherModesKeyBindingsNonRecursive": [
         {
+            "before": ["<leader>", "e"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.openGlobalSettings",
+                    "args": []
+                }
+            ]
+        },
+        {
             "before":["<leader>", "O"],
             "after":[],
             "commands": [
