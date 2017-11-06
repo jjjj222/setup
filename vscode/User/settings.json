@@ -44,6 +44,15 @@
             ]
         },
         {
+            "before":["<leader>", "/"],
+            "after":[],
+            "commands": [
+                {
+                    "command": ":nohl"
+                }
+            ]
+        },
+        {
             "before":["J"],
             "after":["1", "0", "j"]
         },
@@ -84,7 +93,8 @@
         }
     ],
     "vim.handleKeys": {
-        "<C-s>": true
+        "<C-s>": false,
+        "<C-a>": false
     },
     "window.zoomLevel": 2
 }
