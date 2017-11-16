@@ -53,6 +53,9 @@ Plugin 'digitaltoad/vim-pug'
 " asyncrun
 Plugin 'skywind3000/asyncrun.vim'
 
+" yaml folding
+Plugin 'digitalrounin/vim-yaml-folds'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "filetype plugin indent on    " required
