@@ -113,6 +113,7 @@ alias cdp4root 'cd `p4root`'
 alias p4sync 'p4 sync ... |& tsaffix | tee sync.log | nl'
 alias p4diff 'p4 diff \!* | less -R'
 alias p4difftool 'set p4diffbak = $P4DIFF; setenv P4DIFF vimdiff; p4 diff \!*; setenv P4DIFF $p4diffbak'
+alias p4clients 'p4 clients -u $USER'
 
 # ctag
 alias ctags 'ctags -R --c++-kinds=+p --fields=+iaS --extra=+q'

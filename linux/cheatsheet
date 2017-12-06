@@ -3,4 +3,4 @@ ls -ld $DIR                 --> show the infornation of a directory
 man -k $KEYWORD             --> search for manpages by keyword
 readlink -f `which vim`     --> follow symlink
 \command                    --> not using alias
-ds .                        --> disk usage
+df .                        --> disk usage
