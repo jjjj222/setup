@@ -541,7 +541,7 @@ set cursorline
 highlight Cursor        ctermfg=Black       ctermbg=Green       cterm=bold
 "highlight Cursor        ctermfg=Black       ctermbg=White       cterm=bold
 "highlight Cursor        ctermfg=Black       ctermbg=LightGrey   cterm=bold
-highlight MatchParen    ctermfg=NONE        ctermbg=Brown       cterm=NONE
+highlight MatchParen    ctermfg=Black       ctermbg=Brown       cterm=NONE
 "highlight MatchParen    ctermfg=Black       ctermbg=White       cterm=NONE
 " highlight CursorLine   cterm=bold
 " highlight CursorLine   cterm=underline
