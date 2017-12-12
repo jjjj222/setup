@@ -905,10 +905,41 @@ function! AutoParenthesisClose()
     endif
 endfunction
 
+let b:has_auto_curly_brace = 0
+function! AutoCurlyBraceOpen()
+    let b:has_auto_curly_brace = 1
+
+    call feedkeys("a", "n")
+    call feedkeys("{", "n")
+    call feedkeys('}', "n")
+    call feedkeys("\<ESC>", "n")
+    call feedkeys('i', "n")
+endfunction
+
+function! AutoCurlyBraceClose()
+    let b:has_auto_parenthesis = 0
+
+    let line = getline('.')
+    let col_n = col('.')
+    call feedkeys("a", "n")
+    if (line[col_n] == "}" && line[col_n - 1] == "{")
+        call cursor( line, col_n+1 )
+    else
+        call feedkeys("}", "n")
+    endif
+endfunction
+
 function! RunBackSpace()
+    let line = getline('.')
+    let col_n = col('.')
+
     call feedkeys("a", "n")
 
-    if (b:has_auto_parenthesis)
+    if (b:has_auto_parenthesis && line[col_n] == ")" && line[col_n - 1] == "(")
+        let b:has_auto_parenthesis = 0
+        call feedkeys("\<DEL>", "n")
+    elseif (b:has_auto_curly_brace && line[col_n] == "}" && line[col_n - 1] == "{")
+        let b:has_auto_curly_brace = 0
         call feedkeys("\<DEL>", "n")
     endif
     call feedkeys("\<BS>", "n")
@@ -916,6 +947,8 @@ endfunction
 
 inoremap ( <ESC>:call AutoParenthesisOpen()<CR>
 inoremap ) <ESC>:call AutoParenthesisClose()<CR>
+inoremap { <ESC>:call AutoCurlyBraceOpen()<CR>
+inoremap } <ESC>:call AutoCurlyBraceClose()<CR>
 inoremap <BS> <ESC>:call RunBackSpace()<CR>
 
 "------------------------------------------------------------------------------
