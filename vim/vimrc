@@ -835,16 +835,46 @@ endfunction
 "endfunction
 
 
+"function! IndentEnterInBrace()
+"    " Use with
+"    " set autoindent
+"    " inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
+"    if (getline('.')[col('.')-1] == "{")
+"        "execute "normal l\"_x"
+"        execute "normal o}"
+"        execute "normal Oq"
+"        execute "normal >>\"_x"
+"        call feedkeys("A", "n")
+"    else
+"        call feedkeys("a", "n")
+"        call feedkeys("\<CR>", "n")
+"    endif
+"endfunction
 function! IndentEnterInBrace()
     " Use with
     " set autoindent
     " inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
     if (getline('.')[col('.')-1] == "{")
-        "execute "normal l\"_x"
-        execute "normal o}"
-        execute "normal Oq"
-        execute "normal >>\"_x"
-        call feedkeys("A", "n")
+        if (col(".") == col("$")-1)
+            let add_paren = 0
+            if (getline('.')[col('.')-2] == "(")
+                let add_paren = 1
+            endif
+            "execute "normal l\"_x"
+            execute "normal o}"
+            if (add_paren == 1)
+                execute "normal a)"
+            endif
+            execute "normal Oq"
+            execute "normal >>\"_x"
+            call feedkeys("A", "n")
+        else
+            call feedkeys("a", "n")
+            call feedkeys("\<CR>", "n")
+            call feedkeys("\<ESC>", "n")
+            call feedkeys("O", "n")
+            call feedkeys("\t", "n")
+        endif
     else
         call feedkeys("a", "n")
         call feedkeys("\<CR>", "n")
