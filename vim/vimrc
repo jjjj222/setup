@@ -881,6 +881,43 @@ function! IndentEnterInBrace()
     endif
 endfunction
 
+let b:has_auto_parenthesis = 0
+function! AutoParenthesisOpen()
+    let b:has_auto_parenthesis = 1
+
+    call feedkeys("a", "n")
+    call feedkeys("(", "n")
+    call feedkeys(')', "n")
+    call feedkeys("\<ESC>", "n")
+    call feedkeys('i', "n")
+endfunction
+
+function! AutoParenthesisClose()
+    let b:has_auto_parenthesis = 0
+
+    let line = getline('.')
+    let col_n = col('.')
+    call feedkeys("a", "n")
+    if (line[col_n] == ")" && line[col_n - 1] == "(")
+        call cursor( line, col_n+1 )
+    else
+        call feedkeys(")", "n")
+    endif
+endfunction
+
+function! RunBackSpace()
+    call feedkeys("a", "n")
+
+    if (b:has_auto_parenthesis)
+        call feedkeys("\<DEL>", "n")
+    endif
+    call feedkeys("\<BS>", "n")
+endfunction
+
+inoremap ( <ESC>:call AutoParenthesisOpen()<CR>
+inoremap ) <ESC>:call AutoParenthesisClose()<CR>
+inoremap <BS> <ESC>:call RunBackSpace()<CR>
+
 "------------------------------------------------------------------------------
 "   after
 "------------------------------------------------------------------------------
