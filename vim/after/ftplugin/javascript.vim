@@ -6,4 +6,4 @@ set autoindent
 "inoremap ( ()<ESC>i
 "inoremap [ []<ESC>i
 ""inoremap <CR> <ESC>:call IndentInBrace()<CR>:startinsert<CR>
-inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
+"inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>

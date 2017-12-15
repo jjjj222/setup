@@ -56,6 +56,9 @@ Plugin 'skywind3000/asyncrun.vim'
 " yaml folding
 Plugin 'digitalrounin/vim-yaml-folds'
 
+"
+Plugin 'jiangmiao/auto-pairs'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "filetype plugin indent on    " required
@@ -815,106 +818,109 @@ function! AddHorizontalLine()
     call cursor(curLine + 1, 0)
 endfunction
 
-function! IndentEnterInBrace()
-    " Use with
-    " set autoindent
-    " inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
-    if (getline('.')[col('.')-1] == "{")
-        if (col(".") == col("$")-1)
-            let add_paren = 0
-            if (getline('.')[col('.')-2] == "(")
-                let add_paren = 1
-            endif
-            "execute "normal l\"_x"
-            execute "normal o}"
-            if (add_paren == 1)
-                execute "normal a)"
-            endif
-            execute "normal Oq"
-            execute "normal >>\"_x"
-            call feedkeys("A", "n")
-        else
-            call feedkeys("a", "n")
-            call feedkeys("\<CR>", "n")
-            call feedkeys("\<ESC>", "n")
-            call feedkeys("O", "n")
-            call feedkeys("\t", "n")
-        endif
-    else
-        call feedkeys("a", "n")
-        call feedkeys("\<CR>", "n")
-    endif
-endfunction
-
-"let b:has_auto_parenthesis = 0
-function! AutoParenthesisOpen()
-    "let b:has_auto_parenthesis = 1
-
-    call feedkeys("a", "n")
-    call feedkeys("(", "n")
-    call feedkeys(')', "n")
-    call feedkeys("\<ESC>", "n")
-    call feedkeys('i', "n")
-endfunction
-
-function! AutoParenthesisClose()
-    "let b:has_auto_parenthesis = 0
-
-    let line = getline('.')
-    let col_n = col('.')
-    call feedkeys("a", "n")
-    if (line[col_n] == ")" && line[col_n - 1] == "(")
-        call cursor( line, col_n+1 )
-    else
-        call feedkeys(")", "n")
-    endif
-endfunction
-
-"let b:has_auto_curly_brace = 0
-function! AutoCurlyBraceOpen()
-    "let b:has_auto_curly_brace = 1
-
-    call feedkeys("a", "n")
-    call feedkeys("{", "n")
-    call feedkeys('}', "n")
-    call feedkeys("\<ESC>", "n")
-    call feedkeys('i', "n")
-endfunction
-
-function! AutoCurlyBraceClose()
-    "let b:has_auto_parenthesis = 0
-
-    let line = getline('.')
-    let col_n = col('.')
-    call feedkeys("a", "n")
-    if (line[col_n] == "}" && line[col_n - 1] == "{")
-        call cursor( line, col_n+1 )
-    else
-        call feedkeys("}", "n")
-    endif
-endfunction
-
-function! RunBackSpace()
-    let line = getline('.')
-    let col_n = col('.')
-
-    call feedkeys("a", "n")
-
-    if (line[col_n] == ")" && line[col_n - 1] == "(")
-        "let b:has_auto_parenthesis = 0
-        call feedkeys("\<DEL>", "n")
-    elseif (line[col_n] == "}" && line[col_n - 1] == "{")
-        "let b:has_auto_curly_brace = 0
-        call feedkeys("\<DEL>", "n")
-    endif
-    call feedkeys("\<BS>", "n")
-endfunction
-
-inoremap ( <ESC>:call AutoParenthesisOpen()<CR>
-inoremap ) <ESC>:call AutoParenthesisClose()<CR>
-inoremap { <ESC>:call AutoCurlyBraceOpen()<CR>
-inoremap } <ESC>:call AutoCurlyBraceClose()<CR>
-inoremap <BS> <ESC>:call RunBackSpace()<CR>
+"-------------------------------------------------------------------------------
+"   
+"-------------------------------------------------------------------------------
+"function! IndentEnterInBrace()
+"    " Use with
+"    " set autoindent
+"    " inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
+"    if (getline('.')[col('.')-1] == "{")
+"        if (col(".") == col("$")-1)
+"            let add_paren = 0
+"            if (getline('.')[col('.')-2] == "(")
+"                let add_paren = 1
+"            endif
+"            "execute "normal l\"_x"
+"            execute "normal o}"
+"            if (add_paren == 1)
+"                execute "normal a)"
+"            endif
+"            execute "normal Oq"
+"            execute "normal >>\"_x"
+"            call feedkeys("A", "n")
+"        else
+"            call feedkeys("a", "n")
+"            call feedkeys("\<CR>", "n")
+"            call feedkeys("\<ESC>", "n")
+"            call feedkeys("O", "n")
+"            call feedkeys("\t", "n")
+"        endif
+"    else
+"        call feedkeys("a", "n")
+"        call feedkeys("\<CR>", "n")
+"    endif
+"endfunction
+"
+""let b:has_auto_parenthesis = 0
+"function! AutoParenthesisOpen()
+"    "let b:has_auto_parenthesis = 1
+"
+"    call feedkeys("a", "n")
+"    call feedkeys("(", "n")
+"    call feedkeys(')', "n")
+"    call feedkeys("\<ESC>", "n")
+"    call feedkeys('i', "n")
+"endfunction
+"
+"function! AutoParenthesisClose()
+"    "let b:has_auto_parenthesis = 0
+"
+"    let line = getline('.')
+"    let col_n = col('.')
+"    call feedkeys("a", "n")
+"    if (line[col_n] == ")" && line[col_n - 1] == "(")
+"        call cursor( line, col_n+1 )
+"    else
+"        call feedkeys(")", "n")
+"    endif
+"endfunction
+"
+""let b:has_auto_curly_brace = 0
+"function! AutoCurlyBraceOpen()
+"    "let b:has_auto_curly_brace = 1
+"
+"    call feedkeys("a", "n")
+"    call feedkeys("{", "n")
+"    call feedkeys('}', "n")
+"    call feedkeys("\<ESC>", "n")
+"    call feedkeys('i', "n")
+"endfunction
+"
+"function! AutoCurlyBraceClose()
+"    "let b:has_auto_parenthesis = 0
+"
+"    let line = getline('.')
+"    let col_n = col('.')
+"    call feedkeys("a", "n")
+"    if (line[col_n] == "}" && line[col_n - 1] == "{")
+"        call cursor( line, col_n+1 )
+"    else
+"        call feedkeys("}", "n")
+"    endif
+"endfunction
+"
+"function! RunBackSpace()
+"    let line = getline('.')
+"    let col_n = col('.')
+"
+"    call feedkeys("a", "n")
+"
+"    if (line[col_n] == ")" && line[col_n - 1] == "(")
+"        "let b:has_auto_parenthesis = 0
+"        call feedkeys("\<DEL>", "n")
+"    elseif (line[col_n] == "}" && line[col_n - 1] == "{")
+"        "let b:has_auto_curly_brace = 0
+"        call feedkeys("\<DEL>", "n")
+"    endif
+"    call feedkeys("\<BS>", "n")
+"endfunction
+"
+"inoremap ( <ESC>:call AutoParenthesisOpen()<CR>
+"inoremap ) <ESC>:call AutoParenthesisClose()<CR>
+"inoremap { <ESC>:call AutoCurlyBraceOpen()<CR>
+"inoremap } <ESC>:call AutoCurlyBraceClose()<CR>
+"inoremap <BS> <ESC>:call RunBackSpace()<CR>
 
 "------------------------------------------------------------------------------
 "   after
