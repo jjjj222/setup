@@ -686,7 +686,7 @@ function! GetCommentStr()
         return ";"
     elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "lex" || cur_file == "yacc" || cur_file == "html")
         return "//"
-    elseif (cur_file == "java" || cur_file == "javascript" || cur_file == "javascript.jsx")
+    elseif (cur_file == "java" || cur_file == "javascript" || cur_file == "javascript.jsx" || cur_file == "scss")
         return "//"
     endif
 
