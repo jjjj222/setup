@@ -815,41 +815,6 @@ function! AddHorizontalLine()
     call cursor(curLine + 1, 0)
 endfunction
 
-"nnoremap <leader>i :call AddIf()<CR><ESC>
-"function! AddIf()
-"    "let line_ul = line("'<")
-"    "let col_ul  = virtcol("'<")
-"    "let line_lr = line("'>")
-"    "let col_lr  = virtcol("'>")
-"    "execute "normal i if () {}"
-"    "let curLine = line(".")
-"    "let curCol = col(".")
-"    "call append(curLine + 0, "QQ ". curLine . "-" . curCol)
-"    "call cursor( curLine+1, curCol )
-"    "execute "normal i }"
-"    "execute "normal A */"
-"    "call cursor( line_ul, col_ul )
-"    "call cursor( curLine, curCol )
-"    "execute "normal I/* "
-"    "execute "normal za"
-"endfunction
-
-
-"function! IndentEnterInBrace()
-"    " Use with
-"    " set autoindent
-"    " inoremap <CR> <ESC>:call IndentEnterInBrace()<CR>
-"    if (getline('.')[col('.')-1] == "{")
-"        "execute "normal l\"_x"
-"        execute "normal o}"
-"        execute "normal Oq"
-"        execute "normal >>\"_x"
-"        call feedkeys("A", "n")
-"    else
-"        call feedkeys("a", "n")
-"        call feedkeys("\<CR>", "n")
-"    endif
-"endfunction
 function! IndentEnterInBrace()
     " Use with
     " set autoindent
