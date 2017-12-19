@@ -479,6 +479,7 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile *.md         set filetype=markdown
     autocmd BufRead,BufNewFile *.cls        set filetype=tex
     autocmd BufRead,BufNewFile *.tn         set filetype=tcl
+    autocmd BufRead,BufNewFile *.atelib         set filetype=tcl
 augroup END
 
 
@@ -919,12 +920,13 @@ function! RunBackSpace()
     let col_n = col('.')
 
     call feedkeys("a", "n")
+    call feedkeys("qqq", "n")
 
     if (line[col_n] == ")" && line[col_n - 1] == "(")
-        "let b:has_auto_parenthesis = 0
         call feedkeys("\<DEL>", "n")
     elseif (line[col_n] == "}" && line[col_n - 1] == "{")
-        "let b:has_auto_curly_brace = 0
+        call feedkeys("\<DEL>", "n")
+    elseif (line[col_n] == "]" && line[col_n - 1] == "[")
         call feedkeys("\<DEL>", "n")
     endif
     call feedkeys("\<BS>", "n")
