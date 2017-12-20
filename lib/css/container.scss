@@ -1,0 +1,34 @@
+div.v-container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start; /* align items in Main Axis */
+    align-items: stretch; /* align items in Cross Axis */
+    align-content: stretch; /* Extra space in Cross Axis */
+}
+
+div.h-container {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start; /* align items in Main Axis */
+    align-items: stretch; /* align items in Cross Axis */
+    align-content: stretch; /* Extra space in Cross Axis */
+}
+
+div.fullsize-container {
+    box-sizing: border-box;
+    height:100%;
+    width:100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+div.main-section {
+    box-sizing: border-box;
+    height:100%;
+    width:100%;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+}
