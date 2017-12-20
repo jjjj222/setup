@@ -1,7 +1,7 @@
 import os
 import subprocess
 import time
-from StringIO import StringIO
+from cStringIO import StringIO
 
 #-------------------------------------------------------------------------------
 #   
