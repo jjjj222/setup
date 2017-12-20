@@ -32,3 +32,18 @@ div.main-section {
     padding: 0;
     flex-grow: 1;
 }
+
+div.resizer {
+    //box-sizing: border-box;
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    top: 0;
+    cursor: col-resize;
+    //bottom: 0;
+    //right: 0;
+    //opacity: 0;
+    opacity: 0.5;
+    background: orange;
+}
+
