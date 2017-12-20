@@ -1,0 +1,14 @@
+{
+  "name": "mylib",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "jest --colors",
+    "watchtest": "jest --watch --colors --bail"
+  },
+  "author": "jjjj222",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^22.0.3"
+  }
+}
