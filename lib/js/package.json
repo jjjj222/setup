@@ -4,11 +4,17 @@
   "description": "",
   "scripts": {
     "test": "jest --colors",
-    "watchtest": "jest --watch --colors --bail"
+    "start": "jest --watch --colors --bail"
   },
   "author": "jjjj222",
   "license": "ISC",
   "dependencies": {
-    "jest": "^22.0.3"
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "d3": "^4.12.0",
+    "jest": "^22.0.3",
+    "regenerator-runtime": "^0.11.1"
   }
 }
