@@ -926,15 +926,20 @@ function! RunBackSpace()
     let col_n = col('.')
 
     call feedkeys("a", "n")
+    "call feedkeys("QQQ", "n")
 
     if (line[col_n] == ")" && line[col_n - 1] == "(")
         call feedkeys("\<DEL>", "n")
+        "call feedkeys("x", "n")
     elseif (line[col_n] == "}" && line[col_n - 1] == "{")
         call feedkeys("\<DEL>", "n")
+        "call feedkeys("x", "n")
     elseif (line[col_n] == "]" && line[col_n - 1] == "[")
         call feedkeys("\<DEL>", "n")
+        "call feedkeys("x", "n")
     endif
     call feedkeys("\<BS>", "n")
+    "call feedkeys("x", "n")
 endfunction
 
 "inoremap ( <ESC>:call AutoParenthesisOpen()<CR>
