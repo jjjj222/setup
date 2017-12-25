@@ -479,7 +479,8 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile *.md         set filetype=markdown
     autocmd BufRead,BufNewFile *.cls        set filetype=tex
     autocmd BufRead,BufNewFile *.tn         set filetype=tcl
-    autocmd BufRead,BufNewFile *.atelib         set filetype=tcl
+    autocmd BufRead,BufNewFile *.atelib     set filetype=tcl
+    autocmd BufRead,BufNewFile .babelrc     set filetype=json
 augroup END
 
 
