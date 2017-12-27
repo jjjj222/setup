@@ -951,7 +951,7 @@ inoremap } <ESC>:call AutoCurlyBraceClose()<CR>
 "inoremap [ <ESC>:call AutoSquareBracketOpen()<CR>
 inoremap [ []<Left>
 inoremap ] <ESC>:call AutoSquareBracketClose()<CR>
-inoremap <C-H> <ESC>:call RunBackSpace()<CR>
+"inoremap <C-H> <ESC>:call RunBackSpace()<CR>
 
 
 "------------------------------------------------------------------------------
