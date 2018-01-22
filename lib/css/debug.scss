@@ -1,0 +1,35 @@
+html {
+    //overflow: visible;
+    border: solid 10px #FF3456;
+}
+
+
+body {
+    background-color: #EEEEEE;
+    border: solid 10px yellow;
+}
+
+//div.fullsize-container {
+//    padding: 2px;
+//    border: solid 5px black;
+//}
+//
+//div.main-section {
+//    padding: 2px;
+//    border: solid 5px green;
+//}
+
+div.layout-row {
+    padding: 2px;
+    border: solid 5px cyan;
+}
+
+div.layout-column {
+    padding: 2px;
+    border: solid 5px green;
+}
+
+div.layout-switch {
+    padding: 2px;
+    border: solid 5px blue;
+}
