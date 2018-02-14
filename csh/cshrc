@@ -67,6 +67,7 @@ alias ll 'ls -al'
 
 # vi
 alias vi 'vim -p'
+alias bvi '/bin/vim -p'
 
 # tmux
 alias tmux "tmux -u"
