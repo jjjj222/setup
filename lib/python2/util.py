@@ -28,6 +28,7 @@ def run_cmd(ostream, cmd, cwd=None, env=None, with_timestamp=False, show_env=[])
             ostream.write(" - ")
         ostream.write(line.rstrip())
         ostream.write("\n")
+        ostream.flush()
 
     print_progress(ostream, cmd, "END", cwd)
 
@@ -42,6 +43,7 @@ def run_cmd_oneline(ostream, cmd, cwd=None, env=None, show_env=[]):
     for line in iter(proc.stdout.readline,''):
         ostream.write(line.rstrip())
         ostream.write("\n")
+        ostream.flush()
 
 def print_progress(ostream, cmd, status, dir):
     ostream.write(timestamp())
@@ -52,6 +54,7 @@ def print_progress(ostream, cmd, status, dir):
         ostream.write(dir)
         ostream.write(")")
     ostream.write("\n")
+    ostream.flush()
 
 def print_env(ostream, env_names, env=None):
     if not env:
@@ -62,6 +65,7 @@ def print_env(ostream, env_names, env=None):
         if value == None:
             value = "<UNDEFINED>"
         ostream.write("%s = %s\n" % (e, value))
+        ostream.flush()
 
 #-------------------------------------------------------------------------------
 #   

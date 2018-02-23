@@ -48,7 +48,7 @@ class Bullseye:
         ostream = sys.stdout
         util.run_cmd_oneline(ostream, cmd, None, None, show_env)
 
-    def genereate_html(self):
+    def generate_html(self):
         cmd = self.covhtml + " --file " + self.cov_file + " " + self.html_folder
 
         show_env = []
