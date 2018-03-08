@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 import re
+from cStringIO import StringIO
 
 # my lib
 import util
@@ -38,6 +39,15 @@ def is_client_exist(name):
     cmd = "p4 -ztag -F %Update% client -o"
     output = subprocess.check_output(cmd.split() + [name]).strip()
     return output != ""
+
+def is_client_uptodate(client_name):
+    assert_client_exist(client_name)
+    sstm = StringIO()
+
+    cmd = "p4 -c " + client_name + " sync -n"
+    util.run_cmd_no_progress(sstm, cmd)
+    #print sstm.getvalue()
+    return sstm.getvalue().strip() == "File(s) up-to-date."
 
 def is_standard_client_name(name):
     pattern = re.compile("^nvtools_[0-9]+_.+$")
@@ -131,6 +141,18 @@ def sync_client(client_name, logfile=None):
 
     cmd = "p4 -c " + client_name + " sync"
     util.run_cmd(ostream, cmd)
+
+#-------------------------------------------------------------------------------
+#   Remove
+#-------------------------------------------------------------------------------
+def remove_client(client_name):
+    assert_client_exist(client_name)
+    #p4 = P4()
+    #p4.connect()
+    #p4.delete_client(client_name)
+    cmd = "p4 client -d " + client_name
+    ostream = sys.stdout
+    util.run_cmd_oneline(ostream, cmd)
 
 #-------------------------------------------------------------------------------
 def main():

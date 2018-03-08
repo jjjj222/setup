@@ -12,6 +12,7 @@ class Mail:
         self.to = None
         self.subject = "Test"
         self.body = "QQ"
+        self.format = "text"
 
     def send(self):
         cmd = "sendmail" + " " + self.to
@@ -22,6 +23,11 @@ class Mail:
         proc.stdin.write("To: " + self.to + "\n")
         proc.stdin.write("From: " + self.fr + "\n")
         proc.stdin.write("Subject: " + self.subject + "\n")
+
+        if self.format == 'html':
+            proc.stdin.write("Mime-Version: 1.0\n")
+            proc.stdin.write("Content-Type: text/html\n")
+
         proc.stdin.write("\n")
         proc.stdin.write(self.body + "\n")
         proc.stdin.close()

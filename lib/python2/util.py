@@ -45,6 +45,13 @@ def run_cmd_oneline(ostream, cmd, cwd=None, env=None, show_env=[]):
         ostream.write("\n")
         ostream.flush()
 
+def run_cmd_no_progress(ostream, cmd, cwd=None, env=None):
+    proc = subprocess.Popen(cmd.split(), cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    for line in iter(proc.stdout.readline,''):
+        ostream.write(line.rstrip())
+        ostream.write("\n")
+        ostream.flush()
+
 def print_progress(ostream, cmd, status, dir):
     ostream.write(timestamp())
     ostream.write(" - (%s) " % status)
