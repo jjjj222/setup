@@ -19,6 +19,7 @@ set showdots=1
 set symlinks=expand
 set correct=command # don't correct typo
 
+setenv SYSTEMD_EDITOR "vim"
 ###############################################################################
 #   auto complete
 ###############################################################################
