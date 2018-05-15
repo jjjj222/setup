@@ -18,6 +18,7 @@ set savehist=( $history merge )
 set showdots=1
 set symlinks=expand
 set correct=command # don't correct typo
+set noding # disable DING!
 
 setenv SYSTEMD_EDITOR "vim"
 ###############################################################################
@@ -113,7 +114,7 @@ alias p4exist 'p4 -ztag -F "%Update%" client -o \!*'
 alias p4root 'p4 -F %clientRoot% -ztag info'
 alias cdp4root 'cd `p4root`'
 alias p4sync 'p4 sync ... |& tsaffix | tee sync.log | nl'
-alias p4diff 'p4 diff \!* | less -R'
+alias p4diff 'p4 diff -Od \!* | less -R'
 alias p4difftool 'set p4diffbak = $P4DIFF; setenv P4DIFF vimdiff; p4 diff \!*; setenv P4DIFF $p4diffbak'
 alias p4clients 'p4 clients -u $USER'
 
