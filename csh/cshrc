@@ -104,6 +104,7 @@ alias pp 'source ~/.jjjj222_setup/csh/cshrc_prompt'
 #alias setpane 'tmux rename-window -t${TMUX_PANE} $HOST'
 alias tmuxpanehost 'printf "\033k$HOST\033\\"'
 alias tmuxpaneauto 'tmux setw automatic-rename'
+alias ssh_window "ssh `tmux display-message -p '#W'`"
 
 # vnc
 alias vnc_on 'vncserver -geometry 1920x1200 :16322' # :22222
