@@ -26,6 +26,7 @@ Plugin 'benmills/vimux'
 Plugin 'tpope/vim-surround'
 " ysiw] : add ]
 " cs' : change the '
+" ds' : remove the '
 " S : visual mode
 
 " repeat "
@@ -37,7 +38,7 @@ Plugin 'godlygeek/tabular'
 " :Tab /:\zs
 
 " rails
-Plugin 'tpope/vim-rails'
+"Plugin 'tpope/vim-rails'
 " :Econtroller
 
 " git
@@ -56,8 +57,14 @@ Plugin 'skywind3000/asyncrun.vim'
 " yaml folding
 Plugin 'digitalrounin/vim-yaml-folds'
 
+" xml folding
+"Plugin 'XML-Folding'
+
 " auto-pairs
 "Plugin 'jiangmiao/auto-pairs'
+
+" typescript
+Plugin 'leafgarland/typescript-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -124,6 +131,7 @@ set makeprg=make\ -j\ 8\ install\ NO_PERFORCE=1\ STRIP=\ NO_OPT=1
 "   paste
 "-------------------------------------------------------------------------------
 set pastetoggle=<F6>
+
 "-------------------------------------------------------------------------------
 "   wrap
 "-------------------------------------------------------------------------------
@@ -481,6 +489,7 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile *.tn         set filetype=tcl
     autocmd BufRead,BufNewFile *.atelib     set filetype=tcl
     autocmd BufRead,BufNewFile .babelrc     set filetype=json
+    autocmd BufRead,BufNewFile *.jrd        set filetype=xml
 augroup END
 
 
@@ -522,6 +531,11 @@ highlight Folded        ctermfg=Cyan        ctermbg=Black
 highlight FoldColumn    ctermfg=Cyan        ctermbg=Black
 set foldtext=SimpleFoldText() " Custom fold text function
 " au BufNewFile,BufRead *.v          source ~/.vim/vfold.vim
+
+augroup XML
+    autocmd!
+    autocmd FileType xml setlocal foldmethod=syntax foldlevelstart=999 foldminlines=0
+augroup END
 
 
 "------------------------------------------------------------------------------

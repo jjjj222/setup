@@ -16,7 +16,9 @@ set notify=1
 set rmstar=1
 set savehist=( $history merge )
 set showdots=1
-set symlinks=expand
+#set symlinks=expand
+set symlinks=ignore
+#unset symlinks
 set correct=command # don't correct typo
 set noding # disable DING!
 
@@ -41,7 +43,7 @@ stty -ixon
 #   path
 ###############################################################################
 
-set path = ( . ~/bin ~/.jjjj222_setup/util ~/local/bin $path )
+set path = ( ~/bin ~/.jjjj222_setup/util ~/local/bin $path )
 set cdpath= ( ~/build ~/lnk )
 
 
@@ -57,6 +59,9 @@ alias precmd "source ~/.cshrc_precmd"
 # grep
 alias grep 'grep --color=auto -n'
 #alias grep 'grep --color=auto -n -r'
+
+# cd
+#alias cd 'cd -L'
 
 # ls
 if ($OSTYPE == "darwin") then
