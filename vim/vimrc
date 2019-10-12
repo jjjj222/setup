@@ -66,6 +66,9 @@ Plugin 'digitalrounin/vim-yaml-folds'
 " typescript
 Plugin 'leafgarland/typescript-vim'
 
+" JSON
+Plugin 'elzr/vim-json'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "filetype plugin indent on    " required
@@ -91,7 +94,8 @@ filetype plugin on
 "set completeopt-=preview
 
 " disable auto comment
-set formatoptions-=cro
+"set formatoptions-=cro
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 "disable modeline"
 set modelines=0
@@ -172,7 +176,7 @@ command! -nargs=1 Silent
 let mapleader = ","
 
 "nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* src/*.* include/*.*<CR>
-nnoremap    <C-g>           :tab split<CR> :Grep -w <cword> *.cc *.h <CR>
+nnoremap    <C-g>           :tab split<CR> :Grep -w <cword> *.js <CR>
 "nnoremap    <C-h>           :tab split<CR> :Grep <cword> *.h<CR>
 "nnoremap    <C-f>       <ESC>
 "vnoremap    <C-f>       <ESC>
@@ -490,6 +494,7 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile *.atelib     set filetype=tcl
     autocmd BufRead,BufNewFile .babelrc     set filetype=json
     autocmd BufRead,BufNewFile *.jrd        set filetype=xml
+    autocmd BufRead,BufNewFile *.conf       set filetype=conf
 augroup END
 
 
@@ -650,6 +655,11 @@ let g:VimuxHeight = "30"
 let g:VimuxOrientation = "h"
 "let g:VimuxRunnerType = "window"
 
+"-------------------------------------------------------------------------------
+"   Plugin 'elzr/vim-json'
+"-------------------------------------------------------------------------------
+let g:vim_json_syntax_conceal = 0
+
 "------------------------------------------------------------------------------
 "   
 "------------------------------------------------------------------------------
@@ -705,7 +715,9 @@ function! GetCommentStr()
         return ";"
     elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "lex" || cur_file == "yacc" || cur_file == "html")
         return "//"
-    elseif (cur_file == "java" || cur_file == "javascript" || cur_file == "javascript.jsx" || cur_file == "scss")
+    elseif (cur_file == "java" || cur_file == "javascript" || cur_file == "typescript" || cur_file == "javascript.jsx" || cur_file == "scss")
+        return "//"
+    elseif (cur_file == "dot")
         return "//"
     endif
 
