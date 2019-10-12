@@ -1,19 +1,19 @@
 [user]
-	name = jjjj222
-	email = jjjj222.tso@gmail.com
+    name = jjjj222
+    email = jjjj222.tso@gmail.com
 [core]
-	editor = vim
-	excludesfile = ~/.jjjj222_setup/git/gitignore
-	pager = less -R
+    editor = vim
+    excludesfile = ~/.jjjj222_setup/git/gitignore
+    pager = less -R
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 [color]
-	ui = true
+    ui = true
 [difftool]
-	prompt = false
+    prompt = false
 [alias]
-	#tree = log --graph --all --decorate --oneline --date-order
-	tree = log --graph --all --pretty=format:'%C(yellow)%h%Creset%C(auto)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit --date-order
+    #tree = log --graph --all --decorate --oneline --date-order
+    tree = log --graph --all --pretty=format:'%C(yellow)%h%Creset%C(auto)%d%Creset %s %C(blue)(%cr) %C(magenta)<%an>%Creset' --abbrev-commit --date-order
     myalias = config --get-regexp alias
     aa = !git add -A && git status
     dp = diff HEAD^ HEAD
@@ -24,4 +24,4 @@
     d = diff
     showconfig = config --list --show-origin
 [push]
-	default = simple
+    default = simple

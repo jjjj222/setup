@@ -26,6 +26,7 @@ Plugin 'benmills/vimux'
 Plugin 'tpope/vim-surround'
 " ysiw] : add ]
 " cs' : change the '
+" ds' : remove the '
 " S : visual mode
 
 " repeat "
@@ -37,7 +38,7 @@ Plugin 'godlygeek/tabular'
 " :Tab /:\zs
 
 " rails
-Plugin 'tpope/vim-rails'
+"Plugin 'tpope/vim-rails'
 " :Econtroller
 
 " git
@@ -56,8 +57,17 @@ Plugin 'skywind3000/asyncrun.vim'
 " yaml folding
 Plugin 'digitalrounin/vim-yaml-folds'
 
+" xml folding
+"Plugin 'XML-Folding'
+
 " auto-pairs
 "Plugin 'jiangmiao/auto-pairs'
+
+" typescript
+Plugin 'leafgarland/typescript-vim'
+
+" JSON
+Plugin 'elzr/vim-json'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -84,7 +94,8 @@ filetype plugin on
 "set completeopt-=preview
 
 " disable auto comment
-set formatoptions-=cro
+"set formatoptions-=cro
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 "disable modeline"
 set modelines=0
@@ -124,6 +135,7 @@ set makeprg=make\ -j\ 8\ install\ NO_PERFORCE=1\ STRIP=\ NO_OPT=1
 "   paste
 "-------------------------------------------------------------------------------
 set pastetoggle=<F6>
+
 "-------------------------------------------------------------------------------
 "   wrap
 "-------------------------------------------------------------------------------
@@ -164,7 +176,7 @@ command! -nargs=1 Silent
 let mapleader = ","
 
 "nnoremap    <C-g>           :tab split<CR> :Grep <cword> *.* src/*.* include/*.*<CR>
-nnoremap    <C-g>           :tab split<CR> :Grep -w <cword> *.cc *.h <CR>
+nnoremap    <C-g>           :tab split<CR> :Grep -w <cword> *.js <CR>
 "nnoremap    <C-h>           :tab split<CR> :Grep <cword> *.h<CR>
 "nnoremap    <C-f>       <ESC>
 "vnoremap    <C-f>       <ESC>
@@ -481,6 +493,8 @@ augroup file_type_setup
     autocmd BufRead,BufNewFile *.tn         set filetype=tcl
     autocmd BufRead,BufNewFile *.atelib     set filetype=tcl
     autocmd BufRead,BufNewFile .babelrc     set filetype=json
+    autocmd BufRead,BufNewFile *.jrd        set filetype=xml
+    autocmd BufRead,BufNewFile *.conf       set filetype=conf
 augroup END
 
 
@@ -522,6 +536,11 @@ highlight Folded        ctermfg=Cyan        ctermbg=Black
 highlight FoldColumn    ctermfg=Cyan        ctermbg=Black
 set foldtext=SimpleFoldText() " Custom fold text function
 " au BufNewFile,BufRead *.v          source ~/.vim/vfold.vim
+
+augroup XML
+    autocmd!
+    autocmd FileType xml setlocal foldmethod=syntax foldlevelstart=999 foldminlines=0
+augroup END
 
 
 "------------------------------------------------------------------------------
@@ -636,6 +655,11 @@ let g:VimuxHeight = "30"
 let g:VimuxOrientation = "h"
 "let g:VimuxRunnerType = "window"
 
+"-------------------------------------------------------------------------------
+"   Plugin 'elzr/vim-json'
+"-------------------------------------------------------------------------------
+let g:vim_json_syntax_conceal = 0
+
 "------------------------------------------------------------------------------
 "   
 "------------------------------------------------------------------------------
@@ -691,7 +715,9 @@ function! GetCommentStr()
         return ";"
     elseif (cur_file == "c" || cur_file == "cpp" || cur_file == "lex" || cur_file == "yacc" || cur_file == "html")
         return "//"
-    elseif (cur_file == "java" || cur_file == "javascript" || cur_file == "javascript.jsx" || cur_file == "scss")
+    elseif (cur_file == "java" || cur_file == "javascript" || cur_file == "typescript" || cur_file == "javascript.jsx" || cur_file == "scss")
+        return "//"
+    elseif (cur_file == "dot")
         return "//"
     endif
 

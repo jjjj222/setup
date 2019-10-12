@@ -16,9 +16,13 @@ set notify=1
 set rmstar=1
 set savehist=( $history merge )
 set showdots=1
-set symlinks=expand
+#set symlinks=expand
+set symlinks=ignore
+#unset symlinks
 set correct=command # don't correct typo
+set noding # disable DING!
 
+setenv SYSTEMD_EDITOR "vim"
 ###############################################################################
 #   auto complete
 ###############################################################################
@@ -39,7 +43,7 @@ stty -ixon
 #   path
 ###############################################################################
 
-set path = ( . ~/bin ~/.jjjj222_setup/util ~/local/bin $path )
+set path = ( ~/bin ~/.jjjj222_setup/util ~/local/bin $path )
 set cdpath= ( ~/build ~/lnk )
 
 
@@ -55,6 +59,9 @@ alias precmd "source ~/.cshrc_precmd"
 # grep
 alias grep 'grep --color=auto -n'
 #alias grep 'grep --color=auto -n -r'
+
+# cd
+#alias cd 'cd -L'
 
 # ls
 if ($OSTYPE == "darwin") then
@@ -99,9 +106,10 @@ alias showcur 'cat ~/.cur_dir/dir_\!*'
 alias pp 'source ~/.jjjj222_setup/csh/cshrc_prompt'
 
 # tmux
-#alias setpane 'tmux rename-window -t${TMUX_PANE} $HOST'
+alias setpane 'tmux rename-window -t${TMUX_PANE} $HOST'
 alias tmuxpanehost 'printf "\033k$HOST\033\\"'
 alias tmuxpaneauto 'tmux setw automatic-rename'
+#alias ssh_window 'ssh `tmux display-message -p "#W"`'
 
 # vnc
 alias vnc_on 'vncserver -geometry 1920x1200 :16322' # :22222
@@ -112,7 +120,7 @@ alias p4exist 'p4 -ztag -F "%Update%" client -o \!*'
 alias p4root 'p4 -F %clientRoot% -ztag info'
 alias cdp4root 'cd `p4root`'
 alias p4sync 'p4 sync ... |& tsaffix | tee sync.log | nl'
-alias p4diff 'p4 diff \!* | less -R'
+alias p4diff 'p4 diff -Od \!* | less -R'
 alias p4difftool 'set p4diffbak = $P4DIFF; setenv P4DIFF vimdiff; p4 diff \!*; setenv P4DIFF $p4diffbak'
 alias p4clients 'p4 clients -u $USER'
 
