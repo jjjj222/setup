@@ -1,0 +1,14 @@
+alias ls='ls -FG'
+
+set_prompt() {
+    source ~/.jjjj222_setup/git/git-prompt.sh
+    local hostname='%F{cyan}%m+ZSH:'
+    local shell='%F{cyan}[zsh]'
+    local datetime='%F{blue}[%F{red}%D{%b.%d} %F{yellow}%D{%H:%M:%S}%F{blue}]'
+    local folder='%F{green}%~'
+    local git='%F{magenta}$(__git_ps1 " (%s)")'
+    local end='%F{blue}>%f'
+    setopt PROMPT_SUBST
+    PROMPT="$hostname $datetime $folder$git $end "
+}
+set_prompt
